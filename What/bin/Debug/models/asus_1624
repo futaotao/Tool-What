@@ -1,0 +1,6 @@
+ro.product.model=ASUS_X002
+ro.product.brand=asus
+ro.product.name=CMCC_Phone
+ro.product.device=ASUSTek Computer Inc
+screen_x_y=720x1280
+sdk_version=18

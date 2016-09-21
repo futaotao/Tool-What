@@ -1,0 +1,6 @@
+ro.product.model=V819i Core4
+ro.product.brand=intel
+ro.product.name=inet_w_64
+ro.product.device=ONDA
+screen_x_y=720x1280
+sdk_version=18

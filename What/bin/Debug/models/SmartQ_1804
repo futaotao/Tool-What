@@ -1,0 +1,6 @@
+ro.product.model=U7
+ro.product.brand=SmartQ
+ro.product.name=full_panda
+ro.product.device=SmartDevices
+screen_x_y=480x800
+sdk_version=18

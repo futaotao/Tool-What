@@ -1,0 +1,6 @@
+ro.product.model=Lenovo A2800-d
+ro.product.brand=Lenovo
+ro.product.name=A2800
+ro.product.device=LENOVO
+screen_x_y=480x800
+sdk_version=17

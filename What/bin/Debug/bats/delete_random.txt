@@ -1,0 +1,2 @@
+rm /sdcard/random
+exit

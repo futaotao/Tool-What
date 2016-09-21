@@ -1,0 +1,6 @@
+ro.product.model=MediaPad 10 FHD
+ro.product.brand=Huawei
+ro.product.name=MediaPad
+ro.product.device=HUAWEI
+screen_x_y=1080x1920
+sdk_version=18

@@ -1,0 +1,6 @@
+ro.product.model=DXA001
+ro.product.brand=alps
+ro.product.name=M5
+ro.product.device=M5
+screen_x_y=480x854
+sdk_version=16

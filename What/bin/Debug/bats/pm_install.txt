@@ -1,0 +1,2 @@
+pm list packages -3
+exit

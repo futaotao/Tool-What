@@ -1,0 +1,6 @@
+ro.product.model=T9300
+ro.product.brand=UMO
+ro.product.name=umo
+ro.product.device=umo
+screen_x_y=480x854
+sdk_version=17

@@ -1,0 +1,6 @@
+ro.product.model=HTC Desire 700 dual sim
+ro.product.brand=htc
+ro.product.name=htc_asia_hk
+ro.product.device=HTC
+screen_x_y=480x854
+sdk_version=17

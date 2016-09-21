@@ -1,0 +1,6 @@
+ro.product.model=MI-ONE C1
+ro.product.brand=Xiaomi
+ro.product.name=libra_mione_plus_cdma
+ro.product.device=Xiaomi
+screen_x_y=480x854
+sdk_version=18

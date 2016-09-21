@@ -1,0 +1,6 @@
+ro.product.model=vivo X510t
+ro.product.brand=vivo
+ro.product.name=msm8960
+ro.product.device=BBK
+screen_x_y=1080x1920
+sdk_version=16

@@ -1,0 +1,6 @@
+ro.product.model=K-Touch L820c
+ro.product.brand=marvell
+ro.product.name=pxa1088dkb_def
+ro.product.device=K-Touch
+screen_x_y=480x800
+sdk_version=17

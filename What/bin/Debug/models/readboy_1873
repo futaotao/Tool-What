@@ -1,0 +1,6 @@
+ro.product.model=Readboy_G35S
+ro.product.brand=readboy
+ro.product.name=rbproc
+ro.product.device=softwinner
+screen_x_y=720x1280
+sdk_version=18

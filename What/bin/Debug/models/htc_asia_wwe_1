@@ -1,0 +1,6 @@
+ro.product.model=HTC Desire S
+ro.product.brand=htc_asia_wwe
+ro.product.name=htc_saga
+ro.product.device=HTC
+screen_x_y=480x800
+sdk_version=16

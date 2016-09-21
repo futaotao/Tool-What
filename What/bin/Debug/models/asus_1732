@@ -1,0 +1,6 @@
+ro.product.model=ASUS Transformer Pad TF300T
+ro.product.brand=asus
+ro.product.name=CN_epad
+ro.product.device=asus
+screen_x_y=720x1280
+sdk_version=18

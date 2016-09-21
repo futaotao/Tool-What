@@ -1,0 +1,6 @@
+ro.product.model=X11
+ro.product.brand=WEIBI
+ro.product.name=MTK6571RD
+ro.product.device=WEIBI
+screen_x_y=480x854
+sdk_version=18

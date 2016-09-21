@@ -1,0 +1,6 @@
+ro.product.model=Samsung_g7508q
+ro.product.brand=Samsung
+ro.product.name=trace
+ro.product.device=trace
+screen_x_y=720x1280
+sdk_version=18

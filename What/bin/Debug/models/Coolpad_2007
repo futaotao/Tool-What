@@ -1,0 +1,6 @@
+ro.product.model=Coolpad 5217
+ro.product.brand=Coolpad
+ro.product.name=msm8610
+ro.product.device=Coolpad
+screen_x_y=480x800
+sdk_version=18

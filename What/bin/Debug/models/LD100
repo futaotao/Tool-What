@@ -1,0 +1,6 @@
+ro.product.model=LD100
+ro.product.brand=LD
+ro.product.name=ld
+ro.product.device=ld
+screen_x_y=480x854
+sdk_version=17

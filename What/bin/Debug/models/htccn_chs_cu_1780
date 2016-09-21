@@ -1,0 +1,6 @@
+ro.product.model=HTC 801e
+ro.product.brand=htccn_chs_cu
+ro.product.name=m7
+ro.product.device=HTC
+screen_x_y=1080x1920
+sdk_version=18

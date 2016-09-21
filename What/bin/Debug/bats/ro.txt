@@ -1,0 +1,4 @@
+chmod 0644 /system/build.prop
+chmod 0550 /system/etc/init.androVM.sh
+mount -o remount,ro /system
+exit

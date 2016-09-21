@@ -1,0 +1,6 @@
+ro.product.model=TCL S720
+ro.product.brand=TCL
+ro.product.name=TCL_S720
+ro.product.device=TCL
+screen_x_y=720x1280
+sdk_version=18

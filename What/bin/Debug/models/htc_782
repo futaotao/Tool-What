@@ -1,0 +1,6 @@
+ro.product.model=HTC D610t
+ro.product.brand=htc
+ro.product.name=htccn_chs
+ro.product.device=HTC
+screen_x_y=480x800
+sdk_version=17

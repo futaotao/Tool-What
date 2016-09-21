@@ -1,0 +1,6 @@
+ro.product.model=HUAWEI C8816
+ro.product.brand=Huawei
+ro.product.name=desolate
+ro.product.device=desolate
+screen_x_y=480x854
+sdk_version=18

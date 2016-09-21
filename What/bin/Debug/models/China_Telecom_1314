@@ -1,0 +1,6 @@
+ro.product.model=K-Touch E99
+ro.product.brand=China Telecom
+ro.product.name=msm8610_t7_e99
+ro.product.device=K-Touch
+screen_x_y=480x854
+sdk_version=17

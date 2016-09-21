@@ -1,0 +1,6 @@
+ro.product.model=HTC T328t
+ro.product.brand=htccn_chs_cmcc
+ro.product.name=htc_primotd
+ro.product.device=HTC
+screen_x_y=480x800
+sdk_version=16

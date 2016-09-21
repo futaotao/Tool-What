@@ -1,0 +1,6 @@
+ro.product.model=KINGSUN-F1
+ro.product.brand=KINGSUN
+ro.product.name=msm8909_512
+ro.product.device=GuangXin
+screen_x_y=480x854
+sdk_version=16

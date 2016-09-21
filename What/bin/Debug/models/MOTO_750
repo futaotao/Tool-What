@@ -1,0 +1,6 @@
+ro.product.model=XT910
+ro.product.brand=MOTO
+ro.product.name=XT910_HKTW
+ro.product.device=motorola
+screen_x_y=480x854
+sdk_version=17

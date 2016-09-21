@@ -1,0 +1,6 @@
+ro.product.model=Z91-C
+ro.product.brand=Allwinner
+ro.product.name=astar_y3
+ro.product.device=softwinner
+screen_x_y=480x800
+sdk_version=17

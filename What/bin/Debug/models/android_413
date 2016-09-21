@@ -1,0 +1,6 @@
+ro.product.model=M2+
+ro.product.brand=android
+ro.product.name=g1a_lt
+ro.product.device=LT
+screen_x_y=480x800
+sdk_version=16

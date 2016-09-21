@@ -1,0 +1,2 @@
+pm clear com.wjjwjj.android.ppt
+exit

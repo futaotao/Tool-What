@@ -1,0 +1,6 @@
+ro.product.model=K-Touch W98
+ro.product.brand=K-Touch
+ro.product.name=k-touch
+ro.product.device=k-touch
+screen_x_y=480x854
+sdk_version=17

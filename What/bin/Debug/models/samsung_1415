@@ -1,0 +1,6 @@
+ro.product.model=GT-N7100
+ro.product.brand=samsung
+ro.product.name=t03gxx
+ro.product.device=samsung
+screen_x_y=480x800
+sdk_version=17

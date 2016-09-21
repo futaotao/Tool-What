@@ -1,0 +1,6 @@
+ro.product.model=移动4G手机
+ro.product.brand=alps
+ro.product.name=Q9
+ro.product.device=Q9
+screen_x_y=480x854
+sdk_version=18

@@ -1,0 +1,6 @@
+ro.product.model=Changhong
+ro.product.brand=qcom
+ro.product.name=ChanghongP08
+ro.product.device=Changhong
+screen_x_y=480x854
+sdk_version=17

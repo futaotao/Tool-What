@@ -1,0 +1,6 @@
+ro.product.model=HTC One max
+ro.product.brand=HTC
+ro.product.name=emmlay
+ro.product.device=emmlay
+screen_x_y=1080x1920
+sdk_version=18

@@ -1,0 +1,6 @@
+ro.product.model=rk30sdk_rtl8723
+ro.product.brand=rk30sdk_rtl8723
+ro.product.name=rk30sdk_rtl8723
+ro.product.device=rockchip
+screen_x_y=480x800
+sdk_version=18

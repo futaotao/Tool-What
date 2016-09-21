@@ -1,0 +1,6 @@
+ro.product.model=TCL-P302C
+ro.product.brand=China Telecom
+ro.product.name=msm8610_s5_h_p302c
+ro.product.device=TCL
+screen_x_y=480x800
+sdk_version=17

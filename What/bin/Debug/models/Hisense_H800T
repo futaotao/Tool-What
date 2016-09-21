@@ -1,0 +1,6 @@
+ro.product.model=Hisense H800T
+ro.product.brand=Hisense
+ro.product.name=hisense
+ro.product.device=hisense
+screen_x_y=720x1280
+sdk_version=18

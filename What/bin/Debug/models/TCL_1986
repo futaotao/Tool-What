@@ -1,0 +1,6 @@
+ro.product.model=TCL P301M
+ro.product.brand=TCL
+ro.product.name=TCL_P301M
+ro.product.device=TCL
+screen_x_y=480x800
+sdk_version=18

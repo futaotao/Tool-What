@@ -1,0 +1,6 @@
+ro.product.model=Coolpad 8712
+ro.product.brand=Coolpad
+ro.product.name=CP8712
+ro.product.device=Coolpad
+screen_x_y=480x854
+sdk_version=17
