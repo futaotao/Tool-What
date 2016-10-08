@@ -30,31 +30,6 @@
         {
             this.startBtn = new System.Windows.Forms.Button();
             this.device = new System.Windows.Forms.Label();
-            this.hourGroup = new System.Windows.Forms.GroupBox();
-            this.cb24 = new System.Windows.Forms.CheckBox();
-            this.cb23 = new System.Windows.Forms.CheckBox();
-            this.cb22 = new System.Windows.Forms.CheckBox();
-            this.cb21 = new System.Windows.Forms.CheckBox();
-            this.cb20 = new System.Windows.Forms.CheckBox();
-            this.cb19 = new System.Windows.Forms.CheckBox();
-            this.cb18 = new System.Windows.Forms.CheckBox();
-            this.cb17 = new System.Windows.Forms.CheckBox();
-            this.cb16 = new System.Windows.Forms.CheckBox();
-            this.cb15 = new System.Windows.Forms.CheckBox();
-            this.cb14 = new System.Windows.Forms.CheckBox();
-            this.cb13 = new System.Windows.Forms.CheckBox();
-            this.cb12 = new System.Windows.Forms.CheckBox();
-            this.cb11 = new System.Windows.Forms.CheckBox();
-            this.cb10 = new System.Windows.Forms.CheckBox();
-            this.cb9 = new System.Windows.Forms.CheckBox();
-            this.cb8 = new System.Windows.Forms.CheckBox();
-            this.cb7 = new System.Windows.Forms.CheckBox();
-            this.cb6 = new System.Windows.Forms.CheckBox();
-            this.cb5 = new System.Windows.Forms.CheckBox();
-            this.cb4 = new System.Windows.Forms.CheckBox();
-            this.cb3 = new System.Windows.Forms.CheckBox();
-            this.cb2 = new System.Windows.Forms.CheckBox();
-            this.cb1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timeLabel = new System.Windows.Forms.Label();
             this.deviceTb = new System.Windows.Forms.TextBox();
@@ -131,6 +106,8 @@
             this.setting_X_x = new System.Windows.Forms.TextBox();
             this.setting_custom_y = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.xprivacyLabel = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.imeiLabel = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.ipLabel = new System.Windows.Forms.Label();
@@ -143,9 +120,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.runAvdPropPath = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
-            this.xprivacyLabel = new System.Windows.Forms.Label();
-            this.hourGroup.SuspendLayout();
             this.avd_group.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -170,279 +144,6 @@
             this.device.Size = new System.Drawing.Size(53, 12);
             this.device.TabIndex = 1;
             this.device.Text = "设备号：";
-            // 
-            // hourGroup
-            // 
-            this.hourGroup.Controls.Add(this.cb24);
-            this.hourGroup.Controls.Add(this.cb23);
-            this.hourGroup.Controls.Add(this.cb22);
-            this.hourGroup.Controls.Add(this.cb21);
-            this.hourGroup.Controls.Add(this.cb20);
-            this.hourGroup.Controls.Add(this.cb19);
-            this.hourGroup.Controls.Add(this.cb18);
-            this.hourGroup.Controls.Add(this.cb17);
-            this.hourGroup.Controls.Add(this.cb16);
-            this.hourGroup.Controls.Add(this.cb15);
-            this.hourGroup.Controls.Add(this.cb14);
-            this.hourGroup.Controls.Add(this.cb13);
-            this.hourGroup.Controls.Add(this.cb12);
-            this.hourGroup.Controls.Add(this.cb11);
-            this.hourGroup.Controls.Add(this.cb10);
-            this.hourGroup.Controls.Add(this.cb9);
-            this.hourGroup.Controls.Add(this.cb8);
-            this.hourGroup.Controls.Add(this.cb7);
-            this.hourGroup.Controls.Add(this.cb6);
-            this.hourGroup.Controls.Add(this.cb5);
-            this.hourGroup.Controls.Add(this.cb4);
-            this.hourGroup.Controls.Add(this.cb3);
-            this.hourGroup.Controls.Add(this.cb2);
-            this.hourGroup.Controls.Add(this.cb1);
-            this.hourGroup.Location = new System.Drawing.Point(15, 62);
-            this.hourGroup.Name = "hourGroup";
-            this.hourGroup.Size = new System.Drawing.Size(305, 101);
-            this.hourGroup.TabIndex = 3;
-            this.hourGroup.TabStop = false;
-            this.hourGroup.Text = "HourGroup";
-            // 
-            // cb24
-            // 
-            this.cb24.AutoSize = true;
-            this.cb24.Location = new System.Drawing.Point(261, 75);
-            this.cb24.Name = "cb24";
-            this.cb24.Size = new System.Drawing.Size(36, 16);
-            this.cb24.TabIndex = 23;
-            this.cb24.Text = "24";
-            this.cb24.UseVisualStyleBackColor = true;
-            // 
-            // cb23
-            // 
-            this.cb23.AutoSize = true;
-            this.cb23.Location = new System.Drawing.Point(225, 75);
-            this.cb23.Name = "cb23";
-            this.cb23.Size = new System.Drawing.Size(36, 16);
-            this.cb23.TabIndex = 22;
-            this.cb23.Text = "23";
-            this.cb23.UseVisualStyleBackColor = true;
-            // 
-            // cb22
-            // 
-            this.cb22.AutoSize = true;
-            this.cb22.Location = new System.Drawing.Point(189, 75);
-            this.cb22.Name = "cb22";
-            this.cb22.Size = new System.Drawing.Size(36, 16);
-            this.cb22.TabIndex = 21;
-            this.cb22.Text = "22";
-            this.cb22.UseVisualStyleBackColor = true;
-            // 
-            // cb21
-            // 
-            this.cb21.AutoSize = true;
-            this.cb21.Location = new System.Drawing.Point(153, 75);
-            this.cb21.Name = "cb21";
-            this.cb21.Size = new System.Drawing.Size(36, 16);
-            this.cb21.TabIndex = 20;
-            this.cb21.Text = "21";
-            this.cb21.UseVisualStyleBackColor = true;
-            // 
-            // cb20
-            // 
-            this.cb20.AutoSize = true;
-            this.cb20.Location = new System.Drawing.Point(117, 75);
-            this.cb20.Name = "cb20";
-            this.cb20.Size = new System.Drawing.Size(36, 16);
-            this.cb20.TabIndex = 19;
-            this.cb20.Text = "20";
-            this.cb20.UseVisualStyleBackColor = true;
-            // 
-            // cb19
-            // 
-            this.cb19.AutoSize = true;
-            this.cb19.Location = new System.Drawing.Point(81, 75);
-            this.cb19.Name = "cb19";
-            this.cb19.Size = new System.Drawing.Size(36, 16);
-            this.cb19.TabIndex = 18;
-            this.cb19.Text = "19";
-            this.cb19.UseVisualStyleBackColor = true;
-            // 
-            // cb18
-            // 
-            this.cb18.AutoSize = true;
-            this.cb18.Location = new System.Drawing.Point(45, 75);
-            this.cb18.Name = "cb18";
-            this.cb18.Size = new System.Drawing.Size(36, 16);
-            this.cb18.TabIndex = 17;
-            this.cb18.Text = "18";
-            this.cb18.UseVisualStyleBackColor = true;
-            // 
-            // cb17
-            // 
-            this.cb17.AutoSize = true;
-            this.cb17.Location = new System.Drawing.Point(6, 75);
-            this.cb17.Name = "cb17";
-            this.cb17.Size = new System.Drawing.Size(36, 16);
-            this.cb17.TabIndex = 16;
-            this.cb17.Text = "17";
-            this.cb17.UseVisualStyleBackColor = true;
-            // 
-            // cb16
-            // 
-            this.cb16.AutoSize = true;
-            this.cb16.Location = new System.Drawing.Point(261, 48);
-            this.cb16.Name = "cb16";
-            this.cb16.Size = new System.Drawing.Size(36, 16);
-            this.cb16.TabIndex = 15;
-            this.cb16.Text = "16";
-            this.cb16.UseVisualStyleBackColor = true;
-            // 
-            // cb15
-            // 
-            this.cb15.AutoSize = true;
-            this.cb15.Location = new System.Drawing.Point(225, 48);
-            this.cb15.Name = "cb15";
-            this.cb15.Size = new System.Drawing.Size(36, 16);
-            this.cb15.TabIndex = 14;
-            this.cb15.Text = "15";
-            this.cb15.UseVisualStyleBackColor = true;
-            // 
-            // cb14
-            // 
-            this.cb14.AutoSize = true;
-            this.cb14.Location = new System.Drawing.Point(189, 48);
-            this.cb14.Name = "cb14";
-            this.cb14.Size = new System.Drawing.Size(36, 16);
-            this.cb14.TabIndex = 13;
-            this.cb14.Text = "14";
-            this.cb14.UseVisualStyleBackColor = true;
-            // 
-            // cb13
-            // 
-            this.cb13.AutoSize = true;
-            this.cb13.Location = new System.Drawing.Point(153, 48);
-            this.cb13.Name = "cb13";
-            this.cb13.Size = new System.Drawing.Size(36, 16);
-            this.cb13.TabIndex = 12;
-            this.cb13.Text = "13";
-            this.cb13.UseVisualStyleBackColor = true;
-            // 
-            // cb12
-            // 
-            this.cb12.AutoSize = true;
-            this.cb12.Location = new System.Drawing.Point(117, 48);
-            this.cb12.Name = "cb12";
-            this.cb12.Size = new System.Drawing.Size(36, 16);
-            this.cb12.TabIndex = 11;
-            this.cb12.Text = "12";
-            this.cb12.UseVisualStyleBackColor = true;
-            // 
-            // cb11
-            // 
-            this.cb11.AutoSize = true;
-            this.cb11.Location = new System.Drawing.Point(81, 48);
-            this.cb11.Name = "cb11";
-            this.cb11.Size = new System.Drawing.Size(36, 16);
-            this.cb11.TabIndex = 10;
-            this.cb11.Text = "11";
-            this.cb11.UseVisualStyleBackColor = true;
-            // 
-            // cb10
-            // 
-            this.cb10.AutoSize = true;
-            this.cb10.Location = new System.Drawing.Point(45, 48);
-            this.cb10.Name = "cb10";
-            this.cb10.Size = new System.Drawing.Size(36, 16);
-            this.cb10.TabIndex = 9;
-            this.cb10.Text = "10";
-            this.cb10.UseVisualStyleBackColor = true;
-            // 
-            // cb9
-            // 
-            this.cb9.AutoSize = true;
-            this.cb9.Location = new System.Drawing.Point(6, 48);
-            this.cb9.Name = "cb9";
-            this.cb9.Size = new System.Drawing.Size(30, 16);
-            this.cb9.TabIndex = 8;
-            this.cb9.Text = "9";
-            this.cb9.UseVisualStyleBackColor = true;
-            // 
-            // cb8
-            // 
-            this.cb8.AutoSize = true;
-            this.cb8.Location = new System.Drawing.Point(262, 21);
-            this.cb8.Name = "cb8";
-            this.cb8.Size = new System.Drawing.Size(30, 16);
-            this.cb8.TabIndex = 7;
-            this.cb8.Text = "8";
-            this.cb8.UseVisualStyleBackColor = true;
-            // 
-            // cb7
-            // 
-            this.cb7.AutoSize = true;
-            this.cb7.Location = new System.Drawing.Point(226, 21);
-            this.cb7.Name = "cb7";
-            this.cb7.Size = new System.Drawing.Size(30, 16);
-            this.cb7.TabIndex = 6;
-            this.cb7.Text = "7";
-            this.cb7.UseVisualStyleBackColor = true;
-            // 
-            // cb6
-            // 
-            this.cb6.AutoSize = true;
-            this.cb6.Location = new System.Drawing.Point(190, 21);
-            this.cb6.Name = "cb6";
-            this.cb6.Size = new System.Drawing.Size(30, 16);
-            this.cb6.TabIndex = 5;
-            this.cb6.Text = "6";
-            this.cb6.UseVisualStyleBackColor = true;
-            // 
-            // cb5
-            // 
-            this.cb5.AutoSize = true;
-            this.cb5.Location = new System.Drawing.Point(154, 21);
-            this.cb5.Name = "cb5";
-            this.cb5.Size = new System.Drawing.Size(30, 16);
-            this.cb5.TabIndex = 4;
-            this.cb5.Text = "5";
-            this.cb5.UseVisualStyleBackColor = true;
-            // 
-            // cb4
-            // 
-            this.cb4.AutoSize = true;
-            this.cb4.Location = new System.Drawing.Point(118, 21);
-            this.cb4.Name = "cb4";
-            this.cb4.Size = new System.Drawing.Size(30, 16);
-            this.cb4.TabIndex = 3;
-            this.cb4.Text = "4";
-            this.cb4.UseVisualStyleBackColor = true;
-            // 
-            // cb3
-            // 
-            this.cb3.AutoSize = true;
-            this.cb3.Location = new System.Drawing.Point(82, 21);
-            this.cb3.Name = "cb3";
-            this.cb3.Size = new System.Drawing.Size(30, 16);
-            this.cb3.TabIndex = 2;
-            this.cb3.Text = "3";
-            this.cb3.UseVisualStyleBackColor = true;
-            // 
-            // cb2
-            // 
-            this.cb2.AutoSize = true;
-            this.cb2.Location = new System.Drawing.Point(46, 21);
-            this.cb2.Name = "cb2";
-            this.cb2.Size = new System.Drawing.Size(30, 16);
-            this.cb2.TabIndex = 1;
-            this.cb2.Text = "2";
-            this.cb2.UseVisualStyleBackColor = true;
-            // 
-            // cb1
-            // 
-            this.cb1.AutoSize = true;
-            this.cb1.Location = new System.Drawing.Point(7, 21);
-            this.cb1.Name = "cb1";
-            this.cb1.Size = new System.Drawing.Size(30, 16);
-            this.cb1.TabIndex = 0;
-            this.cb1.Text = "1";
-            this.cb1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -1115,6 +816,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "RunningAvd";
             // 
+            // xprivacyLabel
+            // 
+            this.xprivacyLabel.AutoSize = true;
+            this.xprivacyLabel.Location = new System.Drawing.Point(69, 137);
+            this.xprivacyLabel.Name = "xprivacyLabel";
+            this.xprivacyLabel.Size = new System.Drawing.Size(0, 12);
+            this.xprivacyLabel.TabIndex = 46;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(11, 137);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(65, 12);
+            this.label31.TabIndex = 45;
+            this.label31.Text = "Xprivacy：";
+            // 
             // imeiLabel
             // 
             this.imeiLabel.AutoSize = true;
@@ -1219,23 +937,6 @@
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(11, 137);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(65, 12);
-            this.label31.TabIndex = 45;
-            this.label31.Text = "Xprivacy：";
-            // 
-            // xprivacyLabel
-            // 
-            this.xprivacyLabel.AutoSize = true;
-            this.xprivacyLabel.Location = new System.Drawing.Point(69, 137);
-            this.xprivacyLabel.Name = "xprivacyLabel";
-            this.xprivacyLabel.Size = new System.Drawing.Size(0, 12);
-            this.xprivacyLabel.TabIndex = 46;
-            // 
             // What
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1254,14 +955,11 @@
             this.Controls.Add(this.deviceTb);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.hourGroup);
             this.Controls.Add(this.device);
             this.Controls.Add(this.startBtn);
             this.Name = "What";
             this.Text = "What";
             this.TransparencyKey = System.Drawing.SystemColors.ActiveCaption;
-            this.hourGroup.ResumeLayout(false);
-            this.hourGroup.PerformLayout();
             this.avd_group.ResumeLayout(false);
             this.avd_group.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1279,31 +977,6 @@
 
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Label device;
-        private System.Windows.Forms.GroupBox hourGroup;
-        private System.Windows.Forms.CheckBox cb1;
-        private System.Windows.Forms.CheckBox cb24;
-        private System.Windows.Forms.CheckBox cb23;
-        private System.Windows.Forms.CheckBox cb22;
-        private System.Windows.Forms.CheckBox cb21;
-        private System.Windows.Forms.CheckBox cb20;
-        private System.Windows.Forms.CheckBox cb19;
-        private System.Windows.Forms.CheckBox cb18;
-        private System.Windows.Forms.CheckBox cb17;
-        private System.Windows.Forms.CheckBox cb16;
-        private System.Windows.Forms.CheckBox cb15;
-        private System.Windows.Forms.CheckBox cb14;
-        private System.Windows.Forms.CheckBox cb13;
-        private System.Windows.Forms.CheckBox cb12;
-        private System.Windows.Forms.CheckBox cb11;
-        private System.Windows.Forms.CheckBox cb10;
-        private System.Windows.Forms.CheckBox cb9;
-        private System.Windows.Forms.CheckBox cb8;
-        private System.Windows.Forms.CheckBox cb7;
-        private System.Windows.Forms.CheckBox cb6;
-        private System.Windows.Forms.CheckBox cb5;
-        private System.Windows.Forms.CheckBox cb4;
-        private System.Windows.Forms.CheckBox cb3;
-        private System.Windows.Forms.CheckBox cb2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.TextBox deviceTb;

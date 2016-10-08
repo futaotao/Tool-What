@@ -358,7 +358,7 @@ namespace What
             return dic;
         }
 
-
+        //当前进程未启动
         public const int PROCESS_NO_START = 0x0000;
         public const int PROCESS_RUNNING = 0x0001;
         public const int PROCESS_DEAD = 0x0002;

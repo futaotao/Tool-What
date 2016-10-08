@@ -39,3 +39,13 @@ D:\futaotao\What\What\obj\Debug\What.csprojResolveAssemblyReference.cache
 D:\futaotao\What\What\obj\Debug\What.What.resources
 D:\futaotao\What\What\obj\Debug\What.Properties.Resources.resources
 D:\futaotao\What\What\obj\Debug\What.csproj.GenerateResource.Cache
+G:\futaotao\Tool-What\What\bin\Debug\What.exe.config
+G:\futaotao\Tool-What\What\obj\Debug\What.exe
+G:\futaotao\Tool-What\What\obj\Debug\What.pdb
+G:\futaotao\Tool-What\What\bin\Debug\What.exe
+G:\futaotao\Tool-What\What\bin\Debug\What.pdb
+G:\futaotao\Tool-What\What\bin\Debug\RasConnect.pdb
+G:\futaotao\Tool-What\What\obj\Debug\What.csprojResolveAssemblyReference.cache
+G:\futaotao\Tool-What\What\obj\Debug\What.What.resources
+G:\futaotao\Tool-What\What\obj\Debug\What.Properties.Resources.resources
+G:\futaotao\Tool-What\What\obj\Debug\What.csproj.GenerateResource.Cache

@@ -19,19 +19,24 @@ namespace What
     public partial class What : Form, OnProcessListener
     {
 
-        private static String basePath = "";
+        //所有配置文件的根路径
+        private static String mBasePath = "";
+
+        //测试apk 用来检测是否启动完成
+        private static string mTestApkPath = "";
+        //发出提示的音乐
+        private static String mTipMusicPath = "";
+
 
         //当前模拟器的 端口
         private static String mDevice = "";
-
+        
+        //Genymotion启动模拟器的进程
         private static String PROCESS_NAME = "player";
         private static String VBOX_HEAD_NAME = "VBoxHeadless";
         private static String VBOX_NET_NAME = "VBoxNetDHCP";
         private static String VBOX_SVC_NAME = "VBoxSVC";
 
-
-        private static List<CheckBox> checkList = null;
-        private static List<int> hourList = new List<int>();
 
         // avd的数量
         private static List<int> avdList = null;
@@ -59,7 +64,7 @@ namespace What
         //模拟的全部机型
         private static Dictionary<string, string> modelDic = null;
 
-
+        //循环执行的线程
         private Thread runThread = null;
 
         //当前设备连接的状态
@@ -67,7 +72,7 @@ namespace What
         private static bool isConnecting = false;
         private static bool isConnected = false;
 
-        //启动次数
+        //循环执行次数
         private static int runTimes = 0;
 
         // 从1开始编号
@@ -83,7 +88,7 @@ namespace What
         private static int beginMin = -1;
         private static int beginSec = -1;
 
-        //刷的时间间隔
+        //每次循环刷的时间间隔
         private static int shuaInterval = 145;
         
 
@@ -99,7 +104,7 @@ namespace What
         private static int mTapSX = -1;
         private static int mTapY = -1;
 
-
+        //默认程序循环是停止的
         private static bool isStop = true;
         private static bool isVpnConnect = false;
 
@@ -109,8 +114,7 @@ namespace What
         , "com.wjjnote","com.wjj.rabbit","com.Green_light_seven","com.wjj.electric","com.wjj.grad","com.wjj.loop","com.jjtax"
         ,"com.wjjwjj.account","com.wjjwjj.house","com.wjjwjj.moneyspell","me.wjjwjj.sote","com.wjjwjj.android.ppt"};
 
-        //测试apk 用来检测是否启动完成
-        private static string testApkPath = "";
+
 
         //每次安装的时间  如果两分钟内没有安装成功 关闭
         private static int installHour = -1;
@@ -119,7 +123,7 @@ namespace What
         private static int installTime = 120;
         private static bool isStartInstall = false;
 
-        private static String tipMusicPath = "";
+        
 
         //每次启动联网的时间  如果两分钟内没有启动联网 关闭
         private static int changeNetHour = -1;
@@ -135,41 +139,46 @@ namespace What
 
             What.CheckForIllegalCrossThreadCalls = false;
 
-            basePath = Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf("\\") + 1);
+            
+            mBasePath = Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf("\\") + 1);
 
-            initCheckList();
+            mTestApkPath = mBasePath + Constant.Folders.APK_FOLDER_NAME + "\\test.apk";
+            mTipMusicPath = mBasePath + Constant.Folders.MUSIC_FOLDER_NAME + "\\tip.wav";
 
-            testApkPath = basePath + Constant.Folders.APK_FOLDER_NAME + "\\test.apk";
-            tipMusicPath = basePath + Constant.Folders.MUSIC_FOLDER_NAME + "\\tip.wav";
-
-            //initApkFolderList();
-            //initSDKList();
             initModelList();
 
-            deviceTb.Text = mDevice;
+            //当前时间
             timeLabel.Text = DateTime.Now.Hour + ":" + DateTime.Now.Minute;
+            //当前鼠标位置
             Point ms = Control.MousePosition;
             postionLabel.Text = "x:" + ms.X + " y:" + ms.Y;
 
+            //第一个模拟器y坐标
             int first = 400;
+            //每一个模拟器的高度间隔
             int interval = 40;
 
+            //模拟器一
             tb1_x.Text = "200";
             tb1_y.Text = first.ToString();
             tb1_sx.Text = "683";
-
+            
+            //模拟器二
             tb2_x.Text = "200";
             tb2_y.Text = (first + interval* 1).ToString();
             tb2_sx.Text = "683";
 
+            //模拟器三
             tb3_x.Text = "200";
             tb3_y.Text = (first + interval* 2).ToString();
             tb3_sx.Text = "683";
 
+            //模拟器四
             tb4_x.Text = "200";
             tb4_y.Text = (first + interval * 3).ToString();
             tb4_sx.Text = "683";
 
+            //Genymotion 设置模拟器参数页面各个点的坐标
             setting_custom_x.Text = "267";
             setting_custom_y.Text = "345";
 
@@ -199,76 +208,11 @@ namespace What
 
 
         #region Init
-        // 初始化checkList
-        private void initCheckList()
-        {
-            checkList = new List<CheckBox>();
-            checkList.Add(cb1);
-            checkList.Add(cb2);
-            checkList.Add(cb3);
-            checkList.Add(cb4);
-            checkList.Add(cb5);
-            checkList.Add(cb6);
-            checkList.Add(cb7);
-            checkList.Add(cb8);
-            checkList.Add(cb9);
-            checkList.Add(cb10);
-            checkList.Add(cb11);
-            checkList.Add(cb12);
-            checkList.Add(cb13);
-            checkList.Add(cb14);
-            checkList.Add(cb15);
-            checkList.Add(cb16);
-            checkList.Add(cb17);
-            checkList.Add(cb18);
-            checkList.Add(cb19);
-            checkList.Add(cb20);
-            checkList.Add(cb21);
-            checkList.Add(cb22);
-            checkList.Add(cb23);
-            checkList.Add(cb24);
-        }
-
-
-
-        //初始化配置文件里的
-        #region
-        //private void initApkFolderList()
-        //{
-        //    apkFolderList = new List<string>();
-        //    string baseFolderPath = basePath + Constant.Folders.APK_FOLDER_NAME;
-        //    string[] dirArray = Directory.GetDirectories(baseFolderPath);
-        //    if (dirArray != null && dirArray.Length > 0)
-        //    {
-        //        foreach (string path in dirArray)
-        //        {
-        //            apkFolderList.Add(path);
-        //        }
-        //    }
-        //}
-        #endregion
-
-        //private void initSDKList()
-        //{
-        //    sdkDic = new Dictionary<int, string>();
-        //    string sdkFolderPath = basePath + Constant.Folders.SDK_FOLDER_NAME;
-        //    string[] dirArray = Directory.GetDirectories(sdkFolderPath);
-
-        //    if (dirArray != null && dirArray.Length > 0)
-        //    {
-        //        foreach (string path in dirArray)
-        //        {
-        //            int sdk = int.Parse(path.Substring(path.LastIndexOf("\\") + 1));
-        //            string propPath = path + "\\" + "build.prop";
-        //            sdkDic.Add(sdk, propPath);
-        //        }
-        //    }
-        //}
-
+        //初始化所有现有的模拟器参数文件
         private void initModelList()
         {
             modelDic = new Dictionary<string, string>();
-            string baseFolderPath = basePath + Constant.Folders.MODEL_FOLDER_NAME;
+            string baseFolderPath = mBasePath + Constant.Folders.MODEL_FOLDER_NAME;
             string[] dirArray = Directory.GetFiles(baseFolderPath);
             if (dirArray != null && dirArray.Length > 0)
             {
@@ -279,98 +223,9 @@ namespace What
                 }
             }
         }
-        #endregion
 
-        #region 安装和卸载apk
-
-        //static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
-        ////遍历安装包
-        //private void installAllApks(int times, List<string> apkFolderList)
-        //{
-        //    if (apkFolderList == null || apkFolderList.Count == 0)
-        //    {
-        //        return;
-        //    }
-
-        //    string path = apkFolderList[times % apkFolderList.Count];
-        //    LogUtil.LogMessage(log, "install:" +path);
-        //    string[] apks = Directory.GetFiles(path);
-        //    if (apks != null && apks.Length > 0)
-        //    {
-        //        LogUtil.LogMessage(log, "install:" + apks.Length);
-        //        foreach (string apkPath in apks)
-        //        {
-        //            totalList.Add(apkPath);
-        //            pkgList.Add(apkPath.Substring(apkPath.LastIndexOf("\\") + 1, apkPath.LastIndexOf(".apk") - apkPath.LastIndexOf("\\") - 1));
-        //        }
-        //        //install
-        //        LogUtil.LogMessage(log, "install:" + totalList.Count + ":" + installSuccess);
-        //        if (totalList.Count > installSuccess)
-        //        {
-        //            startInstall(totalList[installSuccess]);
-        //        }
-        //    }
-        //}
-
-       
-
-        private void startInstall(String apkPath)
-        {
-            //  semaphore.WaitOne();
-            LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            isStartInstall = false;
-            installHour = DateTime.Now.Hour;
-            installMin = DateTime.Now.Minute;
-            installSec = DateTime.Now.Second;
-            LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
-            Thread.Sleep(3000);
-            Util.callInstall(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
-        }
-
-        //private void startUninstall(String pkgName) {
-        //    semaphore.WaitOne();
-        //    LogUtil.LogMessage(log, "Devices:" + mDevice + "UnInstall:" + pkgName);
-        //    Util.callUninstall(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.UNINSTALL_BAT_NAME, mDevice, pkgName, this);
-        //}
-        #endregion
-
-        private void btnStop_Click(object sender, EventArgs e)
-        {
-            //MessageBox.Show("Hello");
-
-            //callPullRandomFile();
-            //callDeleteRandomFile();
-
-            //avdSetting(1,1,"1","1");
-             Dictionary<string, string> ipDic = Util.getIpInfo();
-             if (ipDic != null && ipDic.Count > 0)
-             {
-
-                 string ip = ipDic["ip"];
-                 MessageBox.Show(ip);
-             }
-
-            beginDay = DateTime.Now.Day;
-            isStop = !isStop;
-        }
-
-        private void startBtn_Click(object sender, EventArgs e)
-        {
-
-            //检测Genymotion 的窗口位置 并移动他
-
-            moveGenymotionWin();
-
-            mDevice = deviceTb.Text;
-            for (int i = 0; i < checkList.Count; i++)
-            {
-                if (checkList[i].Checked)
-                {
-                    hourList.Add(i + 1);
-                }
-            }
-
-            #region 初始化 模拟器的参数
+        //初始化 Genymotion 上 模拟器坐标
+        private void initAvdList() {
             avdList = new List<int>();
             positionXDic = new Dictionary<int, int>();
             positionSXDic = new Dictionary<int, int>();
@@ -405,9 +260,27 @@ namespace What
                 positionSXDic.Add(4, int.Parse(tb4_sx.Text));
                 positionYDic.Add(4, int.Parse(tb4_y.Text));
             }
+        }
+        #endregion
 
-            #endregion
+     
 
+        private void btnStop_Click(object sender, EventArgs e)
+        { 
+
+            beginDay = DateTime.Now.Day;
+            isStop = !isStop;
+        }
+
+        //开始按钮点击事件
+        private void startBtn_Click(object sender, EventArgs e)
+        {
+
+            //检测Genymotion 的窗口位置 并移动 指定位置   --后来去掉，因为直接设置窗体启动的位置
+            //moveGenymotionWin();
+
+            mDevice = deviceTb.Text;
+           
             if (runThread != null)
             {
                 runThread.Start();
@@ -423,22 +296,22 @@ namespace What
 
             while (true)
             {
-
+                //鼠标位置
                 Point ms = Control.MousePosition;
                 postionLabel.Text = "x:" + ms.X + " y:" + ms.Y;
-
+                //当前时间
                 timeLabel.Text = DateTime.Now.Hour + ":" + DateTime.Now.Minute;
-
+                //循环次数
                 countLabel.Text = runTimes + "";
 
                 if (!isStop)
                 {
 
-                    //判断时间间隔
+                    //判断时间间隔  如果超过刷的时间， 修改模拟器参数后 关闭模拟器，进行下一次循环
                     if (getTimeInterval(beginHour, beginMin, beginSec, DateTime.Now) >= shuaInterval || !isToday(beginDay, DateTime.Now))
                     {
 
-                        //TODO 修改本模拟器的参数
+                       
                         LogUtil.LogMessage(log, "脚本执行时间到 开始修改参数： " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         beginDay = DateTime.Now.Day;
                         beginHour = -1;
@@ -446,7 +319,6 @@ namespace What
                         beginSec = -1;
 
                         //获取安装的包 并清除数据
-                        
                         LogUtil.LogMessage(log, "修改机型信息。。");
                         startChangeProp(mCurrentAvdNum);
 
@@ -465,6 +337,7 @@ namespace What
 
                     }
 
+                    //判断安装测试apk是否超时， 如果超时关闭模拟器！进入下一次循环
                     if (getTimeInterval(installHour, installMin, installSec, DateTime.Now) >= installTime && !isStartInstall)
                     {
                         LogUtil.LogMessage(log, "******成功检测一次 没有启动安装*****");
@@ -478,6 +351,7 @@ namespace What
                         //callDeleteRandomFile();
                     }
 
+                    //判断联网是否超时，     如果超时关闭模拟器！进入下一次循环
                     if (getTimeInterval(changeNetHour, changeNetMin, changeNetSec, DateTime.Now) >= changeNetTime && isStartChangeNet) { 
                         //如果启动了联网， 且两分钟内没有结果
                         LogUtil.LogMessage(log, "******成功检测一次 联网超时的情况*****");
@@ -496,7 +370,7 @@ namespace What
 
                     isShowWindow();
                     isShowElse();
-
+                    //判断进程有没有启动
                     int val = Util.getProcessStaus(PROCESS_NAME);
                     if (val == Util.PROCESS_NO_START)
                     {
@@ -520,7 +394,7 @@ namespace What
                                 mTapSX = positionSXDic[mCurrentAvdNum];
                                 mTapY = positionYDic[mCurrentAvdNum];
 
-                                string avdPropPath = basePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdNum + ".txt";
+                                string avdPropPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdNum + ".txt";
                                 runAvdPropPath.Text = avdPropPath;
                                 Dictionary<string, string> runAvdDic = readProperty(avdPropPath);
                                 if (runAvdDic != null && runAvdDic.Count != 0)
@@ -532,7 +406,7 @@ namespace What
                                     runAvdScreen.Text = screen_x_y;
                                     mCurrentScreen = screen_x_y;
 
-                                    imeiLabel.Text = getImei(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\init.androVM.sh");
+                                    imeiLabel.Text = getImei(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\init.androVM.sh");
 
                                     string[] temp = screen_x_y.Split(new char[] { 'x' });
                                     if (temp != null && temp.Length == 2)
@@ -574,7 +448,7 @@ namespace What
                         {
                             isConnecting = true;
                             LogUtil.LogMessage(log, "-----start connect----------");
-                            Util.getDevices(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DEVICES_BAT_NAME, this);
+                            Util.getDevices(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DEVICES_BAT_NAME, this);
                         }
                     }
                     else
@@ -647,7 +521,7 @@ namespace What
             }
         }
 
-        // 改变ip 并统计
+
         // 改变ip 并统计
         private void changeNet()
         {
@@ -656,13 +530,13 @@ namespace What
             changeNetHour = DateTime.Now.Hour;
             changeNetMin = DateTime.Now.Minute;
             changeNetSec = DateTime.Now.Second;
-            Util.callConnectVpn(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "b160", "222", this);
+            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "b160", "222", this);
         }
 
         private void closeNet()
         {
             LogUtil.LogMessage(log, "-----closeNet----------");
-            Util.callDisconnectVpn(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_D_BAT_NAME, "VPN", this);
+            Util.callDisconnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_D_BAT_NAME, "VPN", this);
         }
 
         //开刷
@@ -711,7 +585,7 @@ namespace What
         /// </summary>
         private void getInstall()
         {
-            Util.callPMInstall(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_INSTALL_BAT_NAME, mDevice, this);
+            Util.callPMInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_INSTALL_BAT_NAME, mDevice, this);
         }
 
         static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
@@ -719,7 +593,7 @@ namespace What
         {
 
             //string pmBatPath = basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_BAT_NAME;
-            string pmTxtPath = basePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\pm.txt";
+            string pmTxtPath = mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\pm.txt";
 
 
             string content = "pm clear " + pkg + "\nexit\n";
@@ -736,19 +610,19 @@ namespace What
             writer.Close();
             //清除一个应用的数据
             semaphore.WaitOne();
-            Util.callPMClear(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_CLEAR_BAT_NAME, mDevice, this);
+            Util.callPMClear(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_CLEAR_BAT_NAME, mDevice, this);
 
         }
 
         private void callPullTimeFile()
         {
             LogUtil.LogMessage(log, "callPullTimeFile");
-            Util.callPullTimeFile(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_TIME_BAT_NAME, basePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+            Util.callPullTimeFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_TIME_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
         private void getPullTimeContent()
         {
-            string path = basePath + Constant.Folders.TEMP_FOLDER_NAME + "\\time.txt";
+            string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\time.txt";
             if (File.Exists(path))
             {
                 StreamReader reader = new StreamReader(path);
@@ -770,7 +644,7 @@ namespace What
                 try
                 {
                     File.Delete(path);
-                    Util.callDeleteTimeFile(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_TIME_BAT_NAME, this);
+                    Util.callDeleteTimeFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_TIME_BAT_NAME, this);
                 }
                 catch (Exception e)
                 {
@@ -796,11 +670,11 @@ namespace What
         private void callPullRandomFile() {
             LogUtil.LogMessage(log, "callPullRandomFile 时间间隔3s");
             Thread.Sleep(3000);
-            Util.callPullRandomFile(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, basePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+            Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
         private void getPullRandomContent() {
-            string path = basePath + Constant.Folders.TEMP_FOLDER_NAME + "\\random";
+            string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\random";
             if (File.Exists(path))
             {
                 StreamReader reader = new StreamReader(path);
@@ -811,7 +685,7 @@ namespace What
         }
 
         private void callDeleteRandomFile() {
-            Util.callDeleteRandomFile(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, this);
+            Util.callDeleteRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, this);
         }
 
         /// <summary>
@@ -831,12 +705,12 @@ namespace What
                     string key = keyList[radom];
                     string value = modelDic[key];
 
-                    //创建一个prop
+                    //创建一个新prop文件 替换掉当前模拟器的
                     propPath = createProp(value, currentAvdNum);
                 }
             }
 
-            Util.callProp(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
+            Util.callProp(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
 
         }
 
@@ -883,8 +757,8 @@ namespace What
 
                             LogUtil.LogMessage(log, "Device Connect 开始安装测试包");
                             #region install
-                            startInstall(testApkPath);
-                            //installAllApks(runTimes, apkFolderList);
+                            startInstall(mTestApkPath);
+                           
                             #endregion
                         }
                         else
@@ -895,7 +769,7 @@ namespace What
                             {
                                 LogUtil.LogMessage(log, "----延迟2s callConnect----");
                                 Thread.Sleep(2000);
-                                Util.callConnect(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.CONNECT_BAT_NAME, mDevice, this);
+                                Util.callConnect(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.CONNECT_BAT_NAME, mDevice, this);
                             }
                         }
                     }
@@ -922,7 +796,7 @@ namespace What
 
                             LogUtil.LogMessage(log, "Device Connect 开始安装测试包");
                             #region install
-                            startInstall(testApkPath);
+                            startInstall(mTestApkPath);
                             //installAllApks(runTimes, apkFolderList);
                             #endregion
 
@@ -935,7 +809,7 @@ namespace What
                             {
                                 LogUtil.LogMessage(log, "----延迟2s getDevices----");
                                 Thread.Sleep(2000);
-                                Util.getDevices(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DEVICES_BAT_NAME, this);
+                                Util.getDevices(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DEVICES_BAT_NAME, this);
                             }
                         }
                     }
@@ -965,7 +839,7 @@ namespace What
                             installSec = -1;
                             //失败重新安装 直到成功 
                             LogUtil.LogMessage(log, "安装失败");
-                            startInstall(testApkPath);
+                            startInstall(mTestApkPath);
 
                         }
                         else if (content.ToLower().Contains("success"))
@@ -1398,7 +1272,7 @@ namespace What
             string[] d = time.Split(new char[] { ' ' });
             if (d != null && d.Length == 2)
             {
-                string dataPath = basePath + Constant.Folders.IPS_FOLDER_NAME + "\\" + d[0] + ".txt";
+                string dataPath = mBasePath + Constant.Folders.IPS_FOLDER_NAME + "\\" + d[0] + ".txt";
                 if (!File.Exists(dataPath))
                 {
                     FileStream stream = File.Create(dataPath);
@@ -1423,7 +1297,7 @@ namespace What
         private string createProp(String modelPath, int currentAvdNum)
         {
 
-            string tempPath = basePath + Constant.Folders.TEMP_FOLDER_NAME;
+            string tempPath = mBasePath + Constant.Folders.TEMP_FOLDER_NAME;
             if (File.Exists(modelPath))
             {
 
@@ -1446,7 +1320,7 @@ namespace What
                     Dictionary<string, string> propDic = readProperty(modelPath);
                     int sdk = int.Parse(propDic["sdk_version"]);
                     //在temp中创建
-                    string sdkPath = basePath + Constant.Folders.SDK_FOLDER_NAME + "\\" + sdk + "\\" + "build.prop";
+                    string sdkPath = mBasePath + Constant.Folders.SDK_FOLDER_NAME + "\\" + sdk + "\\" + "build.prop";
                     File.Copy(sdkPath, modelFolder + "\\" + "build.prop");
                     //并且修改好
                     if (changeProp(propDic, modelFolder + "\\" + "build.prop") && saveAvdProperty(modelPath, currentAvdNum))
@@ -1497,7 +1371,7 @@ namespace What
         /// <returns></returns>
         private bool saveAvdProperty(String modelPath, int currentAvdNum)
         {
-            string propPath = basePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + currentAvdNum + ".txt";
+            string propPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + currentAvdNum + ".txt";
             try
             {
                 if (File.Exists(propPath))
@@ -1608,7 +1482,7 @@ namespace What
 
         #region 模拟点击和输入
 
-        //打开设置
+        //打开Genymotion设置页，并設置分辨率
         private bool avdSetting(int x, int y , string s_x, string s_y)
         {
             //通过模拟点击设置avd参数
@@ -1647,91 +1521,11 @@ namespace What
             Thread.Sleep(10000);
             
             
-            //通过代码直接设置avd参数
-            //String path = "C:\\Users\\Administrator\\VirtualBox VMs\\Google Nexus 4 - 4.1.1 - API 16 - 768x1280_11";
-            //String vboxName = "Google Nexus 4 - 4.1.1 - API 16 - 768x1280_11.vbox";
-            //String vbox_prevName = "Google Nexus 4 - 4.1.1 - API 16 - 768x1280_11.vbox-prev";
-
-            //String vboxPath = path + "\\"+vboxName;
-            //String vbox_prevPath = path + "\\" + vbox_prevName;
-
-            //if (!File.Exists(vboxPath))
-            //{
-            //    MessageBox.Show("File Not Exist! " + "\n" + vboxPath);
-            //}
-            //else
-            //{
-            //    StreamReader reader = new StreamReader(vboxPath);
-            //    String content = reader.ReadToEnd();
-            //    content = content.Replace("xmlns=\"http://www.innotek.de/VirtualBox-settings\"", "");
-            //    reader.Close();
-            //    MessageBox.Show(content);
-
-            //    StreamWriter writer = new StreamWriter(vboxPath);
-            //    writer.Write(content);
-            //    writer.Flush();
-            //    writer.Close();
-
-            //    try
-            //    {
-            //        XmlDocument vboxXml = new XmlDocument();
-            //        vboxXml.Load(vboxPath);
-
-
-            //        XmlNodeList nodeList = vboxXml.SelectNodes("VirtualBox/Machine/Hardware/GuestProperties/GuestProperty");
-            //        foreach (XmlNode node in nodeList)
-            //        {
-            //            if (node.Attributes["name"].Value.Equals("vbox_dpi"))
-            //            {
-            //                if (s_x.Trim().Equals("480"))
-            //                {
-            //                    node.Attributes["value"].Value = "240";
-            //                }
-            //                else if (s_x.Trim().Equals("720") || s_x.Trim().Equals("768"))
-            //                {
-            //                    node.Attributes["value"].Value = "320";
-            //                }
-            //                else if (s_x.Trim().Equals("1080"))
-            //                {
-            //                    node.Attributes["value"].Value = "480";
-            //                }
-            //            }
-
-            //            if (node.Attributes["name"].Value.Equals("vbox_graph_mode"))
-            //            {
-            //                node.Attributes["value"].Value = s_x + "x" + s_y + "-16";
-            //            }
-            //        }
-
-            //    }
-            //    catch (Exception e) {
-            //        MessageBox.Show(e.Message);                
-            //    }
-                
-               
-            //}
-
-            //if (!File.Exists(vbox_prevPath))
-            //{
-            //    MessageBox.Show("File Not Exist!" + "\n" + vbox_prevPath);
-            //}
-            //else
-            //{
-            //    XmlDocument vbox_prevXml = new XmlDocument();
-            //    vbox_prevXml.Load(vbox_prevPath);
-            //}
-
-            
-
-
-
-
-
-
+            //TODO 通过代码直接设置avd参数
             return true;
         }
 
-        //判断 弹出了 模拟器正在处理设置的窗口
+        //判断 是否弹出了 遮挡  程序执行的 窗口，有则关闭
         private bool isShowWindow()
         {
             Process[] ps = Process.GetProcessesByName("genymotion");
@@ -1763,7 +1557,7 @@ namespace What
         }
 
         /// <summary>
-        /// 检测有没有异常窗口弹出
+        /// 检测有没有异常窗口弹出，任何阻止程序进行 都要关闭掉
         /// </summary>
         private void isShowElse()
         {
@@ -1782,6 +1576,9 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 检测有没有异常窗口弹出, 任何阻止程序进行 都要关闭掉
+        /// </summary>
         private void isShowNotRead()
         {
             try
@@ -1834,7 +1631,7 @@ namespace What
                     p.Kill();
                 }
 
-                Util.callCloseAdb(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.ADB_CLOSE_BAT_NAME, this);
+                Util.callCloseAdb(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.ADB_CLOSE_BAT_NAME, this);
 
             }
             catch (Exception e)
@@ -1912,7 +1709,7 @@ namespace What
 
         }
 
-        //启动脚本
+        //启动模拟器里 按键精灵的脚本
         private bool startJiaoben(string screen)
         {
             try
@@ -2034,7 +1831,7 @@ namespace What
 
         #endregion
 
-        #region
+        #region 模拟鼠标点击
         //双击
         private void doubleClick(int x, int y)
         {
@@ -2080,7 +1877,7 @@ namespace What
         }
         #endregion
 
-        #region 模拟输入
+        #region 模拟键盘输入
 
         private void inputStr(String processName, String text)
         {
@@ -2163,7 +1960,7 @@ namespace What
 
         #endregion
 
-
+        //播放音乐
         private void playMusic(string path)
         {
             SoundPlayer sp = new SoundPlayer();
@@ -2171,7 +1968,58 @@ namespace What
             sp.PlayLooping();
         }
 
-       
+        #region 安装和卸载apk
+
+        //static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
+        ////遍历安装包
+        //private void installAllApks(int times, List<string> apkFolderList)
+        //{
+        //    if (apkFolderList == null || apkFolderList.Count == 0)
+        //    {
+        //        return;
+        //    }
+
+        //    string path = apkFolderList[times % apkFolderList.Count];
+        //    LogUtil.LogMessage(log, "install:" +path);
+        //    string[] apks = Directory.GetFiles(path);
+        //    if (apks != null && apks.Length > 0)
+        //    {
+        //        LogUtil.LogMessage(log, "install:" + apks.Length);
+        //        foreach (string apkPath in apks)
+        //        {
+        //            totalList.Add(apkPath);
+        //            pkgList.Add(apkPath.Substring(apkPath.LastIndexOf("\\") + 1, apkPath.LastIndexOf(".apk") - apkPath.LastIndexOf("\\") - 1));
+        //        }
+        //        //install
+        //        LogUtil.LogMessage(log, "install:" + totalList.Count + ":" + installSuccess);
+        //        if (totalList.Count > installSuccess)
+        //        {
+        //            startInstall(totalList[installSuccess]);
+        //        }
+        //    }
+        //}
+
+
+
+        private void startInstall(String apkPath)
+        {
+            //  semaphore.WaitOne();
+            LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            isStartInstall = false;
+            installHour = DateTime.Now.Hour;
+            installMin = DateTime.Now.Minute;
+            installSec = DateTime.Now.Second;
+            LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
+            Thread.Sleep(3000);
+            Util.callInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
+        }
+
+        //private void startUninstall(String pkgName) {
+        //    semaphore.WaitOne();
+        //    LogUtil.LogMessage(log, "Devices:" + mDevice + "UnInstall:" + pkgName);
+        //    Util.callUninstall(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.UNINSTALL_BAT_NAME, mDevice, pkgName, this);
+        //}
+        #endregion
 
       
 
