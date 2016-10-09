@@ -68,9 +68,9 @@ namespace What
         private Thread runThread = null;
 
         //当前设备连接的状态
-        private static bool isLaunching = false;
-        private static bool isConnecting = false;
-        private static bool isConnected = false;
+        private static bool isLaunching = false;//模拟器是否启动
+        private static bool isConnecting = false;//vpn是否正在連接
+        private static bool isConnected = false;//vpn是否已经连接
 
         //循环执行次数
         private static int runTimes = 0;
@@ -263,8 +263,8 @@ namespace What
         }
         #endregion
 
-     
 
+        //停止按钮点击事件
         private void btnStop_Click(object sender, EventArgs e)
         { 
 
@@ -337,7 +337,7 @@ namespace What
 
                     }
 
-                    //判断安装测试apk是否超时， 如果超时关闭模拟器！进入下一次循环
+                    //判断安装测试apk是否超时， 如果超时（说明模拟器启动有问题）关闭模拟器！进入下一次循环
                     if (getTimeInterval(installHour, installMin, installSec, DateTime.Now) >= installTime && !isStartInstall)
                     {
                         LogUtil.LogMessage(log, "******成功检测一次 没有启动安装*****");
@@ -370,6 +370,7 @@ namespace What
 
                     isShowWindow();
                     isShowElse();
+                   
                     //判断进程有没有启动
                     int val = Util.getProcessStaus(PROCESS_NAME);
                     if (val == Util.PROCESS_NO_START)
@@ -386,20 +387,22 @@ namespace What
 
                             if (avdList != null && avdList.Count > 0)
                             {
-                                //每次随机一个 sdk版本
+                                //随机选择一个模拟器    
                                 int radmom = getRadmomVal(avdList.Count);
                                 mCurrentAvdNum = avdList[radmom];
-                               // mCurrentAvdNum = 1;
+                                // mCurrentAvdNum = 1;   //指定选择某一个模拟器 just for test
+                                // 该模拟器关键点坐标
                                 mTapX = positionXDic[mCurrentAvdNum];
                                 mTapSX = positionSXDic[mCurrentAvdNum];
                                 mTapY = positionYDic[mCurrentAvdNum];
 
+                                //该模拟器的机型参数     机型分辨率 需要在模拟器启动之前提前设置
                                 string avdPropPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdNum + ".txt";
                                 runAvdPropPath.Text = avdPropPath;
                                 Dictionary<string, string> runAvdDic = readProperty(avdPropPath);
                                 if (runAvdDic != null && runAvdDic.Count != 0)
                                 {
-                                  
+                                    //把当前模拟器的参数显示出来
                                     runAvdModel.Text = runAvdDic["ro.product.model"];
                                     runAvdSdk.Text = runAvdDic["sdk_version"];
                                     string screen_x_y = runAvdDic["screen_x_y"];
@@ -1446,7 +1449,11 @@ namespace What
             return contentDictionary;
         }
 
-        //获取一个随机值
+        /// <summary>
+        /// 获取一个随机值
+        /// </summary>
+        /// <param name="max"></param>
+        /// <returns></returns>
         private int getRadmomVal(int max)
         {
             Random rd = new Random();
@@ -1525,7 +1532,10 @@ namespace What
             return true;
         }
 
-        //判断 是否弹出了 遮挡  程序执行的 窗口，有则关闭
+        /// <summary>
+        /// 判断 是否弹出了 遮挡  程序执行的 窗口，有则关闭
+        /// </summary>
+        /// <returns></returns>
         private bool isShowWindow()
         {
             Process[] ps = Process.GetProcessesByName("genymotion");

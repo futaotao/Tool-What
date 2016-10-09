@@ -23,9 +23,13 @@ namespace What
 
         public class Folders {
             public const String IPS_FOLDER_NAME = "ips";
+            //模拟器对应的机型信息。
             public const String AVD_PROPERTY_FOLDER_NAME = "avds";
+            //测试apk的保存路径  用于检测模拟器是否启动的
             public const String APK_FOLDER_NAME = "apks";
+            //批处理文件保存路径
             public const String BAT_FOLDER_NAME = "bats";
+            //提示音保存路径
             public const String MUSIC_FOLDER_NAME = "music";
 
             public const String SDK_FOLDER_NAME = "sdks";
