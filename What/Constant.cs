@@ -31,38 +31,55 @@ namespace What
             public const String BAT_FOLDER_NAME = "bats";
             //提示音保存路径
             public const String MUSIC_FOLDER_NAME = "music";
-
+            //不同sdk版本的 build.prop文件 模板
             public const String SDK_FOLDER_NAME = "sdks";
+
             public const String MODEL_FOLDER_NAME = "models";
             public const String TEMP_FOLDER_NAME = "temp";
 
            
         }
-
+        
+        /// <summary>
+        /// 所有的批处理文件
+        /// </summary>
         public class Apktool {
+            //获取连接设备
             public const String DEVICES_BAT_NAME = "devices.bat";
+            //adb 连接设备
             public const String CONNECT_BAT_NAME = "connect.bat";
+
             public const String INSTALL_BAT_NAME = "install.bat";
             public const String PROP_BAT_NAME = "prop.bat";
             public const String APPS_BAT_NAME = "apps.bat";
             public const String UNINSTALL_BAT_NAME = "uninstall.bat";
 
             public const String REBOOT_BAT_NAME = "reboot.bat";
+            
+            //连接vpn
             public const String VPN_C_BAT_NAME = "vpn_c.bat";
+            //断开vpn
             public const String VPN_D_BAT_NAME = "vpn_d.bat";
 
             public const String PULL_TIME_BAT_NAME = "pull_time.bat";
             public const String DETETE_TIME_BAT_NAME = "delete_time.bat";
 
+            //从模拟器中 pull出Xprivacy生成的随机值文件
             public const String PULL_RANDOM_BAT_NAME = "pull_random.bat";
+            //删除 Xprivacy生成的 随机值文件
             public const String DETETE_RANDOM_BAT_NAME = "delete_random.bat";
 
+            //清除模拟器某一个应用的数据
             public const String PM_CLEAR_BAT_NAME = "pm_clear.bat";
+            //获取当前模拟器安装的应用
             public const String PM_INSTALL_BAT_NAME = "pm_install.bat";
 
             public const String ADB_CLOSE_BAT_NAME = "adb_close.bat                                                                                    ";
         }
 
+        /// <summary>
+        /// 回调标识
+        /// </summary>
         public class ProcessType
         {
             public const int TYPE_OF_PROCESS_START_UNKNOWN = 0x0000;
@@ -93,9 +110,9 @@ namespace What
            
             
             
-            
+            //连接vpn回调
             public const int TYPE_OF_PROCESS_CONNECT_VPN = 0x00011;
-
+            //断开vpn回调
             public const int TYPE_OF_PROCESS_DISCONNECT_VPN = 0x00012;
 
             public const int TYPE_OF_PROCESS_PULL_TIME = 0x00013;

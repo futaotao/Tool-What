@@ -28,7 +28,7 @@ namespace What
         private static String mTipMusicPath = "";
 
 
-        //当前模拟器的 端口
+        //当前模拟器的 设备号和端口
         private static String mDevice = "";
         
         //Genymotion启动模拟器的进程
@@ -68,9 +68,9 @@ namespace What
         private Thread runThread = null;
 
         //当前设备连接的状态
-        private static bool isLaunching = false;//模拟器是否启动
-        private static bool isConnecting = false;//vpn是否正在連接
-        private static bool isConnected = false;//vpn是否已经连接
+        private static bool isLaunching = false;//模拟器是否正在启动
+        private static bool isConnecting = false;//模拟器否正在连接
+        private static bool isConnected = false;//模拟器是否已经连接
 
         //循环执行次数
         private static int runTimes = 0;
@@ -106,6 +106,7 @@ namespace What
 
         //默认程序循环是停止的
         private static bool isStop = true;
+        //判断vpn是否连接
         private static bool isVpnConnect = false;
 
         // 需要清除缓存 的包
@@ -121,6 +122,7 @@ namespace What
         private static int installMin = -1;
         private static int installSec = -1;
         private static int installTime = 120;
+        //判断是否 已经开始安装
         private static bool isStartInstall = false;
 
         
@@ -130,6 +132,7 @@ namespace What
         private static int changeNetMin = -1;
         private static int changeNetSec = -1;
         private static int changeNetTime = 120;
+        //判断是否 已经开始连接vpn
         private static bool isStartChangeNet = false;
 
 
@@ -379,6 +382,7 @@ namespace What
                         {
                             isConnecting = false;
                             isConnected = false;
+                            //正在启动中
                             isLaunching = true;
                             LogUtil.LogMessage(log, "-----start launch----------");
 
@@ -403,17 +407,22 @@ namespace What
                                 if (runAvdDic != null && runAvdDic.Count != 0)
                                 {
                                     //把当前模拟器的参数显示出来
-                                    runAvdModel.Text = runAvdDic["ro.product.model"];
+                                    //机型
+                                    runAvdModel.Text = runAvdDic["ro.product.model"]; 
+                                    //sdk版本
                                     runAvdSdk.Text = runAvdDic["sdk_version"];
+                                    //屏幕分辨率
                                     string screen_x_y = runAvdDic["screen_x_y"];
                                     runAvdScreen.Text = screen_x_y;
                                     mCurrentScreen = screen_x_y;
 
+                                    //获取imei
                                     imeiLabel.Text = getImei(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\init.androVM.sh");
 
                                     string[] temp = screen_x_y.Split(new char[] { 'x' });
                                     if (temp != null && temp.Length == 2)
-                                    {
+                                    {   
+                                        //设置待启动的模拟器   分辨率是启动之前设置
                                         avdSetting(mTapSX, mTapY, temp[0], temp[1]);
                                     }
                                 }
@@ -427,30 +436,27 @@ namespace What
 
                                 if (!isVpnConnect)
                                 {
+                                    //启动之前 先连接vpn
                                     LogUtil.LogMessage(log, "-----changeNet----------");
                                     isVpnConnect = true;
+                                    //连接vpn  连接成功和失败都会有相应回调
                                     changeNet();
                                 }
-                                //else
-                                //{
-                                //    LogUtil.LogMessage(log, "-----closeNet  changeNet----------");
-                                //    closeNet();
-                                //    changeNet();
-                                //}
                             }
 
                         }
                     }
                     else if (val == Util.PROCESS_RUNNING)
                     {
-
+                        //说明模拟器已经启动     正在启动设置为false
                         isLaunching = false;
 
-
+                        //当模拟器 没有正在连接 也没有已经连接 才进入循环
                         if (!isConnecting && !isConnected)
                         {
                             isConnecting = true;
                             LogUtil.LogMessage(log, "-----start connect----------");
+                            //准备 adb 连接模拟器
                             Util.getDevices(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DEVICES_BAT_NAME, this);
                         }
                     }
@@ -484,6 +490,11 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 获取机型的imei
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         private string getImei(string filePath)
         {
             if (!File.Exists(filePath))
@@ -505,12 +516,19 @@ namespace What
             return str;
         }
 
-        // 判断有没有启动成功
+        /// <summary>
+        /// 准备启动模拟器
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         private bool launch(int x, int y)
         {
-            LogUtil.LogMessage(log, "yan chi 10 ... Tet");
+            LogUtil.LogMessage(log, "延迟 15s 后启动 模拟器");
             Thread.Sleep(15000);
+            //真正点击模拟器
             launchAvd(x, y);
+            //判断是否有 其他窗口遮挡， 如果遮挡 关闭之后重新
             if (!isShowWindow())
             {
                 //如果没有展示 启动成功
@@ -525,10 +543,13 @@ namespace What
         }
 
 
-        // 改变ip 并统计
+        /// <summary>
+        /// 开始vpn连接， 并统计新的ip
+        /// </summary>
         private void changeNet()
         {
             LogUtil.LogMessage(log, "-----changeNet----------" + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            //标记开始 连接vpn
             isStartChangeNet = true;
             changeNetHour = DateTime.Now.Hour;
             changeNetMin = DateTime.Now.Minute;
@@ -536,13 +557,19 @@ namespace What
             Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "b160", "222", this);
         }
 
+        /// <summary>
+        /// 断开vpn 连接
+        /// </summary>
         private void closeNet()
         {
             LogUtil.LogMessage(log, "-----closeNet----------");
             Util.callDisconnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_D_BAT_NAME, "VPN", this);
         }
 
-        //开刷
+        /// <summary>
+        /// 开始刷
+        /// </summary>
+        /// <param name="screen">屏幕分辨率</param>
         private void startShua(string screen)
         {
 
@@ -557,24 +584,15 @@ namespace What
                 beginMin = DateTime.Now.Minute;
                 beginSec = DateTime.Now.Second;
 
-               
-                // 判断是否联网成功  如果成功否则结束avd
-                // 
-                //Thread.Sleep(25000);
-                //LogUtil.LogMessage(log, "延迟 25s 来检测是否联网成功！call pull file ");
-                //callPullTimeFile();
-
-                LogUtil.LogMessage(log, "测试不检测是否联网");
             }
             else
             {
                 LogUtil.LogMessage(log, "启动脚本失败");
                 try
                 {
+                    //关闭循环进程
                     Util.closeProcess(PROCESS_NAME);
                     Util.closeProcess(VBOX_HEAD_NAME);
-                  //  Util.closeProcess(VBOX_NET_NAME);
-                 //   Util.closeProcess(VBOX_SVC_NAME);
                 }
                 catch (Exception e)
                 {
@@ -592,10 +610,13 @@ namespace What
         }
 
         static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
+        /// <summary>
+        /// 清除模拟器 指定包名应用的数据
+        /// </summary>
+        /// <param name="pkg">包名</param>
         private void clearData(string pkg)
         {
-
-            //string pmBatPath = basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_BAT_NAME;
+            //包名经常更换，所以pm文件动态生成
             string pmTxtPath = mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\pm.txt";
 
 
@@ -617,6 +638,9 @@ namespace What
 
         }
 
+        /// <summary>
+        /// 检测模拟器是否联网的。  这个后来去掉了， 正常启动都会联网
+        /// </summary>
         private void callPullTimeFile()
         {
             LogUtil.LogMessage(log, "callPullTimeFile");
@@ -668,7 +692,7 @@ namespace What
         }
 
         /// <summary>
-        /// pull random file
+        /// 从模拟器中 pull出 Xprivacy生成的随机值
         /// </summary>
         private void callPullRandomFile() {
             LogUtil.LogMessage(log, "callPullRandomFile 时间间隔3s");
@@ -676,6 +700,9 @@ namespace What
             Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
+        /// <summary>
+        /// 获取Xprivacy生成的随机值内容
+        /// </summary>
         private void getPullRandomContent() {
             string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\random";
             if (File.Exists(path))
@@ -687,12 +714,15 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 删除 Xprivacy生成随机值的文件
+        /// </summary>
         private void callDeleteRandomFile() {
             Util.callDeleteRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, this);
         }
 
         /// <summary>
-        /// 准备修改当前avd 的参数
+        /// 准备修改当前模拟器 的机型参数  通过替换 build.prop文件。 一个循环执行结束的时候会修改机型参数，模拟器第一次启动也会修改机型参数
         /// </summary>
         /// <param name="currentAvdNum"></param>
         private void startChangeProp(int currentAvdNum)
@@ -708,23 +738,128 @@ namespace What
                     string key = keyList[radom];
                     string value = modelDic[key];
 
-                    //创建一个新prop文件 替换掉当前模拟器的
+                    //创建一个新prop文件
                     propPath = createProp(value, currentAvdNum);
                 }
             }
-
+            //用新创建的prop文件 替换掉模拟器的prop文件。 
             Util.callProp(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
 
         }
 
 
 
-
+        /// <summary>
+        /// 所有回调
+        /// </summary>
+        /// <param name="type"></param>
         public void onProcessOver(int type)
         {
 
             switch (type)
             {
+                #region vpn 连接. 成功 启动模拟器; 不成功 重新进入循环;
+                case Constant.ProcessType.TYPE_OF_PROCESS_CONNECT_VPN:
+                    //接收vpn 连接的回调
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+
+                        LogUtil.LogMessage(log, content);
+                        //标记 vpn连接 结束
+                        isStartChangeNet = false;
+                        changeNetHour = -1;
+                        changeNetMin = -1;
+                        changeNetSec = -1;
+
+                        if (content.Contains("已连接") || content.Contains("已经连接"))
+                        {
+                            LogUtil.LogMessage(log, "-----vpn connect----------");
+
+                            //标记 vpn连接成功
+                            isVpnConnect = true;
+                            LogUtil.LogMessage(log, "-----launch avd----------");
+                            //准备启动模拟器
+                            launch(mTapX, mTapY);
+
+                            #region 保存ip
+                            //Dictionary<string, string> ipDic = Util.getIpInfo();
+                            //if (ipDic != null && ipDic.Count > 0)
+                            //{
+
+                            //    string ip = ipDic["ip"];
+                            //    if (!ip.Trim().Contains("60.166."))
+                            //    {
+                            //        string location = ipDic["location"];
+                            //        ipLabel.Text = ip + "  " + location;
+                            //        string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            //        saveIp(ip, location, time);
+                            //        isVpnConnect = true;
+                            //        LogUtil.LogMessage(log, "-----launch avd----------");
+                            //        launch(mTapX, mTapY);
+                            //    }
+                            //    else
+                            //    {
+                            //        LogUtil.LogMessage(log, "-----get Ip info failed----------");
+                            //        isVpnConnect = false;
+                            //        isLaunching = false;
+                            //        closeNet();
+
+                            //        //isShowWindow();
+                            //    }
+                            //}
+                            //else
+                            //{
+                            //    LogUtil.LogMessage(log, "-----get Ip info failed----------");
+                            //    isVpnConnect = false;
+                            //    isLaunching = false;
+                            //    closeNet();
+
+                            //    //isShowWindow();
+                            //}
+                            #endregion
+                        }
+                        else
+                        {
+                            LogUtil.LogMessage(log, "-----vpn connect failed----------");
+                            //vpn连接失败 会重新进入循环
+                            isVpnConnect = false;
+                            isLaunching = false;
+                            closeNet();
+                        }
+
+                    }
+                    break;
+                #endregion
+
+                #region vpn 断开
+                case Constant.ProcessType.TYPE_OF_PROCESS_DISCONNECT_VPN:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                    }
+                    break;
+                #endregion
+
+                #region 获取当前连接的设备. 如果已经连接  开始安装测试apk; 如果没有连接 开始连接;
                 case Constant.ProcessType.TYPE_OF_PROCESS_GET_DEVICES:
                     if (Util.myThread != null)
                     {
@@ -741,33 +876,36 @@ namespace What
 
                         LogUtil.LogMessage(log, content);
 
+                        // 192开头
                         if (content.Contains("192"))
                         {
                             mDevice = content.Substring(content.LastIndexOf("192"), content.LastIndexOf("5555") - content.LastIndexOf("192") + 4);
                             deviceTb.Text = mDevice;
                         }
-
+                        
+                        // 169开头
                         if (content.Contains("169"))
                         {
                             mDevice = content.Substring(content.LastIndexOf("169"), content.LastIndexOf("5555") - content.LastIndexOf("169") + 4);
                             deviceTb.Text = mDevice;
                         }
 
+                        
                         if ((content.Contains("192") || content.Contains("169")) && !content.Contains("offline"))
                         {
+                            //说明此时已经 adb 已经连接到了 模拟器
                             isConnecting = false;
                             isConnected = true;
 
                             LogUtil.LogMessage(log, "Device Connect 开始安装测试包");
-                            #region install
+                            //开始安装测试包 目的等待模拟器真正进入运行状态
                             startInstall(mTestApkPath);
                            
-                            #endregion
                         }
                         else
                         {
                             LogUtil.LogMessage(log, "Device Not Connect");
-                            // connect
+                            // 说明此时 adb 还没有连接到模拟器
                             if (isConnecting)
                             {
                                 LogUtil.LogMessage(log, "----延迟2s callConnect----");
@@ -777,6 +915,9 @@ namespace What
                         }
                     }
                     break;
+                #endregion
+
+                #region 开始连接设备; 连接成功  开始安装测试apk; 连接失败  重新获取当前连接设备;
                 case Constant.ProcessType.TYPE_OF_PROCESS_START_CONNECT:
 
 
@@ -794,20 +935,19 @@ namespace What
 
                         if ((content.Contains("192") || content.Contains("169")) && !content.Contains("offline") && !content.Contains("unable"))
                         {
+                            //说明此时已经 adb 已经连接到了 模拟器
                             isConnecting = false;
                             isConnected = true;
 
                             LogUtil.LogMessage(log, "Device Connect 开始安装测试包");
-                            #region install
+                            //开始安装测试包 目的等待模拟器真正进入运行状态
                             startInstall(mTestApkPath);
-                            //installAllApks(runTimes, apkFolderList);
-                            #endregion
 
                         }
                         else
                         {
                             LogUtil.LogMessage(log, "Device Not Connect");
-                            // getDevices
+                            // 开始获取当前连接的设备
                             if (isConnecting)
                             {
                                 LogUtil.LogMessage(log, "----延迟2s getDevices----");
@@ -817,7 +957,9 @@ namespace What
                         }
                     }
                     break;
-                #region
+                #endregion
+
+                #region 开始安装测试包
                 case Constant.ProcessType.TYPE_OF_PROCESS_START_INSTALL:
                     // semaphore.Release();
 
@@ -840,8 +982,8 @@ namespace What
                             installHour = -1;
                             installMin = -1;
                             installSec = -1;
-                            //失败重新安装 直到成功 
                             LogUtil.LogMessage(log, "安装失败");
+                            //失败重新安装 直到成功
                             startInstall(mTestApkPath);
 
                         }
@@ -861,7 +1003,6 @@ namespace What
                             }
                             else
                             {
-
                                 // 检测 Xprivacy 是否生成随机值， 如果成功说明 也可以启动脚本了
                                 callPullRandomFile();
 
@@ -869,9 +1010,7 @@ namespace What
                         }
                         else
                         {
-
                             LogUtil.LogMessage(log, "-----------未知------");
-
                             if (content.Trim().Equals(""))
                             {
                                 LogUtil.LogMessage(log, "-----------log is empty---------");
@@ -880,8 +1019,6 @@ namespace What
                             {
                                 LogUtil.LogMessage(log, "-----------log is" + content + "---------");
                             }
-
-                            //closeAvd(mCurrentScreen);
                         }
                     }
 
@@ -947,6 +1084,100 @@ namespace What
                 //    }
                 //    break;
                 #endregion
+
+                #region 从模拟器pull出 Xprivacy生成的随机值文件
+                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "Pull:" + content);
+
+                        if (content.Contains("not exist"))
+                        {
+                            LogUtil.LogMessage(log, "Xprivacy还没生成随机值！");
+                            //说明Xprivacy 没有生成随机值，脚本暂时也不能启动
+                            //继续等待
+                            callPullRandomFile();
+                        }
+                        else
+                        {
+                            // 说明Xprivacy生成了随机值，脚本也可以启动了
+                            //开刷
+                            LogUtil.LogMessage(log, "Xprivacy生成随机值！");
+                            getPullRandomContent();
+                            LogUtil.LogMessage(log, "延迟 5s 开刷");
+                            Thread.Sleep(5000);
+                            startShua(mCurrentScreen);
+                        }
+
+                    }
+                    break;
+                #endregion
+
+                #region 获取当前模拟器安装的应用 并清除准备刷的应用的 数据
+                case Constant.ProcessType.TYPE_OF_PROCESS_PM_INSTALL:
+
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+                        LogUtil.LogMessage(log, "PM Install:" + content);
+
+                        if (pkgArray != null && pkgArray.Length > 0)
+                        {
+                            for (int i = 0; i < pkgArray.Length; i++)
+                            {
+                                //循环遍历 清除要刷的应用的数据
+                                if (content.Contains(pkgArray[i]))
+                                {
+                                    clearData(pkgArray[i]);
+                                }
+                            }
+                        }
+
+                    }
+                    break;
+                #endregion
+
+                #region 清除准备要刷的应用的数据
+                case Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR:
+                    semaphore.Release();
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "PM Clear:" + content);
+
+                    }
+                    break;
+                #endregion
+
+
+                #region 修改机型参数
                 case Constant.ProcessType.TYPE_OF_PROCESS_CHANGE_PROP:
 
                     if (Util.myThread != null)
@@ -968,205 +1199,13 @@ namespace What
                         else
                         {
                             LogUtil.LogMessage(log, "-----change prop success ！ 准备删除 Xprivacy 生成的随机值！----------");
-
                             callDeleteRandomFile();
-
                         }
                     }
                     break;
+                #endregion
 
-                case Constant.ProcessType.TYPE_OF_PROCESS_START_REBOOT:
-
-                    break;
-
-                #region vpn 连接
-                case Constant.ProcessType.TYPE_OF_PROCESS_CONNECT_VPN:
-
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-
-                        LogUtil.LogMessage(log, content);
-                        isStartChangeNet = false;
-                        changeNetHour = -1;
-                        changeNetMin = -1;
-                        changeNetSec = -1;
-
-                        if (content.Contains("已连接") || content.Contains("已经连接"))
-                        {
-                            LogUtil.LogMessage(log, "-----vpn connect----------");
-
-                   
-                            isVpnConnect = true;
-                            LogUtil.LogMessage(log, "-----launch avd----------");
-                            launch(mTapX, mTapY);
-
-                            //Dictionary<string, string> ipDic = Util.getIpInfo();
-                            //if (ipDic != null && ipDic.Count > 0)
-                            //{
-
-                            //    string ip = ipDic["ip"];
-                            //    if (!ip.Trim().Contains("60.166."))
-                            //    {
-                            //        string location = ipDic["location"];
-                            //        ipLabel.Text = ip + "  " + location;
-                            //        string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            //        saveIp(ip, location, time);
-                            //        isVpnConnect = true;
-                            //        LogUtil.LogMessage(log, "-----launch avd----------");
-                            //        launch(mTapX, mTapY);
-                            //    }
-                            //    else
-                            //    {
-                            //        LogUtil.LogMessage(log, "-----get Ip info failed----------");
-                            //        isVpnConnect = false;
-                            //        isLaunching = false;
-                            //        closeNet();
-
-                            //        //isShowWindow();
-                            //    }
-                            //}
-                            //else
-                            //{
-                            //    LogUtil.LogMessage(log, "-----get Ip info failed----------");
-                            //    isVpnConnect = false;
-                            //    isLaunching = false;
-                            //    closeNet();
-
-                            //    //isShowWindow();
-                            //}
-                        }
-                        else
-                        {
-                            LogUtil.LogMessage(log, "-----vpn connect failed----------");
-                            isVpnConnect = false;
-                            isLaunching = false;
-                            closeNet();
-
-                            // isShowWindow();
-                            //closeNet();
-                            //changeNet();
-                        }
-
-                    }
-                    break;
-                case Constant.ProcessType.TYPE_OF_PROCESS_DISCONNECT_VPN:
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-
-                        //if (content.Contains("已连接"))
-                        //{
-                        //    MessageBox.Show("Success!");
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("Failed!");
-                        //}
-
-                    }
-                    break;
-                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_TIME:
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        LogUtil.LogMessage(log, "Pull:" + content);
-
-                        if (content.Contains("not exist"))
-                        {
-                            //说明脚本没有启动成功
-                            //关闭模拟器重新启动
-                            LogUtil.LogMessage(log, "脚本启动失败或者联网失败的！");
-                            callDeleteRandomFile();
-                            //closeAvd(mCurrentScreen);
-                        }
-                        else
-                        {
-                            getPullTimeContent();
-                        }
-
-                    }
-                    break;
-                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM:
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        LogUtil.LogMessage(log, "Pull:" + content);
-
-                        if (content.Contains("not exist"))
-                        {
-                            //说明Xprivacy 没有生成随机值，脚本暂时也不能启动
-                            //继续等待
-                            LogUtil.LogMessage(log, "Xprivacy还没生成随机值！");
-                            callPullRandomFile();
-                        }
-                        else
-                        {
-                            // 说明Xprivacy生成了随机值，脚本也可以启动了
-                            //开刷
-                            LogUtil.LogMessage(log, "Xprivacy生成随机值！");
-                            getPullRandomContent();
-                            LogUtil.LogMessage(log, "延迟 5s 开刷");
-                            Thread.Sleep(5000);
-                            startShua(mCurrentScreen);
-                           
-                        }
-
-                    }
-                    break;
-                case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_TIME:
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        LogUtil.LogMessage(log, "Delete:" + content);
-
-                    }
-                    break;
+                #region 删除Xprivacy生成的随机值文件
                 case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM:
                     if (Util.myThread != null)
                     {
@@ -1212,54 +1251,65 @@ namespace What
 
                     }
                     break;
-                case Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR:
-                    semaphore.Release();
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        LogUtil.LogMessage(log, "PM Clear:" + content);
-
-                    }
-                    break;
-                case Constant.ProcessType.TYPE_OF_PROCESS_PM_INSTALL:
-
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-                        LogUtil.LogMessage(log, "PM Install:" + content);
-
-                        if (pkgArray != null && pkgArray.Length > 0)
-                        {
-                            for (int i = 0; i < pkgArray.Length; i++)
-                            {
-                                if (content.Contains(pkgArray[i]))
-                                {
-                                    clearData(pkgArray[i]);
-                                }
-                            }
-                        }
-
-                    }
-                    break;
-
                 #endregion
+
+                case Constant.ProcessType.TYPE_OF_PROCESS_START_REBOOT:
+
+                    break;
+      
+                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_TIME:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "Pull:" + content);
+
+                        if (content.Contains("not exist"))
+                        {
+                            //说明脚本没有启动成功
+                            //关闭模拟器重新启动
+                            LogUtil.LogMessage(log, "脚本启动失败或者联网失败的！");
+                            callDeleteRandomFile();
+                            //closeAvd(mCurrentScreen);
+                        }
+                        else
+                        {
+                            getPullTimeContent();
+                        }
+
+                    }
+                    break;
+
+
+                case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_TIME:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "Delete:" + content);
+
+                    }
+                    break;
+           
+           
+
+
             }
         }
 
@@ -1292,7 +1342,7 @@ namespace What
         }
 
         /// <summary>
-        /// 修改Prop 
+        /// 根据sdk版本 去获取对应版本的build.prop模板
         /// </summary>
         /// <param name="modelPath">model的文件路径</param>
         /// <param name="currentAvdNum">当前启动的avd</param>
@@ -1322,10 +1372,10 @@ namespace What
 
                     Dictionary<string, string> propDic = readProperty(modelPath);
                     int sdk = int.Parse(propDic["sdk_version"]);
-                    //在temp中创建
+                    //根据sdk版本  获取对应版本的 模板文件复制到temp里 等待修改
                     string sdkPath = mBasePath + Constant.Folders.SDK_FOLDER_NAME + "\\" + sdk + "\\" + "build.prop";
                     File.Copy(sdkPath, modelFolder + "\\" + "build.prop");
-                    //并且修改好
+                    //开始修改机型参数， 并保存起来方便后面用到的时候获取
                     if (changeProp(propDic, modelFolder + "\\" + "build.prop") && saveAvdProperty(modelPath, currentAvdNum))
                     {
                         return modelFolder + "\\" + "build.prop";
@@ -1336,7 +1386,7 @@ namespace What
         }
 
         /// <summary>
-        /// 修改prop
+        /// 修改Temp中的模板 prop文件
         /// </summary>
         /// <param name="fromPath"></param>
         /// <param name="toPath"></param>
@@ -1367,7 +1417,7 @@ namespace What
         }
 
         /// <summary>
-        /// 保存下次avd信息
+        /// 保存已经修改的模拟器的相关参数。下次启动的时候 可以获取到。
         /// </summary>
         /// <param name="currentAvdNum"></param>
         /// <param name="modelPath"></param>
@@ -1555,6 +1605,7 @@ namespace What
                         SendMessage(versionHandle, 0x10, 0, 0);
                     }
 
+                    //模拟设置参数以后 需要一定时候才能启动
                     IntPtr vHandle = FindWindow("QWidget", "Virtual device configuration");
                     if (vHandle != IntPtr.Zero)
                     {
@@ -1652,7 +1703,11 @@ namespace What
 
         }
 
-        //启动avd
+        /// <summary>
+        /// 启动模拟器
+        /// </summary>
+        /// <param name="x">X坐标</param>
+        /// <param name="y">Y坐标</param>
         private void launchAvd(int x, int y)
         {
             doubleClick(x, y);
@@ -1719,7 +1774,11 @@ namespace What
 
         }
 
-        //启动模拟器里 按键精灵的脚本
+        /// <summary>
+        /// 启动模拟器里 按键精灵的脚本;   模拟器需要设置 No home bar
+        /// </summary>
+        /// <param name="screen">不同分辨率不同</param>
+        /// <returns></returns>
         private bool startJiaoben(string screen)
         {
             try
@@ -2010,7 +2069,10 @@ namespace What
         //}
 
 
-
+        /// <summary>
+        /// 安装测试apk 为了判断模拟器是不是真正运行起来
+        /// </summary>
+        /// <param name="apkPath">测试apk路径</param>
         private void startInstall(String apkPath)
         {
             //  semaphore.WaitOne();

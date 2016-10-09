@@ -50,7 +50,11 @@ namespace What
         }
 
         
-        //获取当前连接的设备
+        /// <summary>
+        /// 获取当前连接的设备
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="onProcessListener"></param>
         public static void getDevices(String batPath, OnProcessListener onProcessListener) {
             if (onProcessListener == null)
             {
@@ -67,7 +71,12 @@ namespace What
             }
         }
 
-        //连接设备
+        /// <summary>
+        /// adb 开始连接设备
+        /// </summary>
+        /// <param name="batPath">bat路径</param>
+        /// <param name="device">设备号</param>
+        /// <param name="onProcessListener"></param>
         public static void callConnect(String batPath, String device, OnProcessListener onProcessListener)
         {
             if(onProcessListener == null ){
@@ -80,7 +89,13 @@ namespace What
             }
         }
 
-        //install apk
+       /// <summary>
+       /// 安装apk
+       /// </summary>
+       /// <param name="batPath">bat路径</param>
+       /// <param name="device">设备号</param>
+       /// <param name="apkPath">apk路径</param>
+       /// <param name="onProcessListener"></param>
         public static void callInstall(String batPath,String device, String apkPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null) {
@@ -135,7 +150,13 @@ namespace What
             }
         }
 
-        //启动修改prop
+        /// <summary>
+        /// 启动修改prop
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="propPath"></param>
+        /// <param name="onProcessListener"></param>
         public static void callProp(String batPath, String device, String propPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -172,7 +193,14 @@ namespace What
         }
 
 
-        //连接vpn
+        /// <summary>
+        /// 连接vpn
+        /// </summary>
+        /// <param name="batPath">bat路径</param>
+        /// <param name="vpnName">VPN的名称</param>
+        /// <param name="userName">VPN账号名</param>
+        /// <param name="userPassword">VPN密码</param>
+        /// <param name="onProcessListener"></param>
         public static void callConnectVpn(String batPath, String vpnName, String userName, String userPassword, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -186,6 +214,29 @@ namespace What
                 myThread.start();
             }
             catch (Exception e) { 
+            }
+        }
+
+        /// <summary>
+        /// 断开vpn
+        /// </summary>
+        /// <param name="batPath">bat路径</param>
+        /// <param name="vpnName">VPN名称</param>
+        /// <param name="onProcessListener"></param>
+        public static void callDisconnectVpn(String batPath, String vpnName, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { vpnName }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_DISCONNECT_VPN);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
             }
         }
 
@@ -223,6 +274,12 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 从模拟器中pull出 Xprivacy生成的随机值文件
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="targetPath"></param>
+        /// <param name="onProcessListener"></param>
         public static void callPullRandomFile(String batPath, String targetPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -240,6 +297,11 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 删除Xprivacy生成的随机值文件
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="onProcessListener"></param>
         public static void callDeleteRandomFile(String batPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -257,6 +319,12 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 清除模拟器应用数据
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="onProcessListener"></param>
         public static void callPMClear(String batPath, String device, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -274,6 +342,12 @@ namespace What
             }
         }
 
+        /// <summary>
+        /// 获取当前模拟器安装的应用
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="onProcessListener"></param>
         public static void callPMInstall(String batPath, String device, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -291,23 +365,7 @@ namespace What
             }
         }
 
-        //断开vpn
-        public static void callDisconnectVpn(String batPath, String vpnName, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { vpnName}), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_DISCONNECT_VPN);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
+       
 
         //关闭adb
         public static void callCloseAdb(String batPath, OnProcessListener onProcessListener)
