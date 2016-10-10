@@ -109,7 +109,7 @@ namespace What
         //判断vpn是否连接
         private static bool isVpnConnect = false;
 
-        // 需要清除缓存 的包
+        // 需要清除缓存 的包 也即是需要刷的包
         private static string[] pkgArray = new string[] { "com.sevenseven.android.ppt", "com.sevenseven.caculator", "com.sevenseven.bill","me.sevenseven.sote","com.sevenseven.account"
         ,  "com.seven.mypurse","com.android.seven.cargas","com.sevensevenlittle","com.seven.cashbook"
         , "com.wjjnote","com.wjj.rabbit","com.Green_light_seven","com.wjj.electric","com.wjj.grad","com.wjj.loop","com.jjtax"
@@ -157,7 +157,7 @@ namespace What
             postionLabel.Text = "x:" + ms.X + " y:" + ms.Y;
 
             //第一个模拟器y坐标
-            int first = 400;
+            int first = 238;
             //每一个模拟器的高度间隔
             int interval = 40;
 
@@ -205,6 +205,8 @@ namespace What
 
             setting_480_x.Text = "470";
             setting_480_y.Text = "485";
+
+            initAvdList();
 
             runThread = new Thread(run);
         }
@@ -279,10 +281,12 @@ namespace What
         private void startBtn_Click(object sender, EventArgs e)
         {
 
-            //检测Genymotion 的窗口位置 并移动 指定位置   --后来去掉，因为直接设置窗体启动的位置
-            //moveGenymotionWin();
+            //检测Genymotion 的窗口位置 并移动 指定位置  (左上角)
+            moveGenymotionWin();
 
             mDevice = deviceTb.Text;
+
+ 
            
             if (runThread != null)
             {
@@ -394,7 +398,7 @@ namespace What
                                 //随机选择一个模拟器    
                                 int radmom = getRadmomVal(avdList.Count);
                                 mCurrentAvdNum = avdList[radmom];
-                                // mCurrentAvdNum = 1;   //指定选择某一个模拟器 just for test
+                                mCurrentAvdNum = 1;   //指定选择某一个模拟器 just for test
                                 // 该模拟器关键点坐标
                                 mTapX = positionXDic[mCurrentAvdNum];
                                 mTapSX = positionSXDic[mCurrentAvdNum];
@@ -480,7 +484,6 @@ namespace What
                             //}
                             //catch (Exception e)
                             //{
-
                             //}
 
 
@@ -554,7 +557,7 @@ namespace What
             changeNetHour = DateTime.Now.Hour;
             changeNetMin = DateTime.Now.Minute;
             changeNetSec = DateTime.Now.Second;
-            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "b160", "222", this);
+            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "1601008431", "123456", this);
         }
 
         /// <summary>
@@ -590,7 +593,7 @@ namespace What
                 LogUtil.LogMessage(log, "启动脚本失败");
                 try
                 {
-                    //关闭循环进程
+                    //关闭模拟器的进程
                     Util.closeProcess(PROCESS_NAME);
                     Util.closeProcess(VBOX_HEAD_NAME);
                 }
@@ -638,58 +641,7 @@ namespace What
 
         }
 
-        /// <summary>
-        /// 检测模拟器是否联网的。  这个后来去掉了， 正常启动都会联网
-        /// </summary>
-        private void callPullTimeFile()
-        {
-            LogUtil.LogMessage(log, "callPullTimeFile");
-            Util.callPullTimeFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_TIME_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
-        }
-
-        private void getPullTimeContent()
-        {
-            string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\time.txt";
-            if (File.Exists(path))
-            {
-                StreamReader reader = new StreamReader(path);
-                String content = reader.ReadToEnd();
-                reader.Close();
-
-                if (!content.Trim().Equals(""))
-                {
-                    //启动成功
-                    LogUtil.LogMessage(log, "脚本启动成功 并且联网成功 :" + content);
-                }
-                else
-                {
-                    //脚本启动成功  但是联网失败
-                    LogUtil.LogMessage(log, "脚本启动成功 并且联网失败");
-                    callDeleteRandomFile();
-                    //closeAvd(mCurrentScreen);
-                }
-                try
-                {
-                    File.Delete(path);
-                    Util.callDeleteTimeFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_TIME_BAT_NAME, this);
-                }
-                catch (Exception e)
-                {
-
-                }
-
-
-            }
-            else
-            {
-                //关闭模拟器
-                LogUtil.LogMessage(log, "脚本启动失败");
-                callDeleteRandomFile();
-                //closeAvd(mCurrentScreen);
-            }
-
-
-        }
+       
 
         /// <summary>
         /// 从模拟器中 pull出 Xprivacy生成的随机值
@@ -1253,6 +1205,8 @@ namespace What
                     break;
                 #endregion
 
+
+                #region 弃用代码
                 case Constant.ProcessType.TYPE_OF_PROCESS_START_REBOOT:
 
                     break;
@@ -1306,8 +1260,9 @@ namespace What
 
                     }
                     break;
-           
-           
+                #endregion
+
+
 
 
             }
@@ -2039,6 +1994,24 @@ namespace What
 
         #region 安装和卸载apk
 
+
+        /// <summary>
+        /// 安装测试apk 为了判断模拟器是不是真正运行起来
+        /// </summary>
+        /// <param name="apkPath">测试apk路径</param>
+        private void startInstall(String apkPath)
+        {
+            //  semaphore.WaitOne();
+            LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            isStartInstall = false;
+            installHour = DateTime.Now.Hour;
+            installMin = DateTime.Now.Minute;
+            installSec = DateTime.Now.Second;
+            LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
+            Thread.Sleep(3000);
+            Util.callInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
+        }
+
         //static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
         ////遍历安装包
         //private void installAllApks(int times, List<string> apkFolderList)
@@ -2069,22 +2042,7 @@ namespace What
         //}
 
 
-        /// <summary>
-        /// 安装测试apk 为了判断模拟器是不是真正运行起来
-        /// </summary>
-        /// <param name="apkPath">测试apk路径</param>
-        private void startInstall(String apkPath)
-        {
-            //  semaphore.WaitOne();
-            LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            isStartInstall = false;
-            installHour = DateTime.Now.Hour;
-            installMin = DateTime.Now.Minute;
-            installSec = DateTime.Now.Second;
-            LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
-            Thread.Sleep(3000);
-            Util.callInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
-        }
+       
 
         //private void startUninstall(String pkgName) {
         //    semaphore.WaitOne();
@@ -2093,7 +2051,66 @@ namespace What
         //}
         #endregion
 
-      
+
+
+
+        #region 弃用的代码
+
+        /// <summary>
+        /// 检测模拟器是否联网的。  这个后来去掉了， 正常启动都会联网
+        /// </summary>
+        private void callPullTimeFile()
+        {
+            LogUtil.LogMessage(log, "callPullTimeFile");
+            Util.callPullTimeFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_TIME_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+        }
+
+
+        private void getPullTimeContent()
+        {
+            string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\time.txt";
+            if (File.Exists(path))
+            {
+                StreamReader reader = new StreamReader(path);
+                String content = reader.ReadToEnd();
+                reader.Close();
+
+                if (!content.Trim().Equals(""))
+                {
+                    //启动成功
+                    LogUtil.LogMessage(log, "脚本启动成功 并且联网成功 :" + content);
+                }
+                else
+                {
+                    //脚本启动成功  但是联网失败
+                    LogUtil.LogMessage(log, "脚本启动成功 并且联网失败");
+                    callDeleteRandomFile();
+                    //closeAvd(mCurrentScreen);
+                }
+                try
+                {
+                    File.Delete(path);
+                    Util.callDeleteTimeFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_TIME_BAT_NAME, this);
+                }
+                catch (Exception e)
+                {
+
+                }
+
+
+            }
+            else
+            {
+                //关闭模拟器
+                LogUtil.LogMessage(log, "脚本启动失败");
+                callDeleteRandomFile();
+                //closeAvd(mCurrentScreen);
+            }
+
+
+        }
+
+        #endregion
 
     }
 }

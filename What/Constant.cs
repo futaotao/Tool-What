@@ -76,6 +76,7 @@ namespace What
             public const String ADB_CLOSE_BAT_NAME = "adb_close.bat";
 
 
+            /*** 已经弃用 ***/
             public const String PULL_TIME_BAT_NAME = "pull_time.bat";
             public const String DETETE_TIME_BAT_NAME = "delete_time.bat";
 
