@@ -742,7 +742,7 @@ namespace What
                     propPath = createProp(value, currentAvdNum);
                 }
             }
-            //用新创建的prop文件 替换掉模拟器的prop文件。 
+            //用新创建的prop文件 替换掉模拟器的prop文件。 修改 init.androVM.sh 修改IMEI
             Util.callProp(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
 
         }

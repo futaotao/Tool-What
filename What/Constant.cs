@@ -61,8 +61,7 @@ namespace What
             //断开vpn
             public const String VPN_D_BAT_NAME = "vpn_d.bat";
 
-            public const String PULL_TIME_BAT_NAME = "pull_time.bat";
-            public const String DETETE_TIME_BAT_NAME = "delete_time.bat";
+
 
             //从模拟器中 pull出Xprivacy生成的随机值文件
             public const String PULL_RANDOM_BAT_NAME = "pull_random.bat";
@@ -74,7 +73,13 @@ namespace What
             //获取当前模拟器安装的应用
             public const String PM_INSTALL_BAT_NAME = "pm_install.bat";
 
-            public const String ADB_CLOSE_BAT_NAME = "adb_close.bat                                                                                    ";
+            public const String ADB_CLOSE_BAT_NAME = "adb_close.bat";
+
+
+            public const String PULL_TIME_BAT_NAME = "pull_time.bat";
+            public const String DETETE_TIME_BAT_NAME = "delete_time.bat";
+
+
         }
 
         /// <summary>
