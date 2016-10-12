@@ -89,7 +89,7 @@ namespace What
         private static String shuaBeginTime = "";
 
         //每次循环刷的时间间隔  单位：秒
-        private static int shuaInterval = 145;
+        private static int shuaInterval = 30;
         
 
         // 随机启动一个 avd
@@ -385,6 +385,7 @@ namespace What
                                 }
                                 else {
                                     mCurrentAvdNum = avdList[radmom];
+                                    mCurrentAvdNum = 2;
                                 }
                                 
                                 // 该模拟器关键点坐标
@@ -448,7 +449,7 @@ namespace What
                     else
                     {
     
-                            LogUtil.LogMessage(log, "-----！！！！什么鬼！！！！----------");
+                           //LogUtil.LogMessage(log, "-----等待模拟器启动----------");
    
                     }
                 }
@@ -795,8 +796,8 @@ namespace What
                             //开刷
                             LogUtil.LogMessage(log, "Xprivacy生成随机值！");
                             getPullRandomContent();
-                            LogUtil.LogMessage(log, "延迟 5s 开刷");
-                            Thread.Sleep(5000);
+                            LogUtil.LogMessage(log, "一切就绪 ！ 延迟 2s 开刷");
+                            Thread.Sleep(2000);
                             startShua(mCurrentScreen);
                         }
 
@@ -873,7 +874,7 @@ namespace What
                         }
                         else
                         {
-                            LogUtil.LogMessage(log, "延迟 2s ....");
+                            LogUtil.LogMessage(log, "延迟 2s ....关闭模拟器");
                             Thread.Sleep(2000);
                             closeAvd(mCurrentScreen);
                         }
@@ -1126,8 +1127,8 @@ namespace What
         /// <returns></returns>
         private bool launch(int x, int y)
         {
-            LogUtil.LogMessage(log, "延迟 15s 后启动 模拟器");
-            Thread.Sleep(15000);
+            LogUtil.LogMessage(log, "延迟 8s 后启动 模拟器");
+            Thread.Sleep(8000);
             //真正点击模拟器
             launchAvd(x, y);
             //判断是否有 其他窗口遮挡， 如果遮挡 关闭之后重新
@@ -1138,8 +1139,6 @@ namespace What
             }
             else
             {
-                //展示了 等10s之后再启动
-                Thread.Sleep(10000);
                 return launch(x, y);
             }
         }
@@ -1482,22 +1481,24 @@ namespace What
             //通过模拟点击设置avd参数
 
             //打开
+            LogUtil.LogMessage(log, "打开模拟器设置窗口");
             Thread.Sleep(1000);
             doubleClick(x, y);
-            Thread.Sleep(10000);
+            LogUtil.LogMessage(log, "延迟 8s 后开始设置模拟器分辨率");
+            Thread.Sleep(8000);
             //点击custom
             click(int.Parse(setting_custom_x.Text), int.Parse(setting_custom_y.Text));
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             doubleClick(int.Parse(setting_X_x.Text), int.Parse(setting_X_y.Text));
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             inputStr("genymotion", s_x);
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             doubleClick(int.Parse(setting_Y_x.Text), int.Parse(setting_Y_y.Text));
             Thread.Sleep(2000);
             inputStr("genymotion", s_y);
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             click(int.Parse(setting_dpi_x.Text), int.Parse(setting_dpi_y.Text));
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             if (s_x.Trim().Equals("480"))
             {
                 click(int.Parse(setting_240_x.Text), int.Parse(setting_240_y.Text));
@@ -1510,10 +1511,8 @@ namespace What
             {
                 click(int.Parse(setting_480_x.Text), int.Parse(setting_480_y.Text));
             }
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             click(int.Parse(setting_ok_x.Text), int.Parse(setting_ok_y.Text));
-            Thread.Sleep(10000);
-            
             
             //TODO 通过代码直接设置avd参数
             return true;
@@ -1715,24 +1714,46 @@ namespace What
                 switch (screen)
                 {
                     case Constant.Screen.SCREEN_480x800:
+                        /*** v2.3.0 ***/
+                        //// 两次Home
+                        //click(1233, 911);
+                        //click(1233, 911);
+                        //Thread.Sleep(2000);
+                        ////icon
+                        //click(788, 314);
+                        //Thread.Sleep(8000);
+                        ////脚本
+                        //click(963, 723);
+                        //Thread.Sleep(2000);
+                        ////手机
+                        //click(854, 394);
+                        //Thread.Sleep(1000);
+                        ////加载
+                        //click(909, 475);
+                        //Thread.Sleep(2000);
+                        ////启动
+                        //click(1020, 563);
+
+                        /*** v3.1.2 ***/
                         // 两次Home
                         click(1233, 911);
                         click(1233, 911);
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1500);
                         //icon
-                        click(788, 314);
+                        click(787, 306);
                         Thread.Sleep(8000);
+                        //未分类
+                        click(966, 434);
+                        Thread.Sleep(1000);
                         //脚本
-                        click(963, 723);
-                        Thread.Sleep(2000);
-                        //手机
-                        click(854, 394);
+                        click(959, 321);
                         Thread.Sleep(1000);
                         //加载
-                        click(909, 475);
-                        Thread.Sleep(2000);
+                        click(960, 895);
+                        Thread.Sleep(1500);
                         //启动
-                        click(1020, 563);
+                        click(1085, 735);
+
                         return true;
                     case Constant.Screen.SCREEN_480x854:
                         // 两次Home

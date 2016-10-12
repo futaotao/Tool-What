@@ -37,14 +37,6 @@ fi
 
 # Load parameters from virtualbox guest properties
 
-# Load VM name as serial no for Android Device Chooser display
-prop_genymotion_vm_name=$(/system/bin/androVM-prop get genymotion_vm_name)
-if [ "$prop_genymotion_vm_name" ]; then
-  setprop ro.product.model "$prop_genymotion_vm_name"
-else
-  setprop ro.product.model "Genymotion Virtual Device"
-fi
-
 prop_vbox_graph_mode=`/system/bin/androVM-prop get vbox_graph_mode`
 if [ -n "$prop_vbox_graph_mode" ]; then
   vbox_graph_mode="$prop_vbox_graph_mode"
@@ -94,10 +86,10 @@ fi
 prop_device_id=$(/system/bin/androVM-prop get genymotion_device_id)
 if [ $? -ne 0 ]; then
   # Default value if unset
-setprop genyd.device.id "582142147608495"
+setprop genyd.device.id "862475268639386"
 else
   # Set user defined value. "[none]" keyword means empty value
-setprop genyd.device.id "582142147608495"
+setprop genyd.device.id "862475268639386"
 fi
 
 insmod /system/lib/cfbcopyarea.ko
@@ -159,12 +151,12 @@ genymotion_version=`getprop ro.genymotion.version`
 # Add platform guestproperty and Android property
 genymotion_platform=$(/system/bin/androVM-prop get genymotion_platform)
 if [ -z "$genymotion_platform" ]; then
-    product_name=$(getprop ro.product.name)
-    if [ "$product_name" == "vbox86tp" ]; then
+    genymotion_product_name=$(getprop ro.product.name.geny-def)
+    if [ "$genymotion_product_name" == "vbox86tp" ]; then
         genymotion_platform="tp"
-    elif [ "$product_name" == "vbox86t" ]; then
+    elif [ "$genymotion_product_name" == "vbox86t" ]; then
         genymotion_platform="t"
-    elif [ "$product_name" == "vbox86p" ]; then
+    elif [ "$genymotion_product_name" == "vbox86p" ]; then
         genymotion_platform="p"
     else
         genymotion_platform="unknown"
@@ -173,7 +165,54 @@ if [ -z "$genymotion_platform" ]; then
 fi
 setprop ro.genymotion.platform "$genymotion_platform"
 
-# Activate/deactivate feature on-demande
+# Set ro.build.characteristics at boot
+build_characteristics_property=ro.build.characteristics
+if [ $genymotion_platform == "p" ]; then
+    setprop $build_characteristics_property "default"
+else
+    setprop $build_characteristics_property "tablet"
+fi
+
+# We want to allow user to override values of android ro.* properties (read-only)
+# So we first check the value of a guest_property for this property
+# If it set, we use it as the android property
+# If not, we use the default value, that we mirrored before in a shadow_property
+set_prop_from_guest_property() {
+    local android_property="$1"
+    local shadow_property="$2"
+    local guest_property="$3"
+    local value=$(/system/bin/androVM-prop get $guest_property)
+    if [ -z "$value" ] ; then
+        value=$(getprop $shadow_property)
+        /system/bin/androVM-prop set $guest_property "$value"
+    fi
+    setprop $android_property "$value"
+}
+
+set_prop_from_guest_property "ro.product.name" "ro.product.name.geny-def" "product_name"
+set_prop_from_guest_property "ro.product.manufacturer" "ro.manufacturer.geny-def" "product_manufacturer"
+set_prop_from_guest_property "ro.product.device" "ro.product.device.geny-def" "product_device"
+set_prop_from_guest_property "ro.product.board" "ro.product.board.geny-def" "product_board"
+set_prop_from_guest_property "ro.product.brand" "ro.product.brand.geny-def" "product_brand"
+set_prop_from_guest_property "ro.build.display.id" "ro.build.display.id.geny-def" "build_display_id"
+
+# Set ro.product.model
+# ro.product.model is different from the other ro.product.* properties
+# The value of ro.product.model is based on, by priority :
+# - The vm property product_model, used to override the product model (done by the user)
+# - The vm property genymotion_vm_name, which is set by the Genymotion Player before the first boot
+# - The value ro.genymotion.product.model we stored in /system/build.prop,
+#   that shadows the value of ro.product.model set during the build
+product_model=$(/system/bin/androVM-prop get product_model)
+if [ -z "$product_model" ]; then
+    product_model=$(/system/bin/androVM-prop get genymotion_vm_name)
+    if [ -z "$product_model" ]; then
+        product_model=$(getprop ro.product.model.geny-def)
+    fi
+    /system/bin/androVM-prop set product_model "$product_model"
+fi
+setprop ro.product.model "$product_model"
+
 # Camera
 prop_camera=$(/system/bin/androVM-prop get genymotion_camera)
 if [ -n "$prop_camera" ]; then

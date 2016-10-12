@@ -1,6 +1,6 @@
-ro.product.model=Coolpad 8017-T00
-ro.product.brand=Coolpad
-ro.product.name=Coolpad8017-T00
-ro.product.device=Yulong
-screen_x_y=480x800
-sdk_version=16
+ro.product.model=T8
+ro.product.brand=CUBE
+ro.product.name=T8
+ro.product.device=CUBE
+screen_x_y=720x1280
+sdk_version=17
