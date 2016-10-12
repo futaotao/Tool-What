@@ -47,6 +47,11 @@ namespace What
         // 启动avd 的y坐标
         private static Dictionary<int, int> positionYDic = null;
 
+        private static List<CheckBox> avdFirstList = null;
+
+        // 新建avd 第一次启动
+        private static bool isAvdFirstRun = false;
+
 
         #region  新的流程不需要再安装和卸载包了
         //apk部分
@@ -78,8 +83,9 @@ namespace What
         // 从1开始编号
         private static int mCurrentAvdNum = -1;
         private static string mCurrentScreen = "";
-        // 新建avd 第一次启动
-        private static bool isAvdFirstRun = false;
+        
+       
+        
 
 
         // 每次开刷的时间
@@ -109,11 +115,11 @@ namespace What
         //判断vpn是否连接
         private static bool isVpnConnect = false;
 
-        // 需要清除缓存 的包 也即是需要刷的包
-        private static string[] pkgArray = new string[] { "com.sevenseven.android.ppt", "com.sevenseven.caculator", "com.sevenseven.bill","me.sevenseven.sote","com.sevenseven.account"
-        ,  "com.seven.mypurse","com.android.seven.cargas","com.sevensevenlittle","com.seven.cashbook"
-        , "com.wjjnote","com.wjj.rabbit","com.Green_light_seven","com.wjj.electric","com.wjj.grad","com.wjj.loop","com.jjtax"
-        ,"com.wjjwjj.account","com.wjjwjj.house","com.wjjwjj.moneyspell","me.wjjwjj.sote","com.wjjwjj.android.ppt"};
+        //// 需要清除缓存 的包 也即是需要刷的包  新的流程 按键精灵处理
+        //private static string[] pkgArray = new string[] { "com.sevenseven.android.ppt", "com.sevenseven.caculator", "com.sevenseven.bill","me.sevenseven.sote","com.sevenseven.account"
+        //,  "com.seven.mypurse","com.android.seven.cargas","com.sevensevenlittle","com.seven.cashbook"
+        //, "com.wjjnote","com.wjj.rabbit","com.Green_light_seven","com.wjj.electric","com.wjj.grad","com.wjj.loop","com.jjtax"
+        //,"com.wjjwjj.account","com.wjjwjj.house","com.wjjwjj.moneyspell","me.wjjwjj.sote","com.wjjwjj.android.ppt"};
 
 
 
@@ -235,12 +241,14 @@ namespace What
             positionXDic = new Dictionary<int, int>();
             positionSXDic = new Dictionary<int, int>();
             positionYDic = new Dictionary<int, int>();
+            avdFirstList = new List<CheckBox>();
             if (!tb1_x.Text.Trim().Equals("") && !tb1_y.Text.Trim().Equals("") && !tb1_sx.Text.Trim().Equals(""))
             {
                 avdList.Add(1);
                 positionXDic.Add(1, int.Parse(tb1_x.Text));
                 positionSXDic.Add(1, int.Parse(tb1_sx.Text));
                 positionYDic.Add(1, int.Parse(tb1_y.Text));
+                avdFirstList.Add(avdCb1);
             }
             if (!tb2_x.Text.Trim().Equals("") && !tb2_y.Text.Trim().Equals("") && !tb2_sx.Text.Trim().Equals(""))
             {
@@ -248,6 +256,7 @@ namespace What
                 positionXDic.Add(2, int.Parse(tb2_x.Text));
                 positionSXDic.Add(2, int.Parse(tb2_sx.Text));
                 positionYDic.Add(2, int.Parse(tb2_y.Text));
+                avdFirstList.Add(avdCb2);
             }
 
             if (!tb3_x.Text.Trim().Equals("") && !tb3_y.Text.Trim().Equals("") && !tb3_sx.Text.Trim().Equals(""))
@@ -256,6 +265,7 @@ namespace What
                 positionXDic.Add(3, int.Parse(tb3_x.Text));
                 positionSXDic.Add(3, int.Parse(tb3_sx.Text));
                 positionYDic.Add(3, int.Parse(tb3_y.Text));
+                avdFirstList.Add(avdCb3);
             }
 
             if (!tb4_x.Text.Trim().Equals("") && !tb4_y.Text.Trim().Equals("") && !tb4_sx.Text.Trim().Equals(""))
@@ -264,6 +274,7 @@ namespace What
                 positionXDic.Add(4, int.Parse(tb4_x.Text));
                 positionSXDic.Add(4, int.Parse(tb4_sx.Text));
                 positionYDic.Add(4, int.Parse(tb4_y.Text));
+                avdFirstList.Add(avdCb4);
             }
         }
         #endregion
@@ -397,8 +408,16 @@ namespace What
                             {
                                 //随机选择一个模拟器    
                                 int radmom = getRadmomVal(avdList.Count);
-                                mCurrentAvdNum = avdList[radmom];
-                                mCurrentAvdNum = 1;   //指定选择某一个模拟器 just for test
+                                //如果有第一次运行的
+                                int firstAvdNum = getAvdFirst();
+                                if (firstAvdNum != -1)
+                                {
+                                    mCurrentAvdNum = firstAvdNum;
+                                }
+                                else {
+                                    mCurrentAvdNum = avdList[radmom];
+                                }
+                                
                                 // 该模拟器关键点坐标
                                 mTapX = positionXDic[mCurrentAvdNum];
                                 mTapSX = positionSXDic[mCurrentAvdNum];
@@ -519,12 +538,21 @@ namespace What
             return str;
         }
 
-
-
-
-     
-
-
+        /// <summary>
+        /// 按顺序获取 第一次运行模拟器的编号
+        /// </summary>
+        /// <returns></returns>
+        private int getAvdFirst()
+        {
+            for (int i = 0; i < avdFirstList.Count; i++) {
+                if (avdFirstList[i].Checked) {
+                    isAvdFirstRun = true;
+                    return i + 1;
+                }
+            }
+            isAvdFirstRun = false;
+            return -1;
+        }
 
         /// <summary>
         /// 所有回调
@@ -889,6 +917,10 @@ namespace What
                         {
                             try
                             {
+                                //改模拟器初始化成功
+                                LogUtil.LogMessage(log, "  " + mCurrentAvdNum + " 模拟器初始化成功 ！");
+                                avdFirstList[mCurrentAvdNum - 1].Checked = false;
+
                                 LogUtil.LogMessage(log, "close vpn");
                                 isVpnConnect = false;
                                 isLaunching = false;
@@ -917,9 +949,9 @@ namespace What
                     break;
                 #endregion
 
-
+                /*******************************************/
                 #region 弃用代码
-
+                /****
                 //case Constant.ProcessType.TYPE_OF_PROCESS_UNINSTALL_APP:
                 //    semaphore.Release();
                 //    if (Util.myThread != null)
@@ -981,6 +1013,7 @@ namespace What
                 //    }
                 //    break;
 
+                   
                 #region 获取当前模拟器安装的应用 并清除准备刷的应用的 数据
                 case Constant.ProcessType.TYPE_OF_PROCESS_PM_INSTALL:
 
@@ -1087,7 +1120,9 @@ namespace What
 
                     }
                     break;
+                     ****/
                 #endregion
+
 
 
 
@@ -2036,10 +2071,11 @@ namespace What
 
 
 
+    /***********************************************************************************************/
 
         #region 弃用的代码
 
-
+        /**
 
         #region  获取当前 模拟器安装的应用 并清除数据   已经由按键精灵直接代替实现
         /// <summary>
@@ -2136,7 +2172,7 @@ namespace What
         }
 
         #endregion
-
+        **/
         #endregion
 
     }

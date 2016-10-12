@@ -22,6 +22,7 @@ namespace What
        }
 
         public class Folders {
+            //保存每次生成的ip
             public const String IPS_FOLDER_NAME = "ips";
             //模拟器对应的机型信息。
             public const String AVD_PROPERTY_FOLDER_NAME = "avds";
@@ -33,8 +34,9 @@ namespace What
             public const String MUSIC_FOLDER_NAME = "music";
             //不同sdk版本的 build.prop文件 模板
             public const String SDK_FOLDER_NAME = "sdks";
-
+            //真实机型的参数 以备修改模拟器的参数
             public const String MODEL_FOLDER_NAME = "models";
+            //已经修改好的 机型参数 防止多次生成
             public const String TEMP_FOLDER_NAME = "temp";
 
            
@@ -49,12 +51,14 @@ namespace What
             //adb 连接设备
             public const String CONNECT_BAT_NAME = "connect.bat";
 
+            //安装
             public const String INSTALL_BAT_NAME = "install.bat";
             public const String PROP_BAT_NAME = "prop.bat";
-            public const String APPS_BAT_NAME = "apps.bat";
+            
+            //卸载
             public const String UNINSTALL_BAT_NAME = "uninstall.bat";
 
-            public const String REBOOT_BAT_NAME = "reboot.bat";
+          
             
             //连接vpn
             public const String VPN_C_BAT_NAME = "vpn_c.bat";
@@ -68,18 +72,20 @@ namespace What
             //删除 Xprivacy生成的 随机值文件
             public const String DETETE_RANDOM_BAT_NAME = "delete_random.bat";
 
-            //清除模拟器某一个应用的数据
-            public const String PM_CLEAR_BAT_NAME = "pm_clear.bat";
-           
-            //获取当前模拟器安装的应用
-            public const String PM_INSTALL_BAT_NAME = "pm_install.bat";
-
             public const String ADB_CLOSE_BAT_NAME = "adb_close.bat";
+
+           
 
 
             /*** 已经弃用 ***/
-            public const String PULL_TIME_BAT_NAME = "pull_time.bat";
-            public const String DETETE_TIME_BAT_NAME = "delete_time.bat";
+            //public const String APPS_BAT_NAME = "apps.bat";
+            //清除模拟器某一个应用的数据
+            //public const String PM_CLEAR_BAT_NAME = "pm_clear.bat";
+            //获取当前模拟器安装的应用
+            //public const String PM_INSTALL_BAT_NAME = "pm_install.bat";
+            //public const String REBOOT_BAT_NAME = "reboot.bat";
+            //public const String PULL_TIME_BAT_NAME = "pull_time.bat";
+            //public const String DETETE_TIME_BAT_NAME = "delete_time.bat";
 
 
         }
@@ -91,10 +97,13 @@ namespace What
         {
             public const int TYPE_OF_PROCESS_START_UNKNOWN = 0x0000;
 
+            //解包
             public const int TYPE_OF_PROCESS_START_UNPACK_APK = 0x0001;
 
+            //打包
             public const int TYPE_OF_PROCESS_START_PACK_APK = 0x0002;
 
+            //打开文件夹
             public const int TYPE_OF_PROCESS_START_OPEN_FOLDER = 0x0003;
 
             // new
@@ -106,11 +115,11 @@ namespace What
 
             public const int TYPE_OF_PROCESS_CHANGE_PROP = 0x0007;
 
-            public const int TYPE_OF_PROCESS_GET_APPS = 0x0008;
+            //public const int TYPE_OF_PROCESS_GET_APPS = 0x0008;
 
             public const int TYPE_OF_PROCESS_UNINSTALL_APP = 0x0009;
 
-            public const int TYPE_OF_PROCESS_START_REBOOT = 0x00010;
+            //public const int TYPE_OF_PROCESS_START_REBOOT = 0x00010;
 
             
 
@@ -122,11 +131,11 @@ namespace What
             //断开vpn回调
             public const int TYPE_OF_PROCESS_DISCONNECT_VPN = 0x00012;
 
-            public const int TYPE_OF_PROCESS_PULL_TIME = 0x00013;
-            public const int TYPE_OF_PROCESS_DELETE_TIME = 0x00014;
+            //public const int TYPE_OF_PROCESS_PULL_TIME = 0x00013;
+            //public const int TYPE_OF_PROCESS_DELETE_TIME = 0x00014;
 
-            public const int TYPE_OF_PROCESS_PM_CLEAR = 0x00015;
-            public const int TYPE_OF_PROCESS_PM_INSTALL = 0x00016;
+            //public const int TYPE_OF_PROCESS_PM_CLEAR = 0x00015;
+            //public const int TYPE_OF_PROCESS_PM_INSTALL = 0x00016;
 
             public const int TYPE_OF_PROCESS_CLOSE_ADB = 0x00017;
 

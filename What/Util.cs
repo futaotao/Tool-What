@@ -112,26 +112,13 @@ namespace What
             }
         }
 
-        //查看所有安装的apk
-        public static void callApps(String batPath, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[]{}), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_GET_APPS);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-
-            }
-        }
-
-        //卸载安装包
+        /// <summary>
+        /// 卸载apk
+        /// </summary>
+        /// <param name="batPath">bat路径</param>
+        /// <param name="device">设备号</param>
+        /// <param name="pkg">包名</param>
+        /// <param name="onProcessListener"></param>
         public static void callUninstall(String batPath, String device, String pkg, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
@@ -175,22 +162,7 @@ namespace What
             }
         }
 
-        //重启
-        public static void callReboot(String batPath, String device, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null) {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device}), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_START_REBOOT);
-                myThread.start();
-            }
-            catch (Exception e) { 
-            
-            }
-        }
+       
 
 
         /// <summary>
@@ -240,7 +212,12 @@ namespace What
             }
         }
 
-        public static void callPullTimeFile(String batPath, String targetPath, OnProcessListener onProcessListener)
+       /// <summary>
+       /// 关闭adb
+       /// </summary>
+       /// <param name="batPath"></param>
+       /// <param name="onProcessListener"></param>
+        public static void callCloseAdb(String batPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
             {
@@ -249,7 +226,7 @@ namespace What
 
             try
             {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_TIME);
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_CLOSE_ADB);
                 myThread.start();
             }
             catch (Exception e)
@@ -257,22 +234,6 @@ namespace What
             }
         }
 
-        public static void callDeleteTimeFile(String batPath, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_DELETE_TIME);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
 
         /// <summary>
         /// 从模拟器中pull出 Xprivacy生成的随机值文件
@@ -297,6 +258,7 @@ namespace What
             }
         }
 
+
         /// <summary>
         /// 删除Xprivacy生成的随机值文件
         /// </summary>
@@ -319,71 +281,8 @@ namespace What
             }
         }
 
-        /// <summary>
-        /// 清除模拟器应用数据
-        /// </summary>
-        /// <param name="batPath"></param>
-        /// <param name="device"></param>
-        /// <param name="onProcessListener"></param>
-        public static void callPMClear(String batPath, String device, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
 
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-        /// <summary>
-        /// 获取当前模拟器安装的应用
-        /// </summary>
-        /// <param name="batPath"></param>
-        /// <param name="device"></param>
-        /// <param name="onProcessListener"></param>
-        public static void callPMInstall(String batPath, String device, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PM_INSTALL);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-       
-
-        //关闭adb
-        public static void callCloseAdb(String batPath, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_CLOSE_ADB);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
+     
 
         //获取ip
         public static Dictionary<string, string> getIpInfo()
@@ -458,5 +357,154 @@ namespace What
                  }
              }
         }
+
+        /*******************************************************************************************/
+        
+        #region  弃用代码
+
+        /**
+
+        /// <summary>
+        /// 查看所有安装的apk 没有用到
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callApps(String batPath, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_GET_APPS);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+
+
+        /// <summary>
+        /// 获取当前模拟器安装的应用
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callPMInstall(String batPath, String device, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PM_INSTALL);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        /// <summary>
+        /// 清除模拟器应用数据
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callPMClear(String batPath, String device, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        /// <summary>
+        /// pull  按键精灵生成的 time文件。用来判断模拟器是否联网成功
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="targetPath"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callPullTimeFile(String batPath, String targetPath, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_TIME);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        /// <summary>
+        /// 删除按键精灵生成time文件
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callDeleteTimeFile(String batPath, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_DELETE_TIME);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        /// <summary>
+        /// 重启模拟器  监听不到
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callReboot(String batPath, String device, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_START_REBOOT);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+         */
+        #endregion
     }
 }
