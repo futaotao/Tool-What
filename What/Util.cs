@@ -16,37 +16,34 @@ namespace What
 
         public static MyThread myThread = null;
 
-        //检查时间是否开刷
-        public static int checkTime(List<int> hourList, List<int> minList)
-        {
+        /// <summary>
+        /// 获取两个时间间隔  单位：秒
+        /// </summary>
+        /// <param name="beginTime">开始时间</param>
+        /// <param name="endTime">结束时间</param>
+        /// <returns></returns>
+        //public static int getTimeInterval(DateTime beginTime, DateTime endTime)
+        //{
+            
+        //    TimeSpan ts = endTime.Subtract(beginTime);
+        //    return (int)(ts.TotalSeconds);
+        //}
 
-            if (hourList != null && hourList.Count > 0 && minList != null && minList.Count > 0)
-            {
-                //每次刷一个小时  半个小时的时会替换一次包
-                int hour = DateTime.Now.Hour;
-                int min = DateTime.Now.Minute;
-                foreach (int h in hourList)
-                {
-                    if (h == hour)
-                    {
-                        foreach (int m in minList) {
-                            if (m == min)
-                            {
-                                if (minList.Count > 1)
-                                {
-                                    return min;
-                                }
-                                else {
-                                    return hour;
-                                }
-                            }
-                        }
-                        
-                    }
-                }
+        /// <summary>
+        /// 获取两个时间间隔  单位：秒
+        /// </summary>
+        /// <param name="beginTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        public static int getTimeInterval(String beginTime, DateTime endTime)
+        {
+            if (String.IsNullOrEmpty(beginTime)) {
+                return 0;
             }
 
-            return -1;
+            DateTime begin = Convert.ToDateTime(beginTime);
+            TimeSpan ts = endTime.Subtract(begin);
+            return (int)(ts.TotalSeconds);
         }
 
         

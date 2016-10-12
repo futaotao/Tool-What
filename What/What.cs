@@ -83,27 +83,14 @@ namespace What
         // 从1开始编号
         private static int mCurrentAvdNum = -1;
         private static string mCurrentScreen = "";
-        
-       
-        
 
 
-        // 每次开刷的时间
-        private static int beginDay = -1;
-        private static int beginHour = -1;
-        private static int beginMin = -1;
-        private static int beginSec = -1;
+        // 每次启动开刷的时间
+        private static String shuaBeginTime = "";
 
-        //每次循环刷的时间间隔
+        //每次循环刷的时间间隔  单位：秒
         private static int shuaInterval = 145;
         
-
-        //每次启动的时间
-        private static int launchHour = -1;
-        private static int launchMin = -1;
-        private static int launchSec = -1;
-        private static int responseTime = 180;
-
 
         // 随机启动一个 avd
         private static int mTapX = -1;
@@ -124,19 +111,15 @@ namespace What
 
 
         //每次安装的时间  如果两分钟内没有安装成功 关闭
-        private static int installHour = -1;
-        private static int installMin = -1;
-        private static int installSec = -1;
+        private static String installBeginTime = "";    
         private static int installTime = 120;
         //判断是否 已经开始安装
-        private static bool isStartInstall = false;
+        private static bool isInstalled = false;
 
         
 
         //每次启动联网的时间  如果两分钟内没有启动联网 关闭
-        private static int changeNetHour = -1;
-        private static int changeNetMin = -1;
-        private static int changeNetSec = -1;
+        private static String changeNetBeginTime = "";
         private static int changeNetTime = 120;
         //判断是否 已经开始连接vpn
         private static bool isStartChangeNet = false;
@@ -282,9 +265,7 @@ namespace What
 
         //停止按钮点击事件
         private void btnStop_Click(object sender, EventArgs e)
-        { 
-
-            beginDay = DateTime.Now.Day;
+        {
             isStop = !isStop;
         }
 
@@ -326,15 +307,11 @@ namespace What
                 {
 
                     //判断时间间隔  如果超过刷的时间， 修改模拟器参数后 关闭模拟器，进行下一次循环
-                    if (getTimeInterval(beginHour, beginMin, beginSec, DateTime.Now) >= shuaInterval || !isToday(beginDay, DateTime.Now))
+                    if (Util.getTimeInterval(shuaBeginTime, DateTime.Now) >= shuaInterval)
                     {
-
-                       
+                        //正常循环
                         LogUtil.LogMessage(log, "脚本执行时间到 开始修改参数： " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        beginDay = DateTime.Now.Day;
-                        beginHour = -1;
-                        beginMin = -1;
-                        beginSec = -1;
+                        shuaBeginTime = "";
 
                         //获取安装的包 并清除数据
                         LogUtil.LogMessage(log, "修改机型信息。。");
@@ -342,9 +319,6 @@ namespace What
 
                         #region 卸载掉安装包
                         //LogUtil.LogMessage(log, "脚本执行时间到 开始卸载： " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        //beginHour = -1;
-                        //beginMin = -1;
-                        //beginSec = -1;
                         //if (pkgList != null && pkgList.Count > 0) {
                         //    if (pkgList.Count > uninstallSuccess)
                         //    {
@@ -356,32 +330,27 @@ namespace What
                     }
 
                     //判断安装测试apk是否超时， 如果超时（说明模拟器启动有问题）关闭模拟器！进入下一次循环
-                    if (getTimeInterval(installHour, installMin, installSec, DateTime.Now) >= installTime && !isStartInstall)
+                    if (Util.getTimeInterval(installBeginTime, DateTime.Now) >= installTime && !isInstalled)
                     {
+                        //非正常情况
                         LogUtil.LogMessage(log, "******成功检测一次 没有启动安装*****");
-
+                        //播放警报
                         //playMusic(tipMusicPath);
-                        beginDay = DateTime.Now.Day;
-                        beginHour = -1;
-                        beginMin = -1;
-                        beginSec = -1;
+
+                        //关闭此次循环
+                        shuaBeginTime = "";
                         closeAvd(mCurrentScreen);
-                        //callDeleteRandomFile();
                     }
 
                     //判断联网是否超时，     如果超时关闭模拟器！进入下一次循环
-                    if (getTimeInterval(changeNetHour, changeNetMin, changeNetSec, DateTime.Now) >= changeNetTime && isStartChangeNet) { 
+                    if (Util.getTimeInterval(changeNetBeginTime, DateTime.Now) >= changeNetTime && isStartChangeNet) { 
                         //如果启动了联网， 且两分钟内没有结果
                         LogUtil.LogMessage(log, "******成功检测一次 联网超时的情况*****");
 
-                        changeNetHour = -1;
-                        changeNetMin = -1;
-                        changeNetSec = -1;
+                        changeNetBeginTime = "";
 
-                        beginDay = DateTime.Now.Day;
-                        beginHour = -1;
-                        beginMin = -1;
-                        beginSec = -1;
+                        //关闭此次循环
+                        shuaBeginTime = "";
                         closeAvd(mCurrentScreen);
                     }
 
@@ -449,13 +418,6 @@ namespace What
                                         avdSetting(mTapSX, mTapY, temp[0], temp[1]);
                                     }
                                 }
-                                
-                                
-
-                                //启动模拟器
-                                launchHour = DateTime.Now.Hour;
-                                launchMin = DateTime.Now.Minute;
-                                launchSec = DateTime.Now.Second;
 
                                 if (!isVpnConnect)
                                 {
@@ -485,28 +447,9 @@ namespace What
                     }
                     else
                     {
-
-                        if (getTimeInterval(launchHour, launchMin, launchSec, DateTime.Now) > responseTime)
-                        {
-
-                            //launchHour = -1;
-                            //launchMin = -1;
-                            //launchSec = -1;
-
-                            //isLaunching = false;
-                            LogUtil.LogMessage(log, "-----三分钟未启动成功！！！！----------");
-                            //try
-                            //{
-                            //    Util.closeProcess(PROCESS_NAME);
-                            //    Util.closeProcess(VBOX_HEAD_NAME);
-                            //    Util.closeProcess(VBOX_NET_NAME);
-                            //}
-                            //catch (Exception e)
-                            //{
-                            //}
-
-
-                        }
+    
+                            LogUtil.LogMessage(log, "-----！！！！什么鬼！！！！----------");
+   
                     }
                 }
             }
@@ -582,9 +525,7 @@ namespace What
                         LogUtil.LogMessage(log, content);
                         //标记 vpn连接 结束
                         isStartChangeNet = false;
-                        changeNetHour = -1;
-                        changeNetMin = -1;
-                        changeNetSec = -1;
+                        changeNetBeginTime = "";
 
                         if (content.Contains("已连接") || content.Contains("已经连接"))
                         {
@@ -783,10 +724,6 @@ namespace What
                         LogUtil.LogMessage(log, content);
                         if (content.ToLower().Contains("failure") || content.ToLower().Contains("error"))
                         {
-                            isStartInstall = true;
-                            installHour = -1;
-                            installMin = -1;
-                            installSec = -1;
                             LogUtil.LogMessage(log, "安装失败");
                             //失败重新安装 直到成功
                             startInstall(mTestApkPath);
@@ -794,10 +731,8 @@ namespace What
                         }
                         else if (content.ToLower().Contains("success"))
                         {
-                            isStartInstall = true;
-                            installHour = -1;
-                            installMin = -1;
-                            installSec = -1;
+                            isInstalled = true;
+                            installBeginTime = "";
                             LogUtil.LogMessage(log, "--等待-- 启动脚本");
 
                             if (isAvdFirstRun)
@@ -1139,9 +1074,7 @@ namespace What
             LogUtil.LogMessage(log, "-----changeNet----------" + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             //标记开始 连接vpn
             isStartChangeNet = true;
-            changeNetHour = DateTime.Now.Hour;
-            changeNetMin = DateTime.Now.Minute;
-            changeNetSec = DateTime.Now.Second;
+            changeNetBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "1601008431", "123456", this);
         }
 
@@ -1223,10 +1156,10 @@ namespace What
         {
             //  semaphore.WaitOne();
             LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            isStartInstall = false;
-            installHour = DateTime.Now.Hour;
-            installMin = DateTime.Now.Minute;
-            installSec = DateTime.Now.Second;
+            isInstalled = false;
+            
+            installBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
             LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
             Thread.Sleep(3000);
             Util.callInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
@@ -1320,11 +1253,9 @@ namespace What
             if (startJiaoben(screen))
             {
                 LogUtil.LogMessage(log, "启动脚本成功  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                // 开始计时 大概 3- 5分钟 后进入下一个循环
-                beginDay = DateTime.Now.Day;
-                beginHour = DateTime.Now.Hour;
-                beginMin = DateTime.Now.Minute;
-                beginSec = DateTime.Now.Second;
+                
+                // 刷的时间 计时开始
+                shuaBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             }
             else
@@ -1541,32 +1472,7 @@ namespace What
             return rd.Next(0, max);
         }
 
-        //获取两个时间点的时间间隔
-        private int getTimeInterval(int bH, int bM, int bS, DateTime e)
-        {
-            if (e != null)
-            {
-                if (bH <= 0 && bM <= 0 && bS <= 0)
-                {
-                    return -1;
-                }
-                return ((e.Hour - bH) * 60 + e.Minute - bM) * 60 + e.Second - bS;
-            }
-            return -1;
-        }
-
-        //判断是否同一天
-        private bool isToday(int bD, DateTime e)
-        {
-            if (e != null)
-            {
-                if (bD != e.Day)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+       
 
         #region 模拟点击和输入
 
@@ -1750,17 +1656,9 @@ namespace What
 
             LogUtil.LogMessage(log, "closeAvd");
 
-            beginHour = -1;
-            beginMin = -1;
-            beginSec = -1;
-
-            changeNetHour = -1;
-            changeNetMin = -1;
-            changeNetSec = -1;
-
-            installHour = -1;
-            installMin = -1;
-            installSec = -1;
+            shuaBeginTime = "";
+            changeNetBeginTime = "";
+            installBeginTime = "";
 
             isLaunching = false;
             isVpnConnect = false;
