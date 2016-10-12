@@ -212,7 +212,7 @@ namespace What
         }
 
 
-        #region Init
+        #region Init  初始化
         //初始化所有现有的模拟器参数文件
         private void initModelList()
         {
@@ -519,185 +519,10 @@ namespace What
             return str;
         }
 
-        /// <summary>
-        /// 准备启动模拟器
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private bool launch(int x, int y)
-        {
-            LogUtil.LogMessage(log, "延迟 15s 后启动 模拟器");
-            Thread.Sleep(15000);
-            //真正点击模拟器
-            launchAvd(x, y);
-            //判断是否有 其他窗口遮挡， 如果遮挡 关闭之后重新
-            if (!isShowWindow())
-            {
-                //如果没有展示 启动成功
-                return true;
-            }
-            else
-            {
-                //展示了 等10s之后再启动
-                Thread.Sleep(10000);
-                return launch(x, y);
-            }
-        }
 
 
-        /// <summary>
-        /// 开始vpn连接， 并统计新的ip
-        /// </summary>
-        private void changeNet()
-        {
-            LogUtil.LogMessage(log, "-----changeNet----------" + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            //标记开始 连接vpn
-            isStartChangeNet = true;
-            changeNetHour = DateTime.Now.Hour;
-            changeNetMin = DateTime.Now.Minute;
-            changeNetSec = DateTime.Now.Second;
-            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "1601008431", "123456", this);
-        }
 
-        /// <summary>
-        /// 断开vpn 连接
-        /// </summary>
-        private void closeNet()
-        {
-            LogUtil.LogMessage(log, "-----closeNet----------");
-            Util.callDisconnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_D_BAT_NAME, "VPN", this);
-        }
-
-        /// <summary>
-        /// 开始刷
-        /// </summary>
-        /// <param name="screen">屏幕分辨率</param>
-        private void startShua(string screen)
-        {
-
-            LogUtil.LogMessage(log, "获取安装的包 并清除数据");
-            getInstall();
-            if (startJiaoben(screen))
-            {
-                LogUtil.LogMessage(log, "启动脚本成功  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                // 开始计时 大概 3- 5分钟 后进入下一个循环
-                beginDay = DateTime.Now.Day;
-                beginHour = DateTime.Now.Hour;
-                beginMin = DateTime.Now.Minute;
-                beginSec = DateTime.Now.Second;
-
-            }
-            else
-            {
-                LogUtil.LogMessage(log, "启动脚本失败");
-                try
-                {
-                    //关闭模拟器的进程
-                    Util.closeProcess(PROCESS_NAME);
-                    Util.closeProcess(VBOX_HEAD_NAME);
-                }
-                catch (Exception e)
-                {
-
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取 当前avd 安装的应用
-        /// </summary>
-        private void getInstall()
-        {
-            Util.callPMInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_INSTALL_BAT_NAME, mDevice, this);
-        }
-
-        static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
-        /// <summary>
-        /// 清除模拟器 指定包名应用的数据
-        /// </summary>
-        /// <param name="pkg">包名</param>
-        private void clearData(string pkg)
-        {
-            //包名经常更换，所以pm文件动态生成
-            string pmTxtPath = mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\pm.txt";
-
-
-            string content = "pm clear " + pkg + "\nexit\n";
-
-            if (!File.Exists(pmTxtPath))
-            {
-                FileStream stream = File.Create(pmTxtPath);
-                stream.Close();
-            }
-
-            StreamWriter writer = new StreamWriter(pmTxtPath);
-            writer.Write(content);
-            writer.Flush();
-            writer.Close();
-            //清除一个应用的数据
-            semaphore.WaitOne();
-            Util.callPMClear(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_CLEAR_BAT_NAME, mDevice, this);
-
-        }
-
-       
-
-        /// <summary>
-        /// 从模拟器中 pull出 Xprivacy生成的随机值
-        /// </summary>
-        private void callPullRandomFile() {
-            LogUtil.LogMessage(log, "callPullRandomFile 时间间隔3s");
-            Thread.Sleep(3000);
-            Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
-        }
-
-        /// <summary>
-        /// 获取Xprivacy生成的随机值内容
-        /// </summary>
-        private void getPullRandomContent() {
-            string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\random";
-            if (File.Exists(path))
-            {
-                StreamReader reader = new StreamReader(path);
-                String content = reader.ReadToEnd();
-                reader.Close();
-                xprivacyLabel.Text = content;
-            }
-        }
-
-        /// <summary>
-        /// 删除 Xprivacy生成随机值的文件
-        /// </summary>
-        private void callDeleteRandomFile() {
-            Util.callDeleteRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, this);
-        }
-
-        /// <summary>
-        /// 准备修改当前模拟器 的机型参数  通过替换 build.prop文件。 一个循环执行结束的时候会修改机型参数，模拟器第一次启动也会修改机型参数
-        /// </summary>
-        /// <param name="currentAvdNum"></param>
-        private void startChangeProp(int currentAvdNum)
-        {
-            //随机一个机型更改本机的参数
-            string propPath = "";
-            if (modelDic != null && modelDic.Count > 0)
-            {
-                int radom = getRadmomVal(modelDic.Count - 1);
-                List<string> keyList = new List<string>(modelDic.Keys);
-                if (keyList.Count > radom)
-                {
-                    string key = keyList[radom];
-                    string value = modelDic[key];
-
-                    //创建一个新prop文件
-                    propPath = createProp(value, currentAvdNum);
-                }
-            }
-            //用新创建的prop文件 替换掉模拟器的prop文件。 修改 init.androVM.sh 修改IMEI
-            Util.callProp(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
-
-        }
+     
 
 
 
@@ -975,6 +800,126 @@ namespace What
                     }
 
                     break;
+        
+                #endregion
+
+                #region 从模拟器pull出 Xprivacy生成的随机值文件
+                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "Pull:" + content);
+
+                        if (content.Contains("not exist"))
+                        {
+                            LogUtil.LogMessage(log, "Xprivacy还没生成随机值！");
+                            //说明Xprivacy 没有生成随机值，脚本暂时也不能启动
+                            //继续等待
+                            callPullRandomFile();
+                        }
+                        else
+                        {
+                            // 说明Xprivacy生成了随机值，脚本也可以启动了
+                            //开刷
+                            LogUtil.LogMessage(log, "Xprivacy生成随机值！");
+                            getPullRandomContent();
+                            LogUtil.LogMessage(log, "延迟 5s 开刷");
+                            Thread.Sleep(5000);
+                            startShua(mCurrentScreen);
+                        }
+
+                    }
+                    break;
+                #endregion
+
+                #region 修改机型参数
+                case Constant.ProcessType.TYPE_OF_PROCESS_CHANGE_PROP:
+
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        if (content.Contains("fail"))
+                        {
+                            LogUtil.LogMessage(log, content);
+                        }
+                        else
+                        {
+                            LogUtil.LogMessage(log, "-----change prop success ！ 准备删除 Xprivacy 生成的随机值！----------");
+                            callDeleteRandomFile();
+                        }
+                    }
+                    break;
+                #endregion
+
+                #region 删除Xprivacy生成的随机值文件的回调 
+                case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "Delete:" + content);
+                        //主动关闭模拟器
+                        if (isAvdFirstRun)
+                        {
+                            try
+                            {
+                                LogUtil.LogMessage(log, "close vpn");
+                                isVpnConnect = false;
+                                isLaunching = false;
+                                closeNet();
+                                ipLabel.Text = "";
+
+                                Util.closeProcess(PROCESS_NAME);
+                                Util.closeProcess(VBOX_HEAD_NAME);
+                                // Util.closeProcess(VBOX_NET_NAME);
+                                // Util.closeProcess(VBOX_SVC_NAME);
+                            }
+                            catch (Exception e)
+                            {
+                            }
+                        }
+                        else
+                        {
+                            LogUtil.LogMessage(log, "延迟 2s ....");
+                            Thread.Sleep(2000);
+                            closeAvd(mCurrentScreen);
+                        }
+                        runTimes++;
+                        mCurrentAvdNum = -1;
+
+                    }
+                    break;
+                #endregion
+
+
+                #region 弃用代码
+
                 //case Constant.ProcessType.TYPE_OF_PROCESS_UNINSTALL_APP:
                 //    semaphore.Release();
                 //    if (Util.myThread != null)
@@ -1035,45 +980,6 @@ namespace What
                 //        }
                 //    }
                 //    break;
-                #endregion
-
-                #region 从模拟器pull出 Xprivacy生成的随机值文件
-                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM:
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        LogUtil.LogMessage(log, "Pull:" + content);
-
-                        if (content.Contains("not exist"))
-                        {
-                            LogUtil.LogMessage(log, "Xprivacy还没生成随机值！");
-                            //说明Xprivacy 没有生成随机值，脚本暂时也不能启动
-                            //继续等待
-                            callPullRandomFile();
-                        }
-                        else
-                        {
-                            // 说明Xprivacy生成了随机值，脚本也可以启动了
-                            //开刷
-                            LogUtil.LogMessage(log, "Xprivacy生成随机值！");
-                            getPullRandomContent();
-                            LogUtil.LogMessage(log, "延迟 5s 开刷");
-                            Thread.Sleep(5000);
-                            startShua(mCurrentScreen);
-                        }
-
-                    }
-                    break;
-                #endregion
 
                 #region 获取当前模拟器安装的应用 并清除准备刷的应用的 数据
                 case Constant.ProcessType.TYPE_OF_PROCESS_PM_INSTALL:
@@ -1128,85 +1034,6 @@ namespace What
                     break;
                 #endregion
 
-
-                #region 修改机型参数
-                case Constant.ProcessType.TYPE_OF_PROCESS_CHANGE_PROP:
-
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        if (content.Contains("fail"))
-                        {
-                            LogUtil.LogMessage(log, content);
-                        }
-                        else
-                        {
-                            LogUtil.LogMessage(log, "-----change prop success ！ 准备删除 Xprivacy 生成的随机值！----------");
-                            callDeleteRandomFile();
-                        }
-                    }
-                    break;
-                #endregion
-
-                #region 删除Xprivacy生成的随机值文件
-                case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM:
-                    if (Util.myThread != null)
-                    {
-                        List<String> logList = Util.myThread.getLog();
-                        String content = "";
-                        if (logList != null && logList.Count > 0)
-                        {
-                            foreach (String logs in logList)
-                            {
-                                content = content + logs;
-                            }
-                        }
-
-                        LogUtil.LogMessage(log, "Delete:" + content);
-                        //主动关闭模拟器
-                        if (isAvdFirstRun)
-                        {
-                            try
-                            {
-                                LogUtil.LogMessage(log, "close vpn");
-                                isVpnConnect = false;
-                                isLaunching = false;
-                                closeNet();
-                                ipLabel.Text = "";
-
-                                Util.closeProcess(PROCESS_NAME);
-                                Util.closeProcess(VBOX_HEAD_NAME);
-                                // Util.closeProcess(VBOX_NET_NAME);
-                                // Util.closeProcess(VBOX_SVC_NAME);
-                            }
-                            catch (Exception e)
-                            {
-                            }
-                        }
-                        else
-                        {
-                            LogUtil.LogMessage(log, "延迟 2s ....");
-                            Thread.Sleep(2000);
-                            closeAvd(mCurrentScreen);
-                        }
-                        runTimes++;
-                        mCurrentAvdNum = -1;
-
-                    }
-                    break;
-                #endregion
-
-
-                #region 弃用代码
                 case Constant.ProcessType.TYPE_OF_PROCESS_START_REBOOT:
 
                     break;
@@ -1268,6 +1095,30 @@ namespace What
             }
         }
 
+        #region  连接 断开 vpn  保存ip
+        /// <summary>
+        /// 开始vpn连接， 并统计新的ip
+        /// </summary>
+        private void changeNet()
+        {
+            LogUtil.LogMessage(log, "-----changeNet----------" + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            //标记开始 连接vpn
+            isStartChangeNet = true;
+            changeNetHour = DateTime.Now.Hour;
+            changeNetMin = DateTime.Now.Minute;
+            changeNetSec = DateTime.Now.Second;
+            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "1601008431", "123456", this);
+        }
+
+        /// <summary>
+        /// 断开vpn 连接
+        /// </summary>
+        private void closeNet()
+        {
+            LogUtil.LogMessage(log, "-----closeNet----------");
+            Util.callDisconnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_D_BAT_NAME, "VPN", this);
+        }
+
         /// <summary>
         /// 保存每次更换的ip
         /// </summary>
@@ -1295,7 +1146,195 @@ namespace What
 
             return false;
         }
+        #endregion
 
+
+
+        /// <summary>
+        /// 准备启动模拟器
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private bool launch(int x, int y)
+        {
+            LogUtil.LogMessage(log, "延迟 15s 后启动 模拟器");
+            Thread.Sleep(15000);
+            //真正点击模拟器
+            launchAvd(x, y);
+            //判断是否有 其他窗口遮挡， 如果遮挡 关闭之后重新
+            if (!isShowWindow())
+            {
+                //如果没有展示 启动成功
+                return true;
+            }
+            else
+            {
+                //展示了 等10s之后再启动
+                Thread.Sleep(10000);
+                return launch(x, y);
+            }
+        }
+
+
+
+        #region 安装和卸载apk
+
+        /// <summary>
+        /// 安装测试apk 为了判断模拟器是不是真正运行起来
+        /// </summary>
+        /// <param name="apkPath">测试apk路径</param>
+        private void startInstall(String apkPath)
+        {
+            //  semaphore.WaitOne();
+            LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            isStartInstall = false;
+            installHour = DateTime.Now.Hour;
+            installMin = DateTime.Now.Minute;
+            installSec = DateTime.Now.Second;
+            LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
+            Thread.Sleep(3000);
+            Util.callInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
+        }
+
+        //static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
+        ////遍历安装包
+        //private void installAllApks(int times, List<string> apkFolderList)
+        //{
+        //    if (apkFolderList == null || apkFolderList.Count == 0)
+        //    {
+        //        return;
+        //    }
+
+        //    string path = apkFolderList[times % apkFolderList.Count];
+        //    LogUtil.LogMessage(log, "install:" +path);
+        //    string[] apks = Directory.GetFiles(path);
+        //    if (apks != null && apks.Length > 0)
+        //    {
+        //        LogUtil.LogMessage(log, "install:" + apks.Length);
+        //        foreach (string apkPath in apks)
+        //        {
+        //            totalList.Add(apkPath);
+        //            pkgList.Add(apkPath.Substring(apkPath.LastIndexOf("\\") + 1, apkPath.LastIndexOf(".apk") - apkPath.LastIndexOf("\\") - 1));
+        //        }
+        //        //install
+        //        LogUtil.LogMessage(log, "install:" + totalList.Count + ":" + installSuccess);
+        //        if (totalList.Count > installSuccess)
+        //        {
+        //            startInstall(totalList[installSuccess]);
+        //        }
+        //    }
+        //}
+
+
+
+
+        //private void startUninstall(String pkgName) {
+        //    semaphore.WaitOne();
+        //    LogUtil.LogMessage(log, "Devices:" + mDevice + "UnInstall:" + pkgName);
+        //    Util.callUninstall(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.UNINSTALL_BAT_NAME, mDevice, pkgName, this);
+        //}
+        #endregion
+
+
+        #region  判断 Xprivacy是否已经生成随机值。
+        /// <summary>
+        /// 从模拟器中 pull出 Xprivacy生成的随机值
+        /// </summary>
+        private void callPullRandomFile()
+        {
+            LogUtil.LogMessage(log, "callPullRandomFile 时间间隔3s");
+            Thread.Sleep(3000);
+            Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+        }
+
+        /// <summary>
+        /// 获取Xprivacy生成的随机值内容
+        /// </summary>
+        private void getPullRandomContent()
+        {
+            string path = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\random";
+            if (File.Exists(path))
+            {
+                StreamReader reader = new StreamReader(path);
+                String content = reader.ReadToEnd();
+                reader.Close();
+                xprivacyLabel.Text = content;
+            }
+        }
+
+        /// <summary>
+        /// 删除 Xprivacy生成随机值的文件
+        /// </summary>
+        private void callDeleteRandomFile()
+        {
+            Util.callDeleteRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, this);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 开始刷
+        /// </summary>
+        /// <param name="screen">屏幕分辨率</param>
+        private void startShua(string screen)
+        {
+            //由按键精灵代替完成
+            //LogUtil.LogMessage(log, "获取安装的包 并清除数据");
+            //getInstall();
+            if (startJiaoben(screen))
+            {
+                LogUtil.LogMessage(log, "启动脚本成功  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                // 开始计时 大概 3- 5分钟 后进入下一个循环
+                beginDay = DateTime.Now.Day;
+                beginHour = DateTime.Now.Hour;
+                beginMin = DateTime.Now.Minute;
+                beginSec = DateTime.Now.Second;
+
+            }
+            else
+            {
+                LogUtil.LogMessage(log, "启动脚本失败");
+                try
+                {
+                    //关闭模拟器的进程
+                    Util.closeProcess(PROCESS_NAME);
+                    Util.closeProcess(VBOX_HEAD_NAME);
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+        }
+
+        #region 修改模拟参数 imei
+        /// <summary>
+        /// 准备修改当前模拟器 的机型参数  通过替换 build.prop文件。 一个循环执行结束的时候会修改机型参数，模拟器第一次启动也会修改机型参数
+        /// </summary>
+        /// <param name="currentAvdNum"></param>
+        private void startChangeProp(int currentAvdNum)
+        {
+            //随机一个机型更改本机的参数
+            string propPath = "";
+            if (modelDic != null && modelDic.Count > 0)
+            {
+                int radom = getRadmomVal(modelDic.Count - 1);
+                List<string> keyList = new List<string>(modelDic.Keys);
+                if (keyList.Count > radom)
+                {
+                    string key = keyList[radom];
+                    string value = modelDic[key];
+
+                    //创建一个新prop文件
+                    propPath = createProp(value, currentAvdNum);
+                }
+            }
+            //用新创建的prop文件 替换掉模拟器的prop文件。 修改 init.androVM.sh 修改IMEI
+            Util.callProp(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
+
+        }
+        
         /// <summary>
         /// 根据sdk版本 去获取对应版本的build.prop模板
         /// </summary>
@@ -1402,6 +1441,8 @@ namespace What
             }
             return false;
         }
+
+        #endregion
 
         /// <summary>
         /// 读取一个property内容
@@ -1992,70 +2033,54 @@ namespace What
             sp.PlayLooping();
         }
 
-        #region 安装和卸载apk
-
-
-        /// <summary>
-        /// 安装测试apk 为了判断模拟器是不是真正运行起来
-        /// </summary>
-        /// <param name="apkPath">测试apk路径</param>
-        private void startInstall(String apkPath)
-        {
-            //  semaphore.WaitOne();
-            LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            isStartInstall = false;
-            installHour = DateTime.Now.Hour;
-            installMin = DateTime.Now.Minute;
-            installSec = DateTime.Now.Second;
-            LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
-            Thread.Sleep(3000);
-            Util.callInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.INSTALL_BAT_NAME, mDevice, apkPath, this);
-        }
-
-        //static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
-        ////遍历安装包
-        //private void installAllApks(int times, List<string> apkFolderList)
-        //{
-        //    if (apkFolderList == null || apkFolderList.Count == 0)
-        //    {
-        //        return;
-        //    }
-
-        //    string path = apkFolderList[times % apkFolderList.Count];
-        //    LogUtil.LogMessage(log, "install:" +path);
-        //    string[] apks = Directory.GetFiles(path);
-        //    if (apks != null && apks.Length > 0)
-        //    {
-        //        LogUtil.LogMessage(log, "install:" + apks.Length);
-        //        foreach (string apkPath in apks)
-        //        {
-        //            totalList.Add(apkPath);
-        //            pkgList.Add(apkPath.Substring(apkPath.LastIndexOf("\\") + 1, apkPath.LastIndexOf(".apk") - apkPath.LastIndexOf("\\") - 1));
-        //        }
-        //        //install
-        //        LogUtil.LogMessage(log, "install:" + totalList.Count + ":" + installSuccess);
-        //        if (totalList.Count > installSuccess)
-        //        {
-        //            startInstall(totalList[installSuccess]);
-        //        }
-        //    }
-        //}
-
-
-       
-
-        //private void startUninstall(String pkgName) {
-        //    semaphore.WaitOne();
-        //    LogUtil.LogMessage(log, "Devices:" + mDevice + "UnInstall:" + pkgName);
-        //    Util.callUninstall(basePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.UNINSTALL_BAT_NAME, mDevice, pkgName, this);
-        //}
-        #endregion
 
 
 
 
         #region 弃用的代码
 
+
+
+        #region  获取当前 模拟器安装的应用 并清除数据   已经由按键精灵直接代替实现
+        /// <summary>
+        /// 获取 当前avd 安装的应用
+        /// </summary>
+        private void getInstall()
+        {
+            Util.callPMInstall(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_INSTALL_BAT_NAME, mDevice, this);
+        }
+
+        static Semaphore semaphore = new Semaphore(1, 1); //同时只允许一线程
+        /// <summary>
+        /// 清除模拟器 指定包名应用的数据
+        /// </summary>
+        /// <param name="pkg">包名</param>
+        private void clearData(string pkg)
+        {
+            //包名经常更换，所以pm文件动态生成
+            string pmTxtPath = mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\temp\\pm.txt";
+
+
+            string content = "pm clear " + pkg + "\nexit\n";
+
+            if (!File.Exists(pmTxtPath))
+            {
+                FileStream stream = File.Create(pmTxtPath);
+                stream.Close();
+            }
+
+            StreamWriter writer = new StreamWriter(pmTxtPath);
+            writer.Write(content);
+            writer.Flush();
+            writer.Close();
+            //清除一个应用的数据
+            semaphore.WaitOne();
+            Util.callPMClear(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_CLEAR_BAT_NAME, mDevice, this);
+
+        }
+        #endregion
+
+        #region  通过 按键精灵联网获取时间   /sdcard/time.txt   通过判断该文件来判断是否联网
         /// <summary>
         /// 检测模拟器是否联网的。  这个后来去掉了， 正常启动都会联网
         /// </summary>
@@ -2109,6 +2134,8 @@ namespace What
 
 
         }
+
+        #endregion
 
         #endregion
 

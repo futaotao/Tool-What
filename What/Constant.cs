@@ -70,6 +70,7 @@ namespace What
 
             //清除模拟器某一个应用的数据
             public const String PM_CLEAR_BAT_NAME = "pm_clear.bat";
+           
             //获取当前模拟器安装的应用
             public const String PM_INSTALL_BAT_NAME = "pm_install.bat";
 
