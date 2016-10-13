@@ -70,6 +70,7 @@ namespace What
             //从模拟器中 pull出Xprivacy生成的随机值文件
             public const String PULL_RANDOM_BAT_NAME = "pull_random.bat";
             //删除 Xprivacy生成的 随机值文件
+            //以及按键精灵v3.1.2 生成的 保存悬浮窗坐标的文件
             public const String DETETE_RANDOM_BAT_NAME = "delete_random.bat";
 
             public const String ADB_CLOSE_BAT_NAME = "adb_close.bat";

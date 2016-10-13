@@ -30,7 +30,7 @@ namespace What
 
         //当前模拟器的 设备号和端口
         private static String mDevice = "";
-        
+
         //Genymotion启动模拟器的进程
         private static String PROCESS_NAME = "player";
         private static String VBOX_HEAD_NAME = "VBoxHeadless";
@@ -90,7 +90,7 @@ namespace What
 
         //每次循环刷的时间间隔  单位：秒
         private static int shuaInterval = 30;
-        
+
 
         // 随机启动一个 avd
         private static int mTapX = -1;
@@ -111,12 +111,12 @@ namespace What
 
 
         //每次安装的时间  如果两分钟内没有安装成功 关闭
-        private static String installBeginTime = "";    
+        private static String installBeginTime = "";
         private static int installTime = 120;
         //判断是否 已经开始安装
         private static bool isInstalled = false;
 
-        
+
 
         //每次启动联网的时间  如果两分钟内没有启动联网 关闭
         private static String changeNetBeginTime = "";
@@ -131,7 +131,7 @@ namespace What
 
             What.CheckForIllegalCrossThreadCalls = false;
 
-            
+
             mBasePath = Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf("\\") + 1);
 
             mTestApkPath = mBasePath + Constant.Folders.APK_FOLDER_NAME + "\\test.apk";
@@ -154,15 +154,15 @@ namespace What
             tb1_x.Text = "200";
             tb1_y.Text = first.ToString();
             tb1_sx.Text = "683";
-            
+
             //模拟器二
             tb2_x.Text = "200";
-            tb2_y.Text = (first + interval* 1).ToString();
+            tb2_y.Text = (first + interval * 1).ToString();
             tb2_sx.Text = "683";
 
             //模拟器三
             tb3_x.Text = "200";
-            tb3_y.Text = (first + interval* 2).ToString();
+            tb3_y.Text = (first + interval * 2).ToString();
             tb3_sx.Text = "683";
 
             //模拟器四
@@ -219,7 +219,8 @@ namespace What
         }
 
         //初始化 Genymotion 上 模拟器坐标
-        private void initAvdList() {
+        private void initAvdList()
+        {
             avdList = new List<int>();
             positionXDic = new Dictionary<int, int>();
             positionSXDic = new Dictionary<int, int>();
@@ -266,6 +267,7 @@ namespace What
         //停止按钮点击事件
         private void btnStop_Click(object sender, EventArgs e)
         {
+            callDeleteRandomFile();
             isStop = !isStop;
         }
 
@@ -278,8 +280,8 @@ namespace What
 
             mDevice = deviceTb.Text;
 
- 
-           
+
+
             if (runThread != null)
             {
                 runThread.Start();
@@ -343,7 +345,8 @@ namespace What
                     }
 
                     //判断联网是否超时，     如果超时关闭模拟器！进入下一次循环
-                    if (Util.getTimeInterval(changeNetBeginTime, DateTime.Now) >= changeNetTime && isStartChangeNet) { 
+                    if (Util.getTimeInterval(changeNetBeginTime, DateTime.Now) >= changeNetTime && isStartChangeNet)
+                    {
                         //如果启动了联网， 且两分钟内没有结果
                         LogUtil.LogMessage(log, "******成功检测一次 联网超时的情况*****");
 
@@ -357,7 +360,7 @@ namespace What
 
                     isShowWindow();
                     isShowElse();
-                   
+
                     //判断进程有没有启动
                     int val = Util.getProcessStaus(PROCESS_NAME);
                     if (val == Util.PROCESS_NO_START)
@@ -383,11 +386,12 @@ namespace What
                                 {
                                     mCurrentAvdNum = firstAvdNum;
                                 }
-                                else {
+                                else
+                                {
                                     mCurrentAvdNum = avdList[radmom];
                                     mCurrentAvdNum = 2;
                                 }
-                                
+
                                 // 该模拟器关键点坐标
                                 mTapX = positionXDic[mCurrentAvdNum];
                                 mTapSX = positionSXDic[mCurrentAvdNum];
@@ -401,7 +405,7 @@ namespace What
                                 {
                                     //把当前模拟器的参数显示出来
                                     //机型
-                                    runAvdModel.Text = runAvdDic["ro.product.model"]; 
+                                    runAvdModel.Text = runAvdDic["ro.product.model"];
                                     //sdk版本
                                     runAvdSdk.Text = runAvdDic["sdk_version"];
                                     //屏幕分辨率
@@ -414,7 +418,7 @@ namespace What
 
                                     string[] temp = screen_x_y.Split(new char[] { 'x' });
                                     if (temp != null && temp.Length == 2)
-                                    {   
+                                    {
                                         //设置待启动的模拟器   分辨率是启动之前设置
                                         avdSetting(mTapSX, mTapY, temp[0], temp[1]);
                                     }
@@ -448,9 +452,9 @@ namespace What
                     }
                     else
                     {
-    
-                           //LogUtil.LogMessage(log, "-----等待模拟器启动----------");
-   
+
+                        //LogUtil.LogMessage(log, "-----等待模拟器启动----------");
+
                     }
                 }
             }
@@ -488,8 +492,10 @@ namespace What
         /// <returns></returns>
         private int getAvdFirst()
         {
-            for (int i = 0; i < avdFirstList.Count; i++) {
-                if (avdFirstList[i].Checked) {
+            for (int i = 0; i < avdFirstList.Count; i++)
+            {
+                if (avdFirstList[i].Checked)
+                {
                     isAvdFirstRun = true;
                     return i + 1;
                 }
@@ -629,7 +635,7 @@ namespace What
                             mDevice = content.Substring(content.LastIndexOf("192"), content.LastIndexOf("5555") - content.LastIndexOf("192") + 4);
                             deviceTb.Text = mDevice;
                         }
-                        
+
                         // 169开头
                         if (content.Contains("169"))
                         {
@@ -637,7 +643,7 @@ namespace What
                             deviceTb.Text = mDevice;
                         }
 
-                        
+
                         if ((content.Contains("192") || content.Contains("169")) && !content.Contains("offline"))
                         {
                             //说明此时已经 adb 已经连接到了 模拟器
@@ -647,7 +653,7 @@ namespace What
                             LogUtil.LogMessage(log, "Device Connect 开始安装测试包");
                             //开始安装测试包 目的等待模拟器真正进入运行状态
                             startInstall(mTestApkPath);
-                           
+
                         }
                         else
                         {
@@ -764,7 +770,7 @@ namespace What
                     }
 
                     break;
-        
+
                 #endregion
 
                 #region 从模拟器pull出 Xprivacy生成的随机值文件
@@ -833,7 +839,7 @@ namespace What
                     break;
                 #endregion
 
-                #region 删除Xprivacy生成的随机值文件的回调 
+                #region 删除Xprivacy生成的随机值文件的回调
                 case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM:
                     if (Util.myThread != null)
                     {
@@ -1156,7 +1162,7 @@ namespace What
             //  semaphore.WaitOne();
             LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             isInstalled = false;
-            
+
             installBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
@@ -1252,7 +1258,7 @@ namespace What
             if (startJiaoben(screen))
             {
                 LogUtil.LogMessage(log, "启动脚本成功  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                
+
                 // 刷的时间 计时开始
                 shuaBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -1299,7 +1305,7 @@ namespace What
             Util.callProp(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PROP_BAT_NAME, mDevice, propPath, this);
 
         }
-        
+
         /// <summary>
         /// 根据sdk版本 去获取对应版本的build.prop模板
         /// </summary>
@@ -1471,12 +1477,12 @@ namespace What
             return rd.Next(0, max);
         }
 
-       
+
 
         #region 模拟点击和输入
 
         //打开Genymotion设置页，并設置分辨率
-        private bool avdSetting(int x, int y , string s_x, string s_y)
+        private bool avdSetting(int x, int y, string s_x, string s_y)
         {
             //通过模拟点击设置avd参数
 
@@ -1513,7 +1519,7 @@ namespace What
             }
             Thread.Sleep(1500);
             click(int.Parse(setting_ok_x.Text), int.Parse(setting_ok_y.Text));
-            
+
             //TODO 通过代码直接设置avd参数
             return true;
         }
@@ -1690,7 +1696,7 @@ namespace What
                 Util.closeProcess(PROCESS_NAME);
                 Util.closeProcess(VBOX_HEAD_NAME);
                 // Util.closeProcess(VBOX_NET_NAME);
-               // Util.closeProcess(VBOX_SVC_NAME);
+                // Util.closeProcess(VBOX_SVC_NAME);
 
 
             }
@@ -1752,88 +1758,176 @@ namespace What
                         click(960, 895);
                         Thread.Sleep(1500);
                         //启动
-                        click(1085, 735);
+                        click(968, 668);
 
                         return true;
                     case Constant.Screen.SCREEN_480x854:
+                        /*** v2.3.0 ***/
+                        //// 两次Home
+                        //click(1233, 902);
+                        //click(1233, 902);
+                        //Thread.Sleep(2000);
+                        ////icon
+                        //click(788, 314);
+                        //Thread.Sleep(8000);
+                        ////脚本
+                        //click(963, 723);
+                        //Thread.Sleep(2000);
+                        ////手机
+                        //click(854, 370);
+                        //Thread.Sleep(1000);
+                        ////加载1
+                        //click(909, 448);
+                        //Thread.Sleep(2000);
+                        ////启动
+                        //click(1020, 555);
+
+                        /*** v3.1.2 ***/
                         // 两次Home
                         click(1233, 902);
                         click(1233, 902);
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1500);
                         //icon
-                        click(788, 314);
+                        click(787, 306);
                         Thread.Sleep(8000);
-                        //脚本
-                        click(963, 723);
-                        Thread.Sleep(2000);
-                        //手机
-                        click(854, 370);
+                        //未分类
+                        click(966, 415);
                         Thread.Sleep(1000);
-                        //加载1
-                        click(909, 448);
-                        Thread.Sleep(2000);
+                        //脚本
+                        click(959, 300);
+                        Thread.Sleep(1000);
+                        //加载
+                        click(960, 921);
+                        Thread.Sleep(1500);
                         //启动
-                        click(1020, 555);
+                        click(969, 682);
+
                         return true;
                     case Constant.Screen.SCREEN_720x1280:
+                        /*** v2.3.0 ***/
+                        //// 两次Home
+                        //click(1265, 956);
+                        //click(1265, 956);
+                        //Thread.Sleep(2000);
+                        ////icon
+                        //click(768, 268);
+                        //Thread.Sleep(8000);
+                        ////脚本
+                        //click(924, 790);
+                        //Thread.Sleep(2000);
+                        ////手机
+                        //click(822, 278);
+                        //Thread.Sleep(1000);
+                        ////加载
+                        //click(887, 367);
+                        //Thread.Sleep(2000);
+                        ////启动
+                        //click(1047, 525);
+
+                        /*** v3.1.2 ***/
                         // 两次Home
                         click(1265, 956);
                         click(1265, 956);
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1500);
                         //icon
                         click(768, 268);
                         Thread.Sleep(8000);
+                        //未分类
+                        click(950, 325);
+                        Thread.Sleep(1000);
                         //脚本
-                        click(924, 790);
-                        Thread.Sleep(2000);
-                        //手机
-                        click(822, 278);
+                        click(955, 210);
                         Thread.Sleep(1000);
                         //加载
-                        click(887, 367);
-                        Thread.Sleep(2000);
+                        click(944, 975);
+                        Thread.Sleep(1500);
                         //启动
-                        click(1047, 525);
+                        click(957, 696);
+
                         return true;
                     case Constant.Screen.SCREEN_768x1280:
+                        /*** v2.3.0 ***/
+                        //// 两次Home
+                        //click(1282, 956);
+                        //click(1282, 956);
+                        //Thread.Sleep(2000);
+                        ////icon
+                        //click(770, 272);
+                        //Thread.Sleep(8000);
+                        ////脚本
+                        //click(907, 795);
+                        //Thread.Sleep(2000);
+                        ////手机
+                        //click(822, 285);
+                        //Thread.Sleep(1000);
+                        ////加载
+                        //click(883, 367);
+                        //Thread.Sleep(2000);
+                        ////启动
+                        //click(1067, 525);
+
+                        /*** v3.1.2 ***/
                         // 两次Home
                         click(1282, 956);
                         click(1282, 956);
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1500);
                         //icon
                         click(770, 272);
                         Thread.Sleep(8000);
+                        //未分类
+                        click(950, 333);
+                        Thread.Sleep(1000);
                         //脚本
-                        click(907, 795);
-                        Thread.Sleep(2000);
-                        //手机
-                        click(822, 285);
+                        click(955, 210);
                         Thread.Sleep(1000);
                         //加载
-                        click(883, 367);
-                        Thread.Sleep(2000);
+                        click(944, 975);
+                        Thread.Sleep(1500);
                         //启动
-                        click(1067, 525);
+                        click(957, 696);
+
                         return true;
                     case Constant.Screen.SCREEN_1080x1920:
+                        /*** v2.3.0 ***/
+                        //// 两次Home
+                        //click(1264, 958);
+                        //click(1264, 958);
+                        //Thread.Sleep(2000);
+                        ////icon
+                        //click(767, 274);
+                        //Thread.Sleep(8000);
+                        ////脚本
+                        //click(940, 795);
+                        //Thread.Sleep(2000);
+                        ////手机
+                        //click(822, 285);
+                        //Thread.Sleep(1000);
+                        ////加载
+                        //click(889, 365);
+                        //Thread.Sleep(2000);
+                        ////启动
+                        //click(1045, 525);
+
+                        /*** v3.1.2 ***/
                         // 两次Home
                         click(1264, 958);
                         click(1264, 958);
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1500);
                         //icon
-                        click(767, 274);
+                        click(767, 268);
                         Thread.Sleep(8000);
+                        //未分类
+                        click(950, 330);
+                        Thread.Sleep(1000);
                         //脚本
-                        click(940, 795);
-                        Thread.Sleep(2000);
-                        //手机
-                        click(822, 285);
+                        click(955, 220);
                         Thread.Sleep(1000);
                         //加载
-                        click(889, 365);
-                        Thread.Sleep(2000);
+                        click(944, 975);
+                        Thread.Sleep(1500);
                         //启动
-                        click(1045, 525);
+                        click(957, 696);
+
                         return true;
                     default:
                         return false;
@@ -1990,7 +2084,7 @@ namespace What
 
 
 
-    /***********************************************************************************************/
+        /***********************************************************************************************/
 
         #region 弃用的代码
 
