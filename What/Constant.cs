@@ -53,6 +53,7 @@ namespace What
 
             //安装
             public const String INSTALL_BAT_NAME = "install.bat";
+            //修改模拟器 build.prop 和 init.androVM.sh
             public const String PROP_BAT_NAME = "prop.bat";
             
             //卸载
