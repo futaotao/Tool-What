@@ -163,7 +163,7 @@ namespace What
             tb1_sx.Text = "683";
 
             //模拟器二
-            tb2_sdk.Text = SDK_17.ToString();
+            tb2_sdk.Text = SDK_19.ToString();
             tb2_x.Text = "200";
             tb2_y.Text = (first + interval * 1).ToString();
             tb2_sx.Text = "683";
@@ -175,7 +175,7 @@ namespace What
             tb3_sx.Text = "683";
 
             //模拟器四
-            tb4_sdk.Text = SDK_19.ToString();
+            tb4_sdk.Text = SDK_17.ToString();
             tb4_x.Text = "200";
             tb4_y.Text = (first + interval * 3).ToString();
             tb4_sx.Text = "683";

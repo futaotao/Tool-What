@@ -43,6 +43,11 @@
             this.tb3_y = new System.Windows.Forms.TextBox();
             this.tb3_x = new System.Windows.Forms.TextBox();
             this.avd_group = new System.Windows.Forms.GroupBox();
+            this.tb4_sdk = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tb1_sdk = new System.Windows.Forms.TextBox();
+            this.tb3_sdk = new System.Windows.Forms.TextBox();
+            this.tb2_sdk = new System.Windows.Forms.TextBox();
             this.avdCb4 = new System.Windows.Forms.CheckBox();
             this.avdCb3 = new System.Windows.Forms.CheckBox();
             this.avdCb2 = new System.Windows.Forms.CheckBox();
@@ -101,11 +106,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.runAvdPropPath = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
-            this.tb4_sdk = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tb1_sdk = new System.Windows.Forms.TextBox();
-            this.tb3_sdk = new System.Windows.Forms.TextBox();
-            this.tb2_sdk = new System.Windows.Forms.TextBox();
             this.avd_group.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -165,7 +165,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(97, 42);
+            this.label3.Location = new System.Drawing.Point(93, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 12);
             this.label3.TabIndex = 15;
@@ -174,7 +174,7 @@
             // postionLabel
             // 
             this.postionLabel.AutoSize = true;
-            this.postionLabel.Location = new System.Drawing.Point(117, 42);
+            this.postionLabel.Location = new System.Drawing.Point(113, 42);
             this.postionLabel.Name = "postionLabel";
             this.postionLabel.Size = new System.Drawing.Size(0, 12);
             this.postionLabel.TabIndex = 16;
@@ -254,6 +254,43 @@
             this.avd_group.TabIndex = 28;
             this.avd_group.TabStop = false;
             this.avd_group.Text = "AVD";
+            // 
+            // tb4_sdk
+            // 
+            this.tb4_sdk.Location = new System.Drawing.Point(42, 114);
+            this.tb4_sdk.Name = "tb4_sdk";
+            this.tb4_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb4_sdk.TabIndex = 46;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(50, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(23, 12);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "sdk";
+            // 
+            // tb1_sdk
+            // 
+            this.tb1_sdk.Location = new System.Drawing.Point(42, 33);
+            this.tb1_sdk.Name = "tb1_sdk";
+            this.tb1_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb1_sdk.TabIndex = 42;
+            // 
+            // tb3_sdk
+            // 
+            this.tb3_sdk.Location = new System.Drawing.Point(42, 87);
+            this.tb3_sdk.Name = "tb3_sdk";
+            this.tb3_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb3_sdk.TabIndex = 44;
+            // 
+            // tb2_sdk
+            // 
+            this.tb2_sdk.Location = new System.Drawing.Point(42, 60);
+            this.tb2_sdk.Name = "tb2_sdk";
+            this.tb2_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb2_sdk.TabIndex = 43;
             // 
             // avdCb4
             // 
@@ -372,7 +409,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 42);
+            this.label2.Location = new System.Drawing.Point(192, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 8;
@@ -381,7 +418,7 @@
             // countLabel
             // 
             this.countLabel.AutoSize = true;
-            this.countLabel.Location = new System.Drawing.Point(217, 42);
+            this.countLabel.Location = new System.Drawing.Point(239, 42);
             this.countLabel.Name = "countLabel";
             this.countLabel.Size = new System.Drawing.Size(0, 12);
             this.countLabel.TabIndex = 9;
@@ -765,43 +802,6 @@
             this.btnStop.Text = "stop";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // tb4_sdk
-            // 
-            this.tb4_sdk.Location = new System.Drawing.Point(42, 114);
-            this.tb4_sdk.Name = "tb4_sdk";
-            this.tb4_sdk.Size = new System.Drawing.Size(38, 21);
-            this.tb4_sdk.TabIndex = 46;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(50, 17);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(23, 12);
-            this.label8.TabIndex = 45;
-            this.label8.Text = "sdk";
-            // 
-            // tb1_sdk
-            // 
-            this.tb1_sdk.Location = new System.Drawing.Point(42, 33);
-            this.tb1_sdk.Name = "tb1_sdk";
-            this.tb1_sdk.Size = new System.Drawing.Size(38, 21);
-            this.tb1_sdk.TabIndex = 42;
-            // 
-            // tb3_sdk
-            // 
-            this.tb3_sdk.Location = new System.Drawing.Point(42, 87);
-            this.tb3_sdk.Name = "tb3_sdk";
-            this.tb3_sdk.Size = new System.Drawing.Size(38, 21);
-            this.tb3_sdk.TabIndex = 44;
-            // 
-            // tb2_sdk
-            // 
-            this.tb2_sdk.Location = new System.Drawing.Point(42, 60);
-            this.tb2_sdk.Name = "tb2_sdk";
-            this.tb2_sdk.Size = new System.Drawing.Size(38, 21);
-            this.tb2_sdk.TabIndex = 43;
             // 
             // What
             // 
