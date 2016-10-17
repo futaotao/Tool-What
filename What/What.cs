@@ -339,7 +339,7 @@ namespace What
         private void btnStop_Click(object sender, EventArgs e)
         {
             //创建prop文件
-            //startChangeProp(16);
+            //startChangeProp(17);
 
             isStop = !isStop;
         }
