@@ -24,7 +24,7 @@ namespace What
         public class Folders {
             //保存每次生成的ip
             public const String IPS_FOLDER_NAME = "ips";
-            //模拟器对应的机型信息。
+            //模拟器对应的sdk版本的机型信息。
             public const String AVD_PROPERTY_FOLDER_NAME = "avds";
             //测试apk的保存路径  用于检测模拟器是否启动的
             public const String APK_FOLDER_NAME = "apks";

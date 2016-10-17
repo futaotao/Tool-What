@@ -46,7 +46,7 @@ namespace What
         private static Dictionary<int, int> positionSXDic = null;
         // 启动avd 的y坐标
         private static Dictionary<int, int> positionYDic = null;
-
+        // 标记模拟器是否是第一次运行
         private static List<CheckBox> avdFirstList = null;
 
         // 新建avd 第一次启动
@@ -80,8 +80,8 @@ namespace What
         //循环执行次数
         private static int runTimes = 0;
 
-        // 从1开始编号
-        private static int mCurrentAvdNum = -1;
+        // 当前准备启动的模拟器的sdk版本，暂支持16,17,18,19 
+        private static int mCurrentAvdSdk = -1;
         private static string mCurrentScreen = "";
 
 
@@ -228,36 +228,40 @@ namespace What
             avdFirstList = new List<CheckBox>();
             if (!tb1_x.Text.Trim().Equals("") && !tb1_y.Text.Trim().Equals("") && !tb1_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(1);
-                positionXDic.Add(1, int.Parse(tb1_x.Text));
-                positionSXDic.Add(1, int.Parse(tb1_sx.Text));
-                positionYDic.Add(1, int.Parse(tb1_y.Text));
+                avdList.Add(16);
+                positionXDic.Add(16, int.Parse(tb1_x.Text));
+                positionSXDic.Add(16, int.Parse(tb1_sx.Text));
+                positionYDic.Add(16, int.Parse(tb1_y.Text));
+                avdCb1.Tag = 16;
                 avdFirstList.Add(avdCb1);
             }
             if (!tb2_x.Text.Trim().Equals("") && !tb2_y.Text.Trim().Equals("") && !tb2_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(2);
-                positionXDic.Add(2, int.Parse(tb2_x.Text));
-                positionSXDic.Add(2, int.Parse(tb2_sx.Text));
-                positionYDic.Add(2, int.Parse(tb2_y.Text));
+                avdList.Add(17);
+                positionXDic.Add(17, int.Parse(tb2_x.Text));
+                positionSXDic.Add(17, int.Parse(tb2_sx.Text));
+                positionYDic.Add(17, int.Parse(tb2_y.Text));
+                avdCb2.Tag = 17;
                 avdFirstList.Add(avdCb2);
             }
 
             if (!tb3_x.Text.Trim().Equals("") && !tb3_y.Text.Trim().Equals("") && !tb3_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(3);
-                positionXDic.Add(3, int.Parse(tb3_x.Text));
-                positionSXDic.Add(3, int.Parse(tb3_sx.Text));
-                positionYDic.Add(3, int.Parse(tb3_y.Text));
+                avdList.Add(18);
+                positionXDic.Add(18, int.Parse(tb3_x.Text));
+                positionSXDic.Add(18, int.Parse(tb3_sx.Text));
+                positionYDic.Add(18, int.Parse(tb3_y.Text));
+                avdCb3.Tag = 18;
                 avdFirstList.Add(avdCb3);
             }
 
             if (!tb4_x.Text.Trim().Equals("") && !tb4_y.Text.Trim().Equals("") && !tb4_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(4);
-                positionXDic.Add(4, int.Parse(tb4_x.Text));
-                positionSXDic.Add(4, int.Parse(tb4_sx.Text));
-                positionYDic.Add(4, int.Parse(tb4_y.Text));
+                avdList.Add(19);
+                positionXDic.Add(19, int.Parse(tb4_x.Text));
+                positionSXDic.Add(19, int.Parse(tb4_sx.Text));
+                positionYDic.Add(19, int.Parse(tb4_y.Text));
+                avdCb4.Tag = 19;
                 avdFirstList.Add(avdCb4);
             }
         }
@@ -317,7 +321,7 @@ namespace What
 
                         //获取安装的包 并清除数据
                         LogUtil.LogMessage(log, "修改机型信息。。");
-                        startChangeProp(mCurrentAvdNum);
+                        startChangeProp(mCurrentAvdSdk);
 
                         #region 卸载掉安装包
                         //LogUtil.LogMessage(log, "脚本执行时间到 开始卸载： " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -381,24 +385,25 @@ namespace What
                                 //随机选择一个模拟器    
                                 int radmom = getRadmomVal(avdList.Count);
                                 //如果有第一次运行的
-                                int firstAvdNum = getAvdFirst();
-                                if (firstAvdNum != -1)
+                                int firstAvdSdk = getAvdFirstSdk();
+                                if (firstAvdSdk != -1)
                                 {
-                                    mCurrentAvdNum = firstAvdNum;
+                                    mCurrentAvdSdk = firstAvdSdk;
                                 }
                                 else
                                 {
-                                    mCurrentAvdNum = avdList[radmom];
-                                    mCurrentAvdNum = 2;
+                                    //返回对应的模拟器版本
+                                    mCurrentAvdSdk = avdList[radmom];
+                                    mCurrentAvdSdk = 2;
                                 }
 
                                 // 该模拟器关键点坐标
-                                mTapX = positionXDic[mCurrentAvdNum];
-                                mTapSX = positionSXDic[mCurrentAvdNum];
-                                mTapY = positionYDic[mCurrentAvdNum];
+                                mTapX = positionXDic[mCurrentAvdSdk];
+                                mTapSX = positionSXDic[mCurrentAvdSdk];
+                                mTapY = positionYDic[mCurrentAvdSdk];
 
                                 //该模拟器的机型参数     机型分辨率 需要在模拟器启动之前提前设置
-                                string avdPropPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdNum + ".txt";
+                                string avdPropPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdSdk + ".txt";
                                 runAvdPropPath.Text = avdPropPath;
                                 Dictionary<string, string> runAvdDic = readProperty(avdPropPath);
                                 if (runAvdDic != null && runAvdDic.Count != 0)
@@ -487,17 +492,17 @@ namespace What
         }
 
         /// <summary>
-        /// 按顺序获取 第一次运行模拟器的编号
+        /// 按顺序获取 第一次运行模拟器的sdk
         /// </summary>
         /// <returns></returns>
-        private int getAvdFirst()
+        private int getAvdFirstSdk()
         {
             for (int i = 0; i < avdFirstList.Count; i++)
             {
                 if (avdFirstList[i].Checked)
                 {
                     isAvdFirstRun = true;
-                    return i + 1;
+                    return int.Parse(avdFirstList[i].Tag.ToString());
                 }
             }
             isAvdFirstRun = false;
@@ -746,7 +751,7 @@ namespace What
                             {
                                 LogUtil.LogMessage(log, "第一次 直接修改配置 下次启动");
                                 //第一次 直接修改配置 下次启动
-                                startChangeProp(mCurrentAvdNum);
+                                startChangeProp(mCurrentAvdSdk);
                             }
                             else
                             {
@@ -860,8 +865,13 @@ namespace What
                             try
                             {
                                 //改模拟器初始化成功
-                                LogUtil.LogMessage(log, "  " + mCurrentAvdNum + " 模拟器初始化成功 ！");
-                                avdFirstList[mCurrentAvdNum - 1].Checked = false;
+                                LogUtil.LogMessage(log, " sdk 是 " + mCurrentAvdSdk + " 模拟器初始化成功 ！");
+                                for (int i = 0; i < avdFirstList.Count; i++) {
+                                    CheckBox cb = avdFirstList[i];
+                                    if (int.Parse(cb.Tag.ToString()) == mCurrentAvdSdk) {
+                                        cb.Checked = false;
+                                    }
+                                }
 
                                 LogUtil.LogMessage(log, "close vpn");
                                 isVpnConnect = false;
@@ -885,7 +895,7 @@ namespace What
                             closeAvd(mCurrentScreen);
                         }
                         runTimes++;
-                        mCurrentAvdNum = -1;
+                        mCurrentAvdSdk = -1;
 
                     }
                     break;
@@ -1281,10 +1291,10 @@ namespace What
 
         #region 修改模拟参数 imei
         /// <summary>
-        /// 准备修改当前模拟器 的机型参数  通过替换 build.prop文件。 一个循环执行结束的时候会修改机型参数，模拟器第一次启动也会修改机型参数
+        /// 准备修改当前模拟器 对应sdk版本的机型参数  通过替换 build.prop文件。 一个循环执行结束的时候会修改机型参数，模拟器第一次启动也会修改机型参数
         /// </summary>
-        /// <param name="currentAvdNum"></param>
-        private void startChangeProp(int currentAvdNum)
+        /// <param name="currentAvdSdk"></param>
+        private void startChangeProp(int currentAvdSdk)
         {
             //随机一个机型更改本机的参数
             string propPath = "";
@@ -1298,7 +1308,7 @@ namespace What
                     string value = modelDic[key];
 
                     //创建一个新prop文件
-                    propPath = createProp(value, currentAvdNum);
+                    propPath = createProp(value, currentAvdSdk);
                 }
             }
             //用新创建的prop文件 替换掉模拟器的prop文件。 修改 init.androVM.sh 修改IMEI

@@ -1,6 +1,0 @@
-ro.product.model=T8
-ro.product.brand=CUBE
-ro.product.name=T8
-ro.product.device=CUBE
-screen_x_y=720x1280
-sdk_version=17
