@@ -216,12 +216,15 @@ namespace What
         private void initModelList()
         {
             mAllSdkModelDic = new Dictionary<int, Dictionary<string, string>>();
-            Dictionary<string, string> modelDic = new Dictionary<string, string>();
-            string modelFolder = mBasePath + Constant.Folders.MODEL_FOLDER_NAME;
             
+            string modelFolder = mBasePath + Constant.Folders.MODEL_FOLDER_NAME;
+           
+            Dictionary<string, string> modelDic = null;
             string[] dirArray = null;
             //16
             string modelFolder_16 = modelFolder + "\\" + SDK_16;
+
+            modelDic = new Dictionary<string, string>();
             dirArray = Directory.GetFiles(modelFolder_16);
             if (dirArray != null && dirArray.Length > 0)
             {
@@ -234,7 +237,7 @@ namespace What
             }
 
             //17
-            modelDic.Clear();
+            modelDic = new Dictionary<string, string>();
             string modelFolder_17 = modelFolder + "\\" + SDK_17;
             dirArray = Directory.GetFiles(modelFolder_17);
             if (dirArray != null && dirArray.Length > 0)
@@ -248,7 +251,7 @@ namespace What
             }
 
             //18
-            modelDic.Clear();
+            modelDic = new Dictionary<string, string>();
             string modelFolder_18 = modelFolder + "\\" + SDK_18;
             dirArray = Directory.GetFiles(modelFolder_18);
             if (dirArray != null && dirArray.Length > 0)
@@ -262,7 +265,7 @@ namespace What
             }
 
             //19
-            modelDic.Clear();
+            modelDic = new Dictionary<string, string>();
             string modelFolder_19 = modelFolder + "\\" + SDK_19;
             dirArray = Directory.GetFiles(modelFolder_19);
             if (dirArray != null && dirArray.Length > 0)
@@ -335,7 +338,9 @@ namespace What
         //停止按钮点击事件
         private void btnStop_Click(object sender, EventArgs e)
         {
-            callDeleteRandomFile();
+            //创建prop文件
+            //startChangeProp(16);
+
             isStop = !isStop;
         }
 
@@ -458,7 +463,6 @@ namespace What
                                 {
                                     //返回对应的模拟器版本
                                     mCurrentAvdSdk = mAvdList[radmom];
-                                   
                                 }
 
                                 // 该模拟器关键点坐标
