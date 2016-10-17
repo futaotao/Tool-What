@@ -43,6 +43,11 @@
             this.tb3_y = new System.Windows.Forms.TextBox();
             this.tb3_x = new System.Windows.Forms.TextBox();
             this.avd_group = new System.Windows.Forms.GroupBox();
+            this.avdCb4 = new System.Windows.Forms.CheckBox();
+            this.avdCb3 = new System.Windows.Forms.CheckBox();
+            this.avdCb2 = new System.Windows.Forms.CheckBox();
+            this.avdCb1 = new System.Windows.Forms.CheckBox();
+            this.label32 = new System.Windows.Forms.Label();
             this.tb4_sx = new System.Windows.Forms.TextBox();
             this.tb4_y = new System.Windows.Forms.TextBox();
             this.tb4_x = new System.Windows.Forms.TextBox();
@@ -68,9 +73,12 @@
             this.setting_dpi_y = new System.Windows.Forms.TextBox();
             this.setting_dpi_x = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.setting_ok_y = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.setting_ok_x = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.setting_custom_x = new System.Windows.Forms.TextBox();
             this.setting_Y_y = new System.Windows.Forms.TextBox();
@@ -93,14 +101,11 @@
             this.label21 = new System.Windows.Forms.Label();
             this.runAvdPropPath = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
-            this.avdCb1 = new System.Windows.Forms.CheckBox();
-            this.avdCb2 = new System.Windows.Forms.CheckBox();
-            this.avdCb3 = new System.Windows.Forms.CheckBox();
-            this.avdCb4 = new System.Windows.Forms.CheckBox();
-            this.setting_ok_x = new System.Windows.Forms.TextBox();
-            this.setting_ok_y = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
+            this.tb4_sdk = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tb1_sdk = new System.Windows.Forms.TextBox();
+            this.tb3_sdk = new System.Windows.Forms.TextBox();
+            this.tb2_sdk = new System.Windows.Forms.TextBox();
             this.avd_group.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -151,9 +156,9 @@
             // 
             // log
             // 
-            this.log.Location = new System.Drawing.Point(209, 260);
+            this.log.Location = new System.Drawing.Point(209, 265);
             this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(356, 256);
+            this.log.Size = new System.Drawing.Size(356, 251);
             this.log.TabIndex = 10;
             this.log.Text = "";
             // 
@@ -176,48 +181,53 @@
             // 
             // tb1_x
             // 
-            this.tb1_x.Location = new System.Drawing.Point(45, 33);
+            this.tb1_x.Location = new System.Drawing.Point(85, 33);
             this.tb1_x.Name = "tb1_x";
             this.tb1_x.Size = new System.Drawing.Size(38, 21);
             this.tb1_x.TabIndex = 17;
             // 
             // tb1_y
             // 
-            this.tb1_y.Location = new System.Drawing.Point(89, 33);
+            this.tb1_y.Location = new System.Drawing.Point(129, 33);
             this.tb1_y.Name = "tb1_y";
             this.tb1_y.Size = new System.Drawing.Size(38, 21);
             this.tb1_y.TabIndex = 23;
             // 
             // tb2_y
             // 
-            this.tb2_y.Location = new System.Drawing.Point(89, 60);
+            this.tb2_y.Location = new System.Drawing.Point(129, 60);
             this.tb2_y.Name = "tb2_y";
             this.tb2_y.Size = new System.Drawing.Size(38, 21);
             this.tb2_y.TabIndex = 25;
             // 
             // tb2_x
             // 
-            this.tb2_x.Location = new System.Drawing.Point(45, 60);
+            this.tb2_x.Location = new System.Drawing.Point(85, 60);
             this.tb2_x.Name = "tb2_x";
             this.tb2_x.Size = new System.Drawing.Size(38, 21);
             this.tb2_x.TabIndex = 24;
             // 
             // tb3_y
             // 
-            this.tb3_y.Location = new System.Drawing.Point(89, 87);
+            this.tb3_y.Location = new System.Drawing.Point(129, 87);
             this.tb3_y.Name = "tb3_y";
             this.tb3_y.Size = new System.Drawing.Size(38, 21);
             this.tb3_y.TabIndex = 27;
             // 
             // tb3_x
             // 
-            this.tb3_x.Location = new System.Drawing.Point(45, 87);
+            this.tb3_x.Location = new System.Drawing.Point(85, 87);
             this.tb3_x.Name = "tb3_x";
             this.tb3_x.Size = new System.Drawing.Size(38, 21);
             this.tb3_x.TabIndex = 26;
             // 
             // avd_group
             // 
+            this.avd_group.Controls.Add(this.tb4_sdk);
+            this.avd_group.Controls.Add(this.label8);
+            this.avd_group.Controls.Add(this.tb1_sdk);
+            this.avd_group.Controls.Add(this.tb3_sdk);
+            this.avd_group.Controls.Add(this.tb2_sdk);
             this.avd_group.Controls.Add(this.avdCb4);
             this.avd_group.Controls.Add(this.avdCb3);
             this.avd_group.Controls.Add(this.avdCb2);
@@ -240,28 +250,73 @@
             this.avd_group.Controls.Add(this.tb1_y);
             this.avd_group.Location = new System.Drawing.Point(12, 70);
             this.avd_group.Name = "avd_group";
-            this.avd_group.Size = new System.Drawing.Size(180, 189);
+            this.avd_group.Size = new System.Drawing.Size(225, 189);
             this.avd_group.TabIndex = 28;
             this.avd_group.TabStop = false;
             this.avd_group.Text = "AVD";
             // 
+            // avdCb4
+            // 
+            this.avdCb4.AutoSize = true;
+            this.avdCb4.Location = new System.Drawing.Point(15, 117);
+            this.avdCb4.Name = "avdCb4";
+            this.avdCb4.Size = new System.Drawing.Size(15, 14);
+            this.avdCb4.TabIndex = 41;
+            this.avdCb4.UseVisualStyleBackColor = true;
+            // 
+            // avdCb3
+            // 
+            this.avdCb3.AutoSize = true;
+            this.avdCb3.Location = new System.Drawing.Point(15, 90);
+            this.avdCb3.Name = "avdCb3";
+            this.avdCb3.Size = new System.Drawing.Size(15, 14);
+            this.avdCb3.TabIndex = 40;
+            this.avdCb3.UseVisualStyleBackColor = true;
+            // 
+            // avdCb2
+            // 
+            this.avdCb2.AutoSize = true;
+            this.avdCb2.Location = new System.Drawing.Point(15, 63);
+            this.avdCb2.Name = "avdCb2";
+            this.avdCb2.Size = new System.Drawing.Size(15, 14);
+            this.avdCb2.TabIndex = 39;
+            this.avdCb2.UseVisualStyleBackColor = true;
+            // 
+            // avdCb1
+            // 
+            this.avdCb1.AutoSize = true;
+            this.avdCb1.Location = new System.Drawing.Point(15, 36);
+            this.avdCb1.Name = "avdCb1";
+            this.avdCb1.Size = new System.Drawing.Size(15, 14);
+            this.avdCb1.TabIndex = 38;
+            this.avdCb1.UseVisualStyleBackColor = true;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(6, 18);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(35, 12);
+            this.label32.TabIndex = 37;
+            this.label32.Text = "first";
+            // 
             // tb4_sx
             // 
-            this.tb4_sx.Location = new System.Drawing.Point(133, 114);
+            this.tb4_sx.Location = new System.Drawing.Point(173, 114);
             this.tb4_sx.Name = "tb4_sx";
             this.tb4_sx.Size = new System.Drawing.Size(38, 21);
             this.tb4_sx.TabIndex = 36;
             // 
             // tb4_y
             // 
-            this.tb4_y.Location = new System.Drawing.Point(89, 114);
+            this.tb4_y.Location = new System.Drawing.Point(129, 114);
             this.tb4_y.Name = "tb4_y";
             this.tb4_y.Size = new System.Drawing.Size(38, 21);
             this.tb4_y.TabIndex = 35;
             // 
             // tb4_x
             // 
-            this.tb4_x.Location = new System.Drawing.Point(45, 114);
+            this.tb4_x.Location = new System.Drawing.Point(85, 114);
             this.tb4_x.Name = "tb4_x";
             this.tb4_x.Size = new System.Drawing.Size(38, 21);
             this.tb4_x.TabIndex = 34;
@@ -269,7 +324,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(140, 18);
+            this.label22.Location = new System.Drawing.Point(180, 18);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(23, 12);
             this.label22.TabIndex = 33;
@@ -277,21 +332,21 @@
             // 
             // tb3_sx
             // 
-            this.tb3_sx.Location = new System.Drawing.Point(133, 87);
+            this.tb3_sx.Location = new System.Drawing.Point(173, 87);
             this.tb3_sx.Name = "tb3_sx";
             this.tb3_sx.Size = new System.Drawing.Size(38, 21);
             this.tb3_sx.TabIndex = 32;
             // 
             // tb2_sx
             // 
-            this.tb2_sx.Location = new System.Drawing.Point(133, 60);
+            this.tb2_sx.Location = new System.Drawing.Point(173, 60);
             this.tb2_sx.Name = "tb2_sx";
             this.tb2_sx.Size = new System.Drawing.Size(38, 21);
             this.tb2_sx.TabIndex = 31;
             // 
             // tb1_sx
             // 
-            this.tb1_sx.Location = new System.Drawing.Point(133, 33);
+            this.tb1_sx.Location = new System.Drawing.Point(173, 33);
             this.tb1_sx.Name = "tb1_sx";
             this.tb1_sx.Size = new System.Drawing.Size(38, 21);
             this.tb1_sx.TabIndex = 30;
@@ -299,7 +354,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(103, 18);
+            this.label6.Location = new System.Drawing.Point(143, 18);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(11, 12);
             this.label6.TabIndex = 29;
@@ -308,7 +363,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(59, 17);
+            this.label4.Location = new System.Drawing.Point(99, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(11, 12);
             this.label4.TabIndex = 28;
@@ -467,6 +522,22 @@
             this.label19.TabIndex = 37;
             this.label19.Text = "Y";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 232);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(17, 12);
+            this.label20.TabIndex = 40;
+            this.label20.Text = "OK";
+            // 
+            // setting_ok_y
+            // 
+            this.setting_ok_y.Location = new System.Drawing.Point(111, 223);
+            this.setting_ok_y.Name = "setting_ok_y";
+            this.setting_ok_y.Size = new System.Drawing.Size(45, 21);
+            this.setting_ok_y.TabIndex = 39;
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -493,6 +564,13 @@
             this.label5.Size = new System.Drawing.Size(11, 12);
             this.label5.TabIndex = 29;
             this.label5.Text = "y";
+            // 
+            // setting_ok_x
+            // 
+            this.setting_ok_x.Location = new System.Drawing.Point(60, 223);
+            this.setting_ok_x.Name = "setting_ok_x";
+            this.setting_ok_x.Size = new System.Drawing.Size(45, 21);
+            this.setting_ok_x.TabIndex = 38;
             // 
             // label7
             // 
@@ -688,73 +766,42 @@
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // label32
+            // tb4_sdk
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(6, 18);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(35, 12);
-            this.label32.TabIndex = 37;
-            this.label32.Text = "first";
+            this.tb4_sdk.Location = new System.Drawing.Point(42, 114);
+            this.tb4_sdk.Name = "tb4_sdk";
+            this.tb4_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb4_sdk.TabIndex = 46;
             // 
-            // avdCb1
+            // label8
             // 
-            this.avdCb1.AutoSize = true;
-            this.avdCb1.Location = new System.Drawing.Point(15, 36);
-            this.avdCb1.Name = "avdCb1";
-            this.avdCb1.Size = new System.Drawing.Size(15, 14);
-            this.avdCb1.TabIndex = 38;
-            this.avdCb1.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(50, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(23, 12);
+            this.label8.TabIndex = 45;
+            this.label8.Text = "sdk";
             // 
-            // avdCb2
+            // tb1_sdk
             // 
-            this.avdCb2.AutoSize = true;
-            this.avdCb2.Location = new System.Drawing.Point(15, 63);
-            this.avdCb2.Name = "avdCb2";
-            this.avdCb2.Size = new System.Drawing.Size(15, 14);
-            this.avdCb2.TabIndex = 39;
-            this.avdCb2.UseVisualStyleBackColor = true;
+            this.tb1_sdk.Location = new System.Drawing.Point(42, 33);
+            this.tb1_sdk.Name = "tb1_sdk";
+            this.tb1_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb1_sdk.TabIndex = 42;
             // 
-            // avdCb3
+            // tb3_sdk
             // 
-            this.avdCb3.AutoSize = true;
-            this.avdCb3.Location = new System.Drawing.Point(15, 90);
-            this.avdCb3.Name = "avdCb3";
-            this.avdCb3.Size = new System.Drawing.Size(15, 14);
-            this.avdCb3.TabIndex = 40;
-            this.avdCb3.UseVisualStyleBackColor = true;
+            this.tb3_sdk.Location = new System.Drawing.Point(42, 87);
+            this.tb3_sdk.Name = "tb3_sdk";
+            this.tb3_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb3_sdk.TabIndex = 44;
             // 
-            // avdCb4
+            // tb2_sdk
             // 
-            this.avdCb4.AutoSize = true;
-            this.avdCb4.Location = new System.Drawing.Point(15, 117);
-            this.avdCb4.Name = "avdCb4";
-            this.avdCb4.Size = new System.Drawing.Size(15, 14);
-            this.avdCb4.TabIndex = 41;
-            this.avdCb4.UseVisualStyleBackColor = true;
-            // 
-            // setting_ok_x
-            // 
-            this.setting_ok_x.Location = new System.Drawing.Point(60, 223);
-            this.setting_ok_x.Name = "setting_ok_x";
-            this.setting_ok_x.Size = new System.Drawing.Size(45, 21);
-            this.setting_ok_x.TabIndex = 38;
-            // 
-            // setting_ok_y
-            // 
-            this.setting_ok_y.Location = new System.Drawing.Point(111, 223);
-            this.setting_ok_y.Name = "setting_ok_y";
-            this.setting_ok_y.Size = new System.Drawing.Size(45, 21);
-            this.setting_ok_y.TabIndex = 39;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(13, 232);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(17, 12);
-            this.label20.TabIndex = 40;
-            this.label20.Text = "OK";
+            this.tb2_sdk.Location = new System.Drawing.Point(42, 60);
+            this.tb2_sdk.Name = "tb2_sdk";
+            this.tb2_sdk.Size = new System.Drawing.Size(38, 21);
+            this.tb2_sdk.TabIndex = 43;
             // 
             // What
             // 
@@ -864,6 +911,11 @@
         private System.Windows.Forms.TextBox setting_ok_x;
         private System.Windows.Forms.TextBox setting_ok_y;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tb4_sdk;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox tb1_sdk;
+        private System.Windows.Forms.TextBox tb3_sdk;
+        private System.Windows.Forms.TextBox tb2_sdk;
     }
 }
 

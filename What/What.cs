@@ -18,6 +18,11 @@ namespace What
 {
     public partial class What : Form, OnProcessListener
     {
+        //当前支持sdk版本
+        private const int SDK_16 = 16;
+        private const int SDK_17 = 17;
+        private const int SDK_18 = 18;
+        private const int SDK_19 = 19;
 
         //所有配置文件的根路径
         private static String mBasePath = "";
@@ -39,15 +44,15 @@ namespace What
 
 
         // avd的数量
-        private static List<int> avdList = null;
+        private static List<int> mAvdList = null;
         // 启动avd 的x坐标
-        private static Dictionary<int, int> positionXDic = null;
+        private static Dictionary<int, int> mPositionXDic = null;
         // 启动avd 设置的x的坐标
-        private static Dictionary<int, int> positionSXDic = null;
+        private static Dictionary<int, int> mPositionSXDic = null;
         // 启动avd 的y坐标
-        private static Dictionary<int, int> positionYDic = null;
+        private static Dictionary<int, int> mPositionYDic = null;
         // 标记模拟器是否是第一次运行
-        private static List<CheckBox> avdFirstList = null;
+        private static List<CheckBox> mAvdFirstList = null;
 
         // 新建avd 第一次启动
         private static bool isAvdFirstRun = false;
@@ -66,11 +71,11 @@ namespace What
         //private static int uninstallSuccess = 0;
         #endregion
 
-        //模拟的全部机型
-        private static Dictionary<string, string> modelDic = null;
+        //所有sdk版本全部机型参数
+        private static Dictionary<int, Dictionary<string, string>> mAllSdkModelDic = null;
 
         //循环执行的线程
-        private Thread runThread = null;
+        private Thread mRunThread = null;
 
         //当前设备连接的状态
         private static bool isLaunching = false;//模拟器是否正在启动
@@ -78,7 +83,7 @@ namespace What
         private static bool isConnected = false;//模拟器是否已经连接
 
         //循环执行次数
-        private static int runTimes = 0;
+        private static int mRunTimes = 0;
 
         // 当前准备启动的模拟器的sdk版本，暂支持16,17,18,19 
         private static int mCurrentAvdSdk = -1;
@@ -86,10 +91,9 @@ namespace What
 
 
         // 每次启动开刷的时间
-        private static String shuaBeginTime = "";
-
+        private static String mShuaBeginTime = "";
         //每次循环刷的时间间隔  单位：秒
-        private static int shuaInterval = 30;
+        private static int mShuaInterval = 30;
 
 
         // 随机启动一个 avd
@@ -110,17 +114,19 @@ namespace What
 
 
 
-        //每次安装的时间  如果两分钟内没有安装成功 关闭
-        private static String installBeginTime = "";
-        private static int installTime = 120;
+        //每次安装的时间  如果在安装超时时间内没有安装成功 关闭
+        private static String mInstallBeginTime = "";
+        //安装超时时间 单位：秒
+        private static int mInstallTime = 120;
         //判断是否 已经开始安装
         private static bool isInstalled = false;
 
 
 
-        //每次启动联网的时间  如果两分钟内没有启动联网 关闭
-        private static String changeNetBeginTime = "";
-        private static int changeNetTime = 120;
+        //每次启动联网的时间  如果在联网超时时间内没有启动联网 关闭
+        private static String mChangeNetBeginTime = "";
+        //联网超时时间 单位：秒
+        private static int mChangeNetTime = 120;
         //判断是否 已经开始连接vpn
         private static bool isStartChangeNet = false;
 
@@ -151,21 +157,25 @@ namespace What
             int interval = 40;
 
             //模拟器一
+            tb1_sdk.Text = SDK_16.ToString();
             tb1_x.Text = "200";
             tb1_y.Text = first.ToString();
             tb1_sx.Text = "683";
 
             //模拟器二
+            tb2_sdk.Text = SDK_17.ToString();
             tb2_x.Text = "200";
             tb2_y.Text = (first + interval * 1).ToString();
             tb2_sx.Text = "683";
 
             //模拟器三
+            tb3_sdk.Text = SDK_18.ToString();
             tb3_x.Text = "200";
             tb3_y.Text = (first + interval * 2).ToString();
             tb3_sx.Text = "683";
 
             //模拟器四
+            tb4_sdk.Text = SDK_19.ToString();
             tb4_x.Text = "200";
             tb4_y.Text = (first + interval * 3).ToString();
             tb4_sx.Text = "683";
@@ -197,7 +207,7 @@ namespace What
 
             initAvdList();
 
-            runThread = new Thread(run);
+            mRunThread = new Thread(run);
         }
 
 
@@ -205,9 +215,14 @@ namespace What
         //初始化所有现有的模拟器参数文件
         private void initModelList()
         {
-            modelDic = new Dictionary<string, string>();
-            string baseFolderPath = mBasePath + Constant.Folders.MODEL_FOLDER_NAME;
-            string[] dirArray = Directory.GetFiles(baseFolderPath);
+            mAllSdkModelDic = new Dictionary<int, Dictionary<string, string>>();
+            Dictionary<string, string> modelDic = new Dictionary<string, string>();
+            string modelFolder = mBasePath + Constant.Folders.MODEL_FOLDER_NAME;
+            
+            string[] dirArray = null;
+            //16
+            string modelFolder_16 = modelFolder + "\\" + SDK_16;
+            dirArray = Directory.GetFiles(modelFolder_16);
             if (dirArray != null && dirArray.Length > 0)
             {
                 foreach (string path in dirArray)
@@ -215,54 +230,103 @@ namespace What
                     string model = path.Substring(path.LastIndexOf("\\") + 1);
                     modelDic.Add(model, path);
                 }
+                mAllSdkModelDic.Add(SDK_16, modelDic);
+            }
+
+            //17
+            modelDic.Clear();
+            string modelFolder_17 = modelFolder + "\\" + SDK_17;
+            dirArray = Directory.GetFiles(modelFolder_17);
+            if (dirArray != null && dirArray.Length > 0)
+            {
+                foreach (string path in dirArray)
+                {
+                    string model = path.Substring(path.LastIndexOf("\\") + 1);
+                    modelDic.Add(model, path);
+                }
+                mAllSdkModelDic.Add(SDK_17, modelDic);
+            }
+
+            //18
+            modelDic.Clear();
+            string modelFolder_18 = modelFolder + "\\" + SDK_18;
+            dirArray = Directory.GetFiles(modelFolder_18);
+            if (dirArray != null && dirArray.Length > 0)
+            {
+                foreach (string path in dirArray)
+                {
+                    string model = path.Substring(path.LastIndexOf("\\") + 1);
+                    modelDic.Add(model, path);
+                }
+                mAllSdkModelDic.Add(SDK_18, modelDic);
+            }
+
+            //19
+            modelDic.Clear();
+            string modelFolder_19 = modelFolder + "\\" + SDK_19;
+            dirArray = Directory.GetFiles(modelFolder_19);
+            if (dirArray != null && dirArray.Length > 0)
+            {
+                foreach (string path in dirArray)
+                {
+                    string model = path.Substring(path.LastIndexOf("\\") + 1);
+                    modelDic.Add(model, path);
+                }
+                mAllSdkModelDic.Add(SDK_19, modelDic);
             }
         }
 
         //初始化 Genymotion 上 模拟器坐标
         private void initAvdList()
         {
-            avdList = new List<int>();
-            positionXDic = new Dictionary<int, int>();
-            positionSXDic = new Dictionary<int, int>();
-            positionYDic = new Dictionary<int, int>();
-            avdFirstList = new List<CheckBox>();
+            mAvdList = new List<int>();
+            mPositionXDic = new Dictionary<int, int>();
+            mPositionSXDic = new Dictionary<int, int>();
+            mPositionYDic = new Dictionary<int, int>();
+            mAvdFirstList = new List<CheckBox>();
+            int sdk = -1;
             if (!tb1_x.Text.Trim().Equals("") && !tb1_y.Text.Trim().Equals("") && !tb1_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(16);
-                positionXDic.Add(16, int.Parse(tb1_x.Text));
-                positionSXDic.Add(16, int.Parse(tb1_sx.Text));
-                positionYDic.Add(16, int.Parse(tb1_y.Text));
-                avdCb1.Tag = 16;
-                avdFirstList.Add(avdCb1);
+
+                sdk = int.Parse(tb1_sdk.Text);
+                mAvdList.Add(sdk);
+                mPositionXDic.Add(sdk, int.Parse(tb1_x.Text));
+                mPositionSXDic.Add(sdk, int.Parse(tb1_sx.Text));
+                mPositionYDic.Add(sdk, int.Parse(tb1_y.Text));
+                avdCb1.Tag = sdk;
+                mAvdFirstList.Add(avdCb1);
             }
             if (!tb2_x.Text.Trim().Equals("") && !tb2_y.Text.Trim().Equals("") && !tb2_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(17);
-                positionXDic.Add(17, int.Parse(tb2_x.Text));
-                positionSXDic.Add(17, int.Parse(tb2_sx.Text));
-                positionYDic.Add(17, int.Parse(tb2_y.Text));
-                avdCb2.Tag = 17;
-                avdFirstList.Add(avdCb2);
+                sdk = int.Parse(tb2_sdk.Text);
+                mAvdList.Add(sdk);
+                mPositionXDic.Add(sdk, int.Parse(tb2_x.Text));
+                mPositionSXDic.Add(sdk, int.Parse(tb2_sx.Text));
+                mPositionYDic.Add(sdk, int.Parse(tb2_y.Text));
+                avdCb2.Tag = sdk;
+                mAvdFirstList.Add(avdCb2);
             }
 
             if (!tb3_x.Text.Trim().Equals("") && !tb3_y.Text.Trim().Equals("") && !tb3_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(18);
-                positionXDic.Add(18, int.Parse(tb3_x.Text));
-                positionSXDic.Add(18, int.Parse(tb3_sx.Text));
-                positionYDic.Add(18, int.Parse(tb3_y.Text));
-                avdCb3.Tag = 18;
-                avdFirstList.Add(avdCb3);
+                sdk = int.Parse(tb3_sdk.Text);
+                mAvdList.Add(sdk);
+                mPositionXDic.Add(sdk, int.Parse(tb3_x.Text));
+                mPositionSXDic.Add(sdk, int.Parse(tb3_sx.Text));
+                mPositionYDic.Add(sdk, int.Parse(tb3_y.Text));
+                avdCb3.Tag = sdk;
+                mAvdFirstList.Add(avdCb3);
             }
 
             if (!tb4_x.Text.Trim().Equals("") && !tb4_y.Text.Trim().Equals("") && !tb4_sx.Text.Trim().Equals(""))
             {
-                avdList.Add(19);
-                positionXDic.Add(19, int.Parse(tb4_x.Text));
-                positionSXDic.Add(19, int.Parse(tb4_sx.Text));
-                positionYDic.Add(19, int.Parse(tb4_y.Text));
-                avdCb4.Tag = 19;
-                avdFirstList.Add(avdCb4);
+                sdk = int.Parse(tb4_sdk.Text);
+                mAvdList.Add(sdk);
+                mPositionXDic.Add(sdk, int.Parse(tb4_x.Text));
+                mPositionSXDic.Add(sdk, int.Parse(tb4_sx.Text));
+                mPositionYDic.Add(sdk, int.Parse(tb4_y.Text));
+                avdCb4.Tag = sdk;
+                mAvdFirstList.Add(avdCb4);
             }
         }
         #endregion
@@ -286,9 +350,9 @@ namespace What
 
 
 
-            if (runThread != null)
+            if (mRunThread != null)
             {
-                runThread.Start();
+                mRunThread.Start();
             }
 
 
@@ -307,17 +371,17 @@ namespace What
                 //当前时间
                 timeLabel.Text = DateTime.Now.Hour + ":" + DateTime.Now.Minute;
                 //循环次数
-                countLabel.Text = runTimes + "";
+                countLabel.Text = mRunTimes + "";
 
                 if (!isStop)
                 {
 
                     //判断时间间隔  如果超过刷的时间， 修改模拟器参数后 关闭模拟器，进行下一次循环
-                    if (Util.getTimeInterval(shuaBeginTime, DateTime.Now) >= shuaInterval)
+                    if (Util.getTimeInterval(mShuaBeginTime, DateTime.Now) >= mShuaInterval)
                     {
                         //正常循环
                         LogUtil.LogMessage(log, "脚本执行时间到 开始修改参数： " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                        shuaBeginTime = "";
+                        mShuaBeginTime = "";
 
                         //获取安装的包 并清除数据
                         LogUtil.LogMessage(log, "修改机型信息。。");
@@ -336,7 +400,7 @@ namespace What
                     }
 
                     //判断安装测试apk是否超时， 如果超时（说明模拟器启动有问题）关闭模拟器！进入下一次循环
-                    if (Util.getTimeInterval(installBeginTime, DateTime.Now) >= installTime && !isInstalled)
+                    if (Util.getTimeInterval(mInstallBeginTime, DateTime.Now) >= mInstallTime && !isInstalled)
                     {
                         //非正常情况
                         LogUtil.LogMessage(log, "******成功检测一次 没有启动安装*****");
@@ -344,20 +408,20 @@ namespace What
                         //playMusic(tipMusicPath);
 
                         //关闭此次循环
-                        shuaBeginTime = "";
+                        mShuaBeginTime = "";
                         closeAvd(mCurrentScreen);
                     }
 
                     //判断联网是否超时，     如果超时关闭模拟器！进入下一次循环
-                    if (Util.getTimeInterval(changeNetBeginTime, DateTime.Now) >= changeNetTime && isStartChangeNet)
+                    if (Util.getTimeInterval(mChangeNetBeginTime, DateTime.Now) >= mChangeNetTime && isStartChangeNet)
                     {
                         //如果启动了联网， 且两分钟内没有结果
                         LogUtil.LogMessage(log, "******成功检测一次 联网超时的情况*****");
 
-                        changeNetBeginTime = "";
+                        mChangeNetBeginTime = "";
 
                         //关闭此次循环
-                        shuaBeginTime = "";
+                        mShuaBeginTime = "";
                         closeAvd(mCurrentScreen);
                     }
 
@@ -380,10 +444,10 @@ namespace What
                             isShowNotRead();
                             closeAdb();
 
-                            if (avdList != null && avdList.Count > 0)
+                            if (mAvdList != null && mAvdList.Count > 0)
                             {
                                 //随机选择一个模拟器    
-                                int radmom = getRadmomVal(avdList.Count);
+                                int radmom = getRadmomVal(mAvdList.Count);
                                 //如果有第一次运行的
                                 int firstAvdSdk = getAvdFirstSdk();
                                 if (firstAvdSdk != -1)
@@ -393,14 +457,14 @@ namespace What
                                 else
                                 {
                                     //返回对应的模拟器版本
-                                    mCurrentAvdSdk = avdList[radmom];
-                                    mCurrentAvdSdk = 2;
+                                    mCurrentAvdSdk = mAvdList[radmom];
+                                   
                                 }
 
                                 // 该模拟器关键点坐标
-                                mTapX = positionXDic[mCurrentAvdSdk];
-                                mTapSX = positionSXDic[mCurrentAvdSdk];
-                                mTapY = positionYDic[mCurrentAvdSdk];
+                                mTapX = mPositionXDic[mCurrentAvdSdk];
+                                mTapSX = mPositionSXDic[mCurrentAvdSdk];
+                                mTapY = mPositionYDic[mCurrentAvdSdk];
 
                                 //该模拟器的机型参数     机型分辨率 需要在模拟器启动之前提前设置
                                 string avdPropPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdSdk + ".txt";
@@ -497,12 +561,12 @@ namespace What
         /// <returns></returns>
         private int getAvdFirstSdk()
         {
-            for (int i = 0; i < avdFirstList.Count; i++)
+            for (int i = 0; i < mAvdFirstList.Count; i++)
             {
-                if (avdFirstList[i].Checked)
+                if (mAvdFirstList[i].Checked)
                 {
                     isAvdFirstRun = true;
-                    return int.Parse(avdFirstList[i].Tag.ToString());
+                    return int.Parse(mAvdFirstList[i].Tag.ToString());
                 }
             }
             isAvdFirstRun = false;
@@ -537,7 +601,7 @@ namespace What
                         LogUtil.LogMessage(log, content);
                         //标记 vpn连接 结束
                         isStartChangeNet = false;
-                        changeNetBeginTime = "";
+                        mChangeNetBeginTime = "";
 
                         if (content.Contains("已连接") || content.Contains("已经连接"))
                         {
@@ -744,7 +808,7 @@ namespace What
                         else if (content.ToLower().Contains("success"))
                         {
                             isInstalled = true;
-                            installBeginTime = "";
+                            mInstallBeginTime = "";
                             LogUtil.LogMessage(log, "--等待-- 启动脚本");
 
                             if (isAvdFirstRun)
@@ -866,8 +930,8 @@ namespace What
                             {
                                 //改模拟器初始化成功
                                 LogUtil.LogMessage(log, " sdk 是 " + mCurrentAvdSdk + " 模拟器初始化成功 ！");
-                                for (int i = 0; i < avdFirstList.Count; i++) {
-                                    CheckBox cb = avdFirstList[i];
+                                for (int i = 0; i < mAvdFirstList.Count; i++) {
+                                    CheckBox cb = mAvdFirstList[i];
                                     if (int.Parse(cb.Tag.ToString()) == mCurrentAvdSdk) {
                                         cb.Checked = false;
                                     }
@@ -894,7 +958,7 @@ namespace What
                             Thread.Sleep(2000);
                             closeAvd(mCurrentScreen);
                         }
-                        runTimes++;
+                        mRunTimes++;
                         mCurrentAvdSdk = -1;
 
                     }
@@ -1091,7 +1155,7 @@ namespace What
             LogUtil.LogMessage(log, "-----changeNet----------" + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             //标记开始 连接vpn
             isStartChangeNet = true;
-            changeNetBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            mChangeNetBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "1601008431", "123456", this);
         }
 
@@ -1173,7 +1237,7 @@ namespace What
             LogUtil.LogMessage(log, "Devices:" + mDevice + "\n Install:" + apkPath + "\n " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             isInstalled = false;
 
-            installBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            mInstallBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             LogUtil.LogMessage(log, "3秒安装一次 避免太频繁！");
             Thread.Sleep(3000);
@@ -1270,7 +1334,7 @@ namespace What
                 LogUtil.LogMessage(log, "启动脚本成功  " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 // 刷的时间 计时开始
-                shuaBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                mShuaBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             }
             else
@@ -1298,13 +1362,14 @@ namespace What
         {
             //随机一个机型更改本机的参数
             string propPath = "";
+            Dictionary<string, string> modelDic = mAllSdkModelDic[currentAvdSdk];
             if (modelDic != null && modelDic.Count > 0)
             {
-                int radom = getRadmomVal(modelDic.Count - 1);
+                int random = getRadmomVal(modelDic.Count - 1);
                 List<string> keyList = new List<string>(modelDic.Keys);
-                if (keyList.Count > radom)
+                if (keyList.Count > random)
                 {
-                    string key = keyList[radom];
+                    string key = keyList[random];
                     string value = modelDic[key];
 
                     //创建一个新prop文件
@@ -1320,9 +1385,9 @@ namespace What
         /// 根据sdk版本 去获取对应版本的build.prop模板
         /// </summary>
         /// <param name="modelPath">model的文件路径</param>
-        /// <param name="currentAvdNum">当前启动的avd</param>
+        /// <param name="currentAvdSdk">当前启动的avd sdk版本</param>
         /// <returns></returns>
-        private string createProp(String modelPath, int currentAvdNum)
+        private string createProp(String modelPath, int currentAvdSdk)
         {
 
             string tempPath = mBasePath + Constant.Folders.TEMP_FOLDER_NAME;
@@ -1330,12 +1395,12 @@ namespace What
             {
 
                 string modelName = modelPath.Substring(modelPath.LastIndexOf("\\") + 1);
-                //temp文件夹存放各个model 的地方
-                string modelFolder = tempPath + "\\" + modelName;
+                //temp文件夹存放不同sdk版本model 的地方
+                string modelFolder = tempPath + "\\" + currentAvdSdk + "\\" + modelName;
 
                 if (Directory.Exists(modelFolder))
                 {
-                    if (saveAvdProperty(modelPath, currentAvdNum))
+                    if (saveAvdProperty(modelPath, currentAvdSdk))
                     {
                         return modelFolder + "\\" + "build.prop";
                     }
@@ -1346,12 +1411,12 @@ namespace What
                     Directory.CreateDirectory(modelFolder);
 
                     Dictionary<string, string> propDic = readProperty(modelPath);
-                    int sdk = int.Parse(propDic["sdk_version"]);
                     //根据sdk版本  获取对应版本的 模板文件复制到temp里 等待修改
-                    string sdkPath = mBasePath + Constant.Folders.SDK_FOLDER_NAME + "\\" + sdk + "\\" + "build.prop";
+                    string sdkPath = mBasePath + Constant.Folders.SDK_FOLDER_NAME + "\\" + currentAvdSdk + "\\" + "build.prop";
                     File.Copy(sdkPath, modelFolder + "\\" + "build.prop");
                     //开始修改机型参数， 并保存起来方便后面用到的时候获取
-                    if (changeProp(propDic, modelFolder + "\\" + "build.prop") && saveAvdProperty(modelPath, currentAvdNum))
+                    //TODO
+                    if (changeProp(propDic, modelFolder + "\\" + "build.prop") && saveAvdProperty(modelPath, currentAvdSdk))
                     {
                         return modelFolder + "\\" + "build.prop";
                     }
@@ -1394,12 +1459,12 @@ namespace What
         /// <summary>
         /// 保存已经修改的模拟器的相关参数。下次启动的时候 可以获取到。
         /// </summary>
-        /// <param name="currentAvdNum"></param>
+        /// <param name="currentAvdSdk"></param>
         /// <param name="modelPath"></param>
         /// <returns></returns>
-        private bool saveAvdProperty(String modelPath, int currentAvdNum)
+        private bool saveAvdProperty(String modelPath, int currentAvdSdk)
         {
-            string propPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + currentAvdNum + ".txt";
+            string propPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + currentAvdSdk + ".txt";
             try
             {
                 if (File.Exists(propPath))
@@ -1671,9 +1736,9 @@ namespace What
 
             LogUtil.LogMessage(log, "closeAvd");
 
-            shuaBeginTime = "";
-            changeNetBeginTime = "";
-            installBeginTime = "";
+            mShuaBeginTime = "";
+            mChangeNetBeginTime = "";
+            mInstallBeginTime = "";
 
             isLaunching = false;
             isVpnConnect = false;
