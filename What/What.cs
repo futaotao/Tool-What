@@ -18,6 +18,8 @@ namespace What
 {
     public partial class What : Form, OnProcessListener
     {
+        private const string VPN_NAME = "hh921";
+        private const String VPN_PASSWORD = "1120";
         //当前支持sdk版本
         private const int SDK_16 = 16;
         private const int SDK_17 = 17;
@@ -93,7 +95,7 @@ namespace What
         // 每次启动开刷的时间
         private static String mShuaBeginTime = "";
         //每次循环刷的时间间隔  单位：秒
-        private static int mShuaInterval = 30;
+        private static int mShuaInterval = 147;
 
 
         // 随机启动一个 avd
@@ -163,7 +165,7 @@ namespace What
             tb1_sx.Text = "683";
 
             //模拟器二
-            tb2_sdk.Text = SDK_19.ToString();
+            tb2_sdk.Text = SDK_17.ToString();
             tb2_x.Text = "200";
             tb2_y.Text = (first + interval * 1).ToString();
             tb2_sx.Text = "683";
@@ -175,7 +177,7 @@ namespace What
             tb3_sx.Text = "683";
 
             //模拟器四
-            tb4_sdk.Text = SDK_17.ToString();
+            tb4_sdk.Text = SDK_19.ToString();
             tb4_x.Text = "200";
             tb4_y.Text = (first + interval * 3).ToString();
             tb4_sx.Text = "683";
@@ -216,9 +218,9 @@ namespace What
         private void initModelList()
         {
             mAllSdkModelDic = new Dictionary<int, Dictionary<string, string>>();
-            
+
             string modelFolder = mBasePath + Constant.Folders.MODEL_FOLDER_NAME;
-           
+
             Dictionary<string, string> modelDic = null;
             string[] dirArray = null;
             //16
@@ -463,6 +465,7 @@ namespace What
                                 {
                                     //返回对应的模拟器版本
                                     mCurrentAvdSdk = mAvdList[radmom];
+
                                 }
 
                                 // 该模拟器关键点坐标
@@ -934,9 +937,11 @@ namespace What
                             {
                                 //改模拟器初始化成功
                                 LogUtil.LogMessage(log, " sdk 是 " + mCurrentAvdSdk + " 模拟器初始化成功 ！");
-                                for (int i = 0; i < mAvdFirstList.Count; i++) {
+                                for (int i = 0; i < mAvdFirstList.Count; i++)
+                                {
                                     CheckBox cb = mAvdFirstList[i];
-                                    if (int.Parse(cb.Tag.ToString()) == mCurrentAvdSdk) {
+                                    if (int.Parse(cb.Tag.ToString()) == mCurrentAvdSdk)
+                                    {
                                         cb.Checked = false;
                                     }
                                 }
@@ -1160,7 +1165,7 @@ namespace What
             //标记开始 连接vpn
             isStartChangeNet = true;
             mChangeNetBeginTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", "1601008431", "123456", this);
+            Util.callConnectVpn(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.VPN_C_BAT_NAME, "VPN", VPN_NAME, VPN_PASSWORD, this);
         }
 
         /// <summary>
