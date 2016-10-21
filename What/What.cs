@@ -887,6 +887,46 @@ namespace What
                     break;
                 #endregion
 
+                #region 从模拟器pull出 按键精灵生成的share文件
+                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN:
+                    if (Util.myThread != null)
+                    {
+                        List<String> logList = Util.myThread.getLog();
+                        String content = "";
+                        if (logList != null && logList.Count > 0)
+                        {
+                            foreach (String logs in logList)
+                            {
+                                content = content + logs;
+                            }
+                        }
+
+                        LogUtil.LogMessage(log, "Pull:" + content);
+
+                        if (content.Contains("not exist"))
+                        {
+                            LogUtil.LogMessage(log, "按键精灵生成share已经删除成功！");
+                            //说明按键精灵生成share文件已经删除成功
+
+                            LogUtil.LogMessage(log, "延迟 2s ....关闭模拟器");
+                            Thread.Sleep(2000);
+                            closeAvd(mCurrentScreen);
+
+                            mRunTimes++;
+                            mCurrentAvdSdk = -1;
+                        }
+                        else
+                        {
+                            // 说明按键精灵生成的share文件删除失败
+                            LogUtil.LogMessage(log, "继续删除 Xprivacy 生成的随机值 和 按键精灵生成share文件！");
+                            callDeleteRandomFile();
+                        }
+
+                    }
+                    break;
+                #endregion
+
+
                 #region 修改机型参数
                 case Constant.ProcessType.TYPE_OF_PROCESS_CHANGE_PROP:
 
@@ -908,14 +948,14 @@ namespace What
                         }
                         else
                         {
-                            LogUtil.LogMessage(log, "-----change prop success ！ 准备删除 Xprivacy 生成的随机值！----------");
+                            LogUtil.LogMessage(log, "change prop success ！ 准备删除 Xprivacy 生成的随机值 和 按键精灵生成share文件！");
                             callDeleteRandomFile();
                         }
                     }
                     break;
                 #endregion
 
-                #region 删除Xprivacy生成的随机值文件的回调
+                #region 删除Xprivacy生成的随机值文件 以及 删除 按键精灵生成的share文件 的回调 
                 case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM:
                     if (Util.myThread != null)
                     {
@@ -963,13 +1003,12 @@ namespace What
                         }
                         else
                         {
-                            LogUtil.LogMessage(log, "延迟 2s ....关闭模拟器");
-                            Thread.Sleep(2000);
-                            closeAvd(mCurrentScreen);
-                        }
-                        mRunTimes++;
-                        mCurrentAvdSdk = -1;
 
+                            LogUtil.LogMessage(log, "判断按键精灵生成的 share 文件是否 删除成功？？");
+                            //判断按键精灵生成的文件还在否？
+                            callPullAnjianFile();                   
+                        }
+                      
                     }
                     break;
                 #endregion
@@ -1299,8 +1338,8 @@ namespace What
         /// </summary>
         private void callPullRandomFile()
         {
-            LogUtil.LogMessage(log, "callPullRandomFile 时间间隔3s");
-            Thread.Sleep(3000);
+            LogUtil.LogMessage(log, "callPullRandomFile 时间间隔2s");
+            Thread.Sleep(2000);
             Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
@@ -1317,6 +1356,15 @@ namespace What
                 reader.Close();
                 xprivacyLabel.Text = content;
             }
+        }
+
+        /// <summary>
+        /// 从模拟器中 pull出 按键精灵生成的share文件
+        /// </summary>
+        private void callPullAnjianFile() {
+            LogUtil.LogMessage(log, "callPullAnjianFile 时间间隔2s");
+            Thread.Sleep(2000);
+            Util.callPullAnjianFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_ANJIAN_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
         /// <summary>

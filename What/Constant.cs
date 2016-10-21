@@ -70,6 +70,8 @@ namespace What
 
             //从模拟器中 pull出Xprivacy生成的随机值文件
             public const String PULL_RANDOM_BAT_NAME = "pull_random.bat";
+            //从模拟器中 pull出键精灵v3.1.2 生成的 保存悬浮窗坐标的文件
+            public const String PULL_ANJIAN_BAT_NAME = "pull_anjian.bat";
             //删除 Xprivacy生成的 随机值文件
             //以及按键精灵v3.1.2 生成的 保存悬浮窗坐标的文件
             public const String DETETE_RANDOM_BAT_NAME = "delete_random.bat";
@@ -141,8 +143,12 @@ namespace What
 
             public const int TYPE_OF_PROCESS_CLOSE_ADB = 0x00017;
 
+            //Xprivacy 的 random文件
             public const int TYPE_OF_PROCESS_PULL_RANDOM = 0x00018;
+            
             public const int TYPE_OF_PROCESS_DELETE_RANDOM = 0x00019;
+            //按键精灵 的share文件
+            public const int TYPE_OF_PROCESS_PULL_ANJIAN = 0x00020;
             
         }
     }

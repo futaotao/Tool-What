@@ -135,7 +135,7 @@ namespace What
         }
 
         /// <summary>
-        /// 启动修改prop
+        /// 修改build.prop 以及 imei
         /// </summary>
         /// <param name="batPath"></param>
         /// <param name="device"></param>
@@ -248,6 +248,29 @@ namespace What
             try
             {
                 myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        /// <summary>
+        /// 从模拟器中 pull出 按键精灵生成Share文件
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="targetPath"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callPullAnjianFile(String batPath, String targetPath, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN);
                 myThread.start();
             }
             catch (Exception e)

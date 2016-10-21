@@ -1,3 +1,3 @@
 @echo off
 set basepath=%~dp0
-adb shell < %basepath%delete_random.txt
+adb -s shell < %basepath%delete_random.txt
