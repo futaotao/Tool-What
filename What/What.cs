@@ -1340,7 +1340,7 @@ namespace What
         {
             LogUtil.LogMessage(log, "callPullRandomFile 时间间隔2s");
             Thread.Sleep(2000);
-            Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+            Util.callPullRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_RANDOM_BAT_NAME, mDevice, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
         /// <summary>
@@ -1364,7 +1364,7 @@ namespace What
         private void callPullAnjianFile() {
             LogUtil.LogMessage(log, "callPullAnjianFile 时间间隔2s");
             Thread.Sleep(2000);
-            Util.callPullAnjianFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_ANJIAN_BAT_NAME, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+            Util.callPullAnjianFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_ANJIAN_BAT_NAME, mDevice, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
         }
 
         /// <summary>
@@ -1372,7 +1372,7 @@ namespace What
         /// </summary>
         private void callDeleteRandomFile()
         {
-            Util.callDeleteRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, this);
+            Util.callDeleteRandomFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.DETETE_RANDOM_BAT_NAME, mDevice, this);
         }
 
         #endregion

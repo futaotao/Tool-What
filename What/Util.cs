@@ -238,7 +238,7 @@ namespace What
         /// <param name="batPath"></param>
         /// <param name="targetPath"></param>
         /// <param name="onProcessListener"></param>
-        public static void callPullRandomFile(String batPath, String targetPath, OnProcessListener onProcessListener)
+        public static void callPullRandomFile(String batPath, String device, String targetPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
             {
@@ -247,7 +247,7 @@ namespace What
 
             try
             {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM);
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device, targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_RANDOM);
                 myThread.start();
             }
             catch (Exception e)
@@ -261,7 +261,7 @@ namespace What
         /// <param name="batPath"></param>
         /// <param name="targetPath"></param>
         /// <param name="onProcessListener"></param>
-        public static void callPullAnjianFile(String batPath, String targetPath, OnProcessListener onProcessListener)
+        public static void callPullAnjianFile(String batPath, String device, String targetPath, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
             {
@@ -270,7 +270,7 @@ namespace What
 
             try
             {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN);
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device, targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN);
                 myThread.start();
             }
             catch (Exception e)
@@ -284,7 +284,7 @@ namespace What
         /// </summary>
         /// <param name="batPath"></param>
         /// <param name="onProcessListener"></param>
-        public static void callDeleteRandomFile(String batPath, OnProcessListener onProcessListener)
+        public static void callDeleteRandomFile(String batPath, String device, OnProcessListener onProcessListener)
         {
             if (onProcessListener == null)
             {
@@ -293,7 +293,7 @@ namespace What
 
             try
             {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM);
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM);
                 myThread.start();
             }
             catch (Exception e)
