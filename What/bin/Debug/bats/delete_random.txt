@@ -1,3 +1,2 @@
 rm /sdcard/random
-rm /data/data/com.cyjh.mobileanjian/shared_prefs/share_float_view_file.xml
 exit

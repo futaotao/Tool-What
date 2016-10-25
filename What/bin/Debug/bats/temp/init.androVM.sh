@@ -4,6 +4,7 @@ unset LD_PRELOAD
 
 vbox_graph_mode="800x600-16"
 vbox_dpi="160"
+vbox_sdcard_drive="/dev/block/sdc"
 
 # Disable cursor blinking - Thanks android-x86 :-)
 echo -e '\033[?17;0;0c' > /dev/tty0
@@ -85,10 +86,10 @@ fi
 prop_device_id=$(/system/bin/androVM-prop get genymotion_device_id)
 if [ $? -ne 0 ]; then
   # Default value if unset
-setprop genyd.device.id "865485562173622"
+setprop genyd.device.id "860126350435998"
 else
   # Set user defined value. "[none]" keyword means empty value
-setprop genyd.device.id "865485562173622"
+setprop genyd.device.id "860126350435998"
 fi
 
 insmod /system/lib/cfbcopyarea.ko
@@ -109,6 +110,22 @@ if [ $prop_hardware_opengl ]; then
     echo "eth0 is not configured correctly - HARDWARE OPENGL IS DISABLED !!!"  > /dev/tty0
     sleep 10
   fi
+fi
+
+# SDCARD
+if [ -b $vbox_sdcard_drive ]; then
+  echo "Trying to mount $vbox_sdcard_drive" > /dev/tty0
+  mount -t vfat -o fmask=0000,dmask=0000 $vbox_sdcard_drive /mnt/shell/emulated
+  if [ $? -ne 0 ]; then
+    echo "Unable to mount $vbox_sdcard_drive, try to create FAT" > /dev/tty0
+    newfs_msdos $vbox_sdcard_drive
+    mount -t vfat -o fmask=0000,dmask=0000 $vbox_sdcard_drive /mnt/shell/emulated
+    if [ $? -ne 0 ]; then
+      echo "Unable to create FAT" > /dev/tty0
+    fi
+  fi
+else
+  echo "NO SDCARD" > /dev/tty0
 fi
 
 # ARM ABI

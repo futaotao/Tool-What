@@ -256,30 +256,6 @@ namespace What
         }
 
         /// <summary>
-        /// 从模拟器中 pull出 按键精灵生成Share文件
-        /// </summary>
-        /// <param name="batPath"></param>
-        /// <param name="targetPath"></param>
-        /// <param name="onProcessListener"></param>
-        public static void callPullAnjianFile(String batPath, String device, String targetPath, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device, targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
-
-
-        /// <summary>
         /// 删除Xprivacy生成的随机值文件
         /// </summary>
         /// <param name="batPath"></param>
@@ -300,6 +276,76 @@ namespace What
             {
             }
         }
+
+        /// <summary>
+        /// 清除模拟器应用数据
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="device"></param>
+        /// <param name="onProcessListener"></param>
+        public static void callPMClear(String batPath, String device, OnProcessListener onProcessListener)
+        {
+            if (onProcessListener == null)
+            {
+                return;
+            }
+
+            try
+            {
+                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR);
+                myThread.start();
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+
+        /// <summary>
+        /// 从模拟器中 pull出 按键精灵生成Share文件
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="targetPath"></param>
+        /// <param name="onProcessListener"></param>
+        //public static void callPullAnjianFile(String batPath, String device, String targetPath, OnProcessListener onProcessListener)
+        //{
+        //    if (onProcessListener == null)
+        //    {
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device, targetPath }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN);
+        //        myThread.start();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //    }
+        //}
+
+        /// <summary>
+        ///  把对应分辨率的share文件 push 到模拟器中 按键精灵的Share文件夹
+        /// </summary>
+        /// <param name="batPath"></param>
+        /// <param name="screen"></param>
+        /// <param name="onProcessListener"></param>
+        //public static void callPushAnjianFile(String batPath, String device, String screen, OnProcessListener onProcessListener)
+        //{
+        //    if (onProcessListener == null)
+        //    {
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device, screen }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PUSH_ANJIAN);
+        //        myThread.start();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //    }
+        //}
 
 
      
@@ -432,28 +478,7 @@ namespace What
             }
         }
 
-        /// <summary>
-        /// 清除模拟器应用数据
-        /// </summary>
-        /// <param name="batPath"></param>
-        /// <param name="device"></param>
-        /// <param name="onProcessListener"></param>
-        public static void callPMClear(String batPath, String device, OnProcessListener onProcessListener)
-        {
-            if (onProcessListener == null)
-            {
-                return;
-            }
-
-            try
-            {
-                myThread = new MyThread(ThreadUtil.getBatOrExeStartInfo(batPath, new String[] { device }), onProcessListener, Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR);
-                myThread.start();
-            }
-            catch (Exception e)
-            {
-            }
-        }
+       
 
         /// <summary>
         /// pull  按键精灵生成的 time文件。用来判断模拟器是否联网成功

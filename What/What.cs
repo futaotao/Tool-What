@@ -18,8 +18,8 @@ namespace What
 {
     public partial class What : Form, OnProcessListener
     {
-        private const string VPN_NAME = "hh921";
-        private const String VPN_PASSWORD = "1120";
+        private const string VPN_NAME = "hh008";
+        private const String VPN_PASSWORD = "333";
         //当前支持sdk版本
         private const int SDK_16 = 16;
         private const int SDK_17 = 17;
@@ -340,9 +340,6 @@ namespace What
         //停止按钮点击事件
         private void btnStop_Click(object sender, EventArgs e)
         {
-            //创建prop文件
-            //startChangeProp(17);
-
             isStop = !isStop;
         }
 
@@ -878,17 +875,20 @@ namespace What
                             //开刷
                             LogUtil.LogMessage(log, "Xprivacy生成随机值！");
                             getPullRandomContent();
-                            LogUtil.LogMessage(log, "一切就绪 ！ 延迟 2s 开刷");
-                            Thread.Sleep(2000);
-                            startShua(mCurrentScreen);
+
+                            LogUtil.LogMessage(log, "清除按键精灵数据");
+                            callClearAnjianData();
+
                         }
 
                     }
                     break;
                 #endregion
 
-                #region 从模拟器pull出 按键精灵生成的share文件
-                case Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN:
+
+                #region 清除按键精灵数据
+                case Constant.ProcessType.TYPE_OF_PROCESS_PM_CLEAR:
+
                     if (Util.myThread != null)
                     {
                         List<String> logList = Util.myThread.getLog();
@@ -901,31 +901,26 @@ namespace What
                             }
                         }
 
-                        LogUtil.LogMessage(log, "Pull:" + content);
+                        LogUtil.LogMessage(log, "PM Clear:" + content);
 
-                        if (content.Contains("not exist"))
+                        if (content.ToLower().Contains("success"))
                         {
-                            LogUtil.LogMessage(log, "按键精灵生成share已经删除成功！");
-                            //说明按键精灵生成share文件已经删除成功
+                            LogUtil.LogMessage(log, "按鍵精灵数据已经清除完成！");
 
-                            LogUtil.LogMessage(log, "延迟 2s ....关闭模拟器");
+
+                            LogUtil.LogMessage(log, "一切就绪 ！ 延迟 2s 开刷");
                             Thread.Sleep(2000);
-                            closeAvd(mCurrentScreen);
-
-                            mRunTimes++;
-                            mCurrentAvdSdk = -1;
+                            startShua(mCurrentScreen);
                         }
                         else
                         {
-                            // 说明按键精灵生成的share文件删除失败
-                            LogUtil.LogMessage(log, "继续删除 Xprivacy 生成的随机值 和 按键精灵生成share文件！");
-                            callDeleteRandomFile();
+                            LogUtil.LogMessage(log, "继续清除按键精灵数据");
+                            callClearAnjianData();
                         }
 
                     }
                     break;
                 #endregion
-
 
                 #region 修改机型参数
                 case Constant.ProcessType.TYPE_OF_PROCESS_CHANGE_PROP:
@@ -948,14 +943,14 @@ namespace What
                         }
                         else
                         {
-                            LogUtil.LogMessage(log, "change prop success ！ 准备删除 Xprivacy 生成的随机值 和 按键精灵生成share文件！");
+                            LogUtil.LogMessage(log, "change prop success ！ 准备删除 Xprivacy 生成的随机值！");
                             callDeleteRandomFile();
                         }
                     }
                     break;
                 #endregion
 
-                #region 删除Xprivacy生成的随机值文件 以及 删除 按键精灵生成的share文件 的回调 
+                #region 删除Xprivacy生成的随机值文件
                 case Constant.ProcessType.TYPE_OF_PROCESS_DELETE_RANDOM:
                     if (Util.myThread != null)
                     {
@@ -1003,15 +998,94 @@ namespace What
                         }
                         else
                         {
+                            LogUtil.LogMessage(log, "延迟 2s ....关闭模拟器");
+                            Thread.Sleep(2000);
+                            closeAvd(mCurrentScreen);
 
-                            LogUtil.LogMessage(log, "判断按键精灵生成的 share 文件是否 删除成功？？");
-                            //判断按键精灵生成的文件还在否？
-                            callPullAnjianFile();                   
+                            mRunTimes++;
+                            mCurrentAvdSdk = -1;        
                         }
                       
                     }
                     break;
                 #endregion
+
+
+                //#region  Push对应分辨率的share文件 到按键精灵的data文件夹中
+                //case Constant.ProcessType.TYPE_OF_PROCESS_PUSH_ANJIAN:
+                //    if (Util.myThread != null)
+                //    {
+                //        List<String> logList = Util.myThread.getLog();
+                //        String content = "";
+                //        if (logList != null && logList.Count > 0)
+                //        {
+                //            foreach (String logs in logList)
+                //            {
+                //                content = content + logs;
+                //            }
+                //        }
+
+                //        LogUtil.LogMessage(log, "Push:" + content);
+                //        if (content.Contains("B/s"))
+                //        {                 
+                //            LogUtil.LogMessage(log, "更新按键精灵share文件成功!");
+                //            LogUtil.LogMessage(log, "判断按键精灵的 share 文件是否 和对应分辨率的share文件一致？？");
+                //            callPullAnjianFile();
+                //        }
+                //        else {
+
+                //            LogUtil.LogMessage(log, "Push失败！再次更新按键精灵share 文件！");
+                //            callPushAnjianFile();
+                //        }
+
+                //    }
+                //    break;
+                //#endregion
+
+                //#region 从模拟器pull出 按键精灵生成的share文件
+                //case Constant.ProcessType.TYPE_OF_PROCESS_PULL_ANJIAN:
+                //    if (Util.myThread != null)
+                //    {
+                //        List<String> logList = Util.myThread.getLog();
+                //        String content = "";
+                //        if (logList != null && logList.Count > 0)
+                //        {
+                //            foreach (String logs in logList)
+                //            {
+                //                content = content + logs;
+                //            }
+                //        }
+
+                //        LogUtil.LogMessage(log, "Pull:" + content);
+
+                //        if (content.Contains("not exist"))
+                //        {
+                //            LogUtil.LogMessage(log, "按键精灵不存在！！！！重新push");              
+                //            callPushAnjianFile();
+                            
+                //        }
+                //        else
+                //        {
+                //            if (comparePullAnjianContent())
+                //            {
+                //                LogUtil.LogMessage(log, "检测share文件内容 与下次对应分辨率内容一致");
+
+                //                LogUtil.LogMessage(log, "延迟 2s ....关闭模拟器");
+                //                Thread.Sleep(2000);
+                //                closeAvd(mCurrentScreen);
+
+                //                mRunTimes++;
+                //                mCurrentAvdSdk = -1;
+                //            }
+                //            else {
+                //                LogUtil.LogMessage(log, "对比发现文件不一致！重新 push");
+                //                callPushAnjianFile();
+                //            }
+                //        }
+
+                //    }
+                //    break;
+                //#endregion
 
                 /*******************************************/
                 #region 弃用代码
@@ -1359,15 +1433,6 @@ namespace What
         }
 
         /// <summary>
-        /// 从模拟器中 pull出 按键精灵生成的share文件
-        /// </summary>
-        private void callPullAnjianFile() {
-            LogUtil.LogMessage(log, "callPullAnjianFile 时间间隔2s");
-            Thread.Sleep(2000);
-            Util.callPullAnjianFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_ANJIAN_BAT_NAME, mDevice, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
-        }
-
-        /// <summary>
         /// 删除 Xprivacy生成随机值的文件
         /// </summary>
         private void callDeleteRandomFile()
@@ -1376,6 +1441,68 @@ namespace What
         }
 
         #endregion
+
+        #region 按键精灵
+        /// <summary>
+        /// 清除按键精灵数据
+        /// </summary>
+        private void callClearAnjianData() {
+            Util.callPMClear(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PM_CLEAR_BAT_NAME, mDevice, this);
+        }
+
+
+        /// <summary>
+        /// 从模拟器中 pull出 按键精灵生成的share文件
+        /// </summary>
+        //private void callPullAnjianFile() {
+        //    LogUtil.LogMessage(log, "callPullAnjianFile 时间间隔2s");
+        //    Thread.Sleep(2000);
+        //    Util.callPullAnjianFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PULL_ANJIAN_BAT_NAME, mDevice, mBasePath + Constant.Folders.TEMP_FOLDER_NAME, this);
+        //}
+
+        /// <summary>
+        /// 比较pull出来的内容和push进入的share文件 内容是否一致
+        /// </summary>
+        //private bool comparePullAnjianContent() {
+        //    string propPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdSdk + ".txt";
+        //    Dictionary<string, string> avdDic = readProperty(propPath);
+        //    string screen_x_y = avdDic["screen_x_y"];
+
+        //    string pullPath = mBasePath + Constant.Folders.TEMP_FOLDER_NAME + "\\share_float_view_file.xml";
+        //    string configPath = mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\anjian\\" + screen_x_y + "\\share_float_view_file.xml";
+
+        //    StreamReader pullReader = new StreamReader(pullPath);
+        //    String pullContent = pullReader.ReadToEnd();
+        //    pullReader.Close();
+
+        //    StreamReader configReader = new StreamReader(pullPath);
+        //    String configContent = configReader.ReadToEnd();
+        //    configReader.Close();
+
+        //    if (pullContent.Equals(configContent)) {
+        //        return true;
+        //    }
+
+        //    return false;
+
+            
+        //}
+
+        /// <summary>
+        /// 根据分辨率 push share文件到 按键精灵的share文件夹中
+        /// </summary>
+        //private void callPushAnjianFile() {          
+        //    //下次启动的 对应sdk版本的 配置文件
+        //    string propPath = mBasePath + Constant.Folders.AVD_PROPERTY_FOLDER_NAME + "\\" + mCurrentAvdSdk + ".txt";
+        //    Dictionary<string, string> avdDic = readProperty(propPath);
+        //    string screen_x_y = avdDic["screen_x_y"];
+        //    LogUtil.LogMessage(log, "callPushAnjianFile : screen_x_y - " + screen_x_y);
+        //    Util.callPushAnjianFile(mBasePath + Constant.Folders.BAT_FOLDER_NAME + "\\" + Constant.Apktool.PUSH_ANJIAN_BAT_NAME, mDevice, screen_x_y, this);
+        //}
+        #endregion
+
+
+      
 
         /// <summary>
         /// 开始刷
@@ -1880,6 +2007,18 @@ namespace What
                         //icon
                         click(787, 306);
                         Thread.Sleep(8000);
+                        //点
+                        click(1001, 920);
+                        Thread.Sleep(1000);
+                        //体验
+                        click(967, 801);
+                        Thread.Sleep(1000);
+                        //我的
+                        click(1148, 908);
+                        Thread.Sleep(1000);
+                        //知道了
+                        click(967, 806);
+                        Thread.Sleep(1000);
                         //未分类
                         click(966, 434);
                         Thread.Sleep(1000);
@@ -1922,6 +2061,18 @@ namespace What
                         //icon
                         click(787, 306);
                         Thread.Sleep(8000);
+                        //点
+                        click(1001, 947);
+                        Thread.Sleep(1000);
+                        //体验
+                        click(968, 825);
+                        Thread.Sleep(1000);
+                        //我的
+                        click(1146, 930);
+                        Thread.Sleep(1000);
+                        //知道了
+                        click(967, 832);
+                        Thread.Sleep(1000);
                         //未分类
                         click(966, 415);
                         Thread.Sleep(1000);
@@ -1964,6 +2115,18 @@ namespace What
                         //icon
                         click(768, 268);
                         Thread.Sleep(8000);
+                        //点
+                        click(992, 1001);
+                        Thread.Sleep(1000);
+                        //体验
+                        click(957, 874);
+                        Thread.Sleep(1000);
+                        //我的
+                        click(1168, 981);
+                        Thread.Sleep(1000);
+                        //知道了
+                        click(956, 881);
+                        Thread.Sleep(1000);
                         //未分类
                         click(950, 325);
                         Thread.Sleep(1000);
@@ -2006,6 +2169,21 @@ namespace What
                         //icon
                         click(770, 272);
                         Thread.Sleep(8000);
+                        //点
+                        click(990, 1001);
+                        Thread.Sleep(1000);
+                        //体验
+                        click(956, 874);
+                        Thread.Sleep(1000);
+                        //我的
+                        click(1181, 984);
+                        Thread.Sleep(1000);
+                        //知道了
+                        click(956, 880);
+                        Thread.Sleep(1000);
+                        //未分类
+                        click(950, 325);
+                        Thread.Sleep(1000);
                         //未分类
                         click(950, 333);
                         Thread.Sleep(1000);
@@ -2048,6 +2226,18 @@ namespace What
                         //icon
                         click(767, 268);
                         Thread.Sleep(8000);
+                        //点
+                        click(992, 1001);
+                        Thread.Sleep(1000);
+                        //体验
+                        click(957, 876);
+                        Thread.Sleep(1000);
+                        //我的
+                        click(1168, 983);
+                        Thread.Sleep(1000);
+                        //知道了
+                        click(956, 880);
+                        Thread.Sleep(1000);
                         //未分类
                         click(950, 330);
                         Thread.Sleep(1000);

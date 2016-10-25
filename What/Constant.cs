@@ -70,21 +70,24 @@ namespace What
 
             //从模拟器中 pull出Xprivacy生成的随机值文件
             public const String PULL_RANDOM_BAT_NAME = "pull_random.bat";
-            //从模拟器中 pull出键精灵v3.1.2 生成的 保存悬浮窗坐标的文件
-            public const String PULL_ANJIAN_BAT_NAME = "pull_anjian.bat";
             //删除 Xprivacy生成的 随机值文件
-            //以及按键精灵v3.1.2 生成的 保存悬浮窗坐标的文件
             public const String DETETE_RANDOM_BAT_NAME = "delete_random.bat";
 
-            public const String ADB_CLOSE_BAT_NAME = "adb_close.bat";
+            //从模拟器中 pull出键精灵v3.1.2 生成的 保存悬浮窗坐标的文件 判断是否是对应分辨率的
+            //public const String PULL_ANJIAN_BAT_NAME = "pull_anjian.bat";
+            //把对应分辨率的share文件 push的 按键精灵的share文件夹中
+            //public const String PUSH_ANJIAN_BAT_NAME = "push_anjian.bat";
+            
 
+            public const String ADB_CLOSE_BAT_NAME = "adb_close.bat";
+            //清除模拟器某一个应用的数据
+            public const String PM_CLEAR_BAT_NAME = "pm_clear.bat";
            
 
 
             /*** 已经弃用 ***/
             //public const String APPS_BAT_NAME = "apps.bat";
-            //清除模拟器某一个应用的数据
-            //public const String PM_CLEAR_BAT_NAME = "pm_clear.bat";
+           
             //获取当前模拟器安装的应用
             //public const String PM_INSTALL_BAT_NAME = "pm_install.bat";
             //public const String REBOOT_BAT_NAME = "reboot.bat";
@@ -138,7 +141,8 @@ namespace What
             //public const int TYPE_OF_PROCESS_PULL_TIME = 0x00013;
             //public const int TYPE_OF_PROCESS_DELETE_TIME = 0x00014;
 
-            //public const int TYPE_OF_PROCESS_PM_CLEAR = 0x00015;
+            //清除应用数据
+            public const int TYPE_OF_PROCESS_PM_CLEAR = 0x00015;
             //public const int TYPE_OF_PROCESS_PM_INSTALL = 0x00016;
 
             public const int TYPE_OF_PROCESS_CLOSE_ADB = 0x00017;
@@ -148,7 +152,8 @@ namespace What
             
             public const int TYPE_OF_PROCESS_DELETE_RANDOM = 0x00019;
             //按键精灵 的share文件
-            public const int TYPE_OF_PROCESS_PULL_ANJIAN = 0x00020;
+            //public const int TYPE_OF_PROCESS_PULL_ANJIAN = 0x00020;
+            //public const int TYPE_OF_PROCESS_PUSH_ANJIAN = 0x00021;
             
         }
     }
