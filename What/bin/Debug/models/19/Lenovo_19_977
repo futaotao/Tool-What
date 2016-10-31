@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A320t-user 4.4.4 KOT49H A320t_USR_S402_1409261940 release-keys
 ro.build.fingerprint=Lenovo/A320t/A320t:4.4.4/KOT49H/A320t_USR_S402_1409261940:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A360t-user 4.4.4 KOT49H A360t_USR_S221_140806 release-keys
 ro.build.fingerprint=Lenovo/A360t/A360t:4.4.4/KOT49H/A360t_USR_S221_140806:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

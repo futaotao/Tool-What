@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=MT7-CL00-user 4.4.4 HuaweiMT7-CL00 C92B128SP05 release-keys
 ro.build.fingerprint=Huawei/MT7-CL00/hwmt7:4.4.4/HuaweiMT7-CL00/C92B128SP05:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

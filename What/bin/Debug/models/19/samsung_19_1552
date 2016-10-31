@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=rossaltezm-user 4.4.4 KTU84P G3608ZMU1ANL1 release-keys
 ro.build.fingerprint=samsung/rossaltezm/rossalte:4.4.4/KTU84P/G3608ZMU1ANL1:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

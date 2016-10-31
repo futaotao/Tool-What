@@ -340,6 +340,14 @@ namespace What
         //停止按钮点击事件
         private void btnStop_Click(object sender, EventArgs e)
         {
+            Dictionary<String,String> dic= Util.getIpInfo();
+            if (dic != null && dic.Count > 0)
+            {
+                MessageBox.Show(dic["ok"] + "\n" + dic["location"] + "\n" + dic["ip"]);
+            }
+            else {
+                MessageBox.Show("Empty");
+            }
             isStop = !isStop;
         }
 
@@ -613,45 +621,41 @@ namespace What
 
                             //标记 vpn连接成功
                             isVpnConnect = true;
-                            LogUtil.LogMessage(log, "-----launch avd----------");
-                            //准备启动模拟器
-                            launch(mTapX, mTapY);
+                            //LogUtil.LogMessage(log, "-----launch avd----------");
+                            ////准备启动模拟器
+                            //launch(mTapX, mTapY);
 
                             #region 保存ip
-                            //Dictionary<string, string> ipDic = Util.getIpInfo();
-                            //if (ipDic != null && ipDic.Count > 0)
-                            //{
+                            Dictionary<string, string> ipDic = Util.getIpInfo();
+                            if (ipDic != null && ipDic.Count > 0)
+                            {
 
-                            //    string ip = ipDic["ip"];
-                            //    if (!ip.Trim().Contains("60.166."))
-                            //    {
-                            //        string location = ipDic["location"];
-                            //        ipLabel.Text = ip + "  " + location;
-                            //        string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            //        saveIp(ip, location, time);
-                            //        isVpnConnect = true;
-                            //        LogUtil.LogMessage(log, "-----launch avd----------");
-                            //        launch(mTapX, mTapY);
-                            //    }
-                            //    else
-                            //    {
-                            //        LogUtil.LogMessage(log, "-----get Ip info failed----------");
-                            //        isVpnConnect = false;
-                            //        isLaunching = false;
-                            //        closeNet();
-
-                            //        //isShowWindow();
-                            //    }
-                            //}
-                            //else
-                            //{
-                            //    LogUtil.LogMessage(log, "-----get Ip info failed----------");
-                            //    isVpnConnect = false;
-                            //    isLaunching = false;
-                            //    closeNet();
-
-                            //    //isShowWindow();
-                            //}
+                                string isOk = ipDic["ok"];
+                                if (isOk.Equals("0"))
+                                {
+                                    string ip = ipDic["ip"];
+                                    string location = ipDic["location"];
+                                    ipLabel.Text = ip + "  " + location;
+                                    string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    saveIp(ip, location, time);
+                                    isVpnConnect = true;
+                                    LogUtil.LogMessage(log, "-----launch avd----------");
+                                    launch(mTapX, mTapY);
+                                }else {
+                                    LogUtil.LogMessage(log, "-----get Ip info failed----------");
+                                    isVpnConnect = false;
+                                    isLaunching = false;
+                                    closeNet();
+                                    //isShowWindow();
+                                }
+                               
+                            }else
+                            {
+                                LogUtil.LogMessage(log, "-----get Ip info failed----------");
+                                isVpnConnect = false;
+                                isLaunching = false;
+                                closeNet();
+                            }
                             #endregion
                         }
                         else
@@ -876,8 +880,19 @@ namespace What
                             LogUtil.LogMessage(log, "Xprivacy生成随机值！");
                             getPullRandomContent();
 
-                            LogUtil.LogMessage(log, "清除按键精灵数据");
-                            callClearAnjianData();
+
+                            if (mCurrentAvdSdk != 19)
+                            {
+                                LogUtil.LogMessage(log, "清除按键精灵数据");
+                                callClearAnjianData();
+                            }
+                            else { 
+                                //直接开刷
+                                //19版本 特殊处理 分辨率全部为 720x1280
+                                LogUtil.LogMessage(log, "一切就绪 ！ 延迟 2s 开刷");
+                                Thread.Sleep(2000);
+                                startShua(mCurrentScreen);
+                            }
 
                         }
 

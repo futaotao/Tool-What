@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=m5t_dux-user 4.4.4 KOT49H 1407579106 test-keys
 ro.build.fingerprint=alps/m5t_dux/m5t_dux:4.4.4/KOT49H/1407579106:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

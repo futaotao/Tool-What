@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=full_yk606_emmc_tdd_35gc-user 4.4.4 KTU84P 1446033397 test-keys
 ro.build.fingerprint=JSNT/full_yk606_emmc_tdd_35gc/yk606_emmc_tdd_35gc:4.4.4/KTU84P/1446033397:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

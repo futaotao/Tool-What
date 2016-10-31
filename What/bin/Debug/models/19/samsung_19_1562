@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=tre3gxx-user 4.4.4 KTU84P N910HXXU1ANK5 release-keys
 ro.build.fingerprint=samsung/tre3gxx/tre3g:4.4.4/KTU84P/N910HXXU1ANK5:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

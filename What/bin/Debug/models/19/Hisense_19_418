@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=E602M-user 4.4.4 KOT49H L860_M00_S01 release-keys
 ro.build.fingerprint=Hisense/E602M/E602M:4.4.4/KOT49H/L860_M00_S01:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=NX505J-user 4.4.4 KVT49L eng.nubia.20141128.123437 release-keys
 ro.build.fingerprint=nubia/NX505J/NX505J:4.4.4/KVT49L/eng.nubia.20141128.123437:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

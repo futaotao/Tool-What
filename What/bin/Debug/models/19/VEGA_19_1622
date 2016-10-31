@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=VEGA_IM-A890K-user 4.4.4 KVT49L IM-A890K.008 release-keys
 ro.build.fingerprint=VEGA/VEGA_IM-A890K/EF59K:4.4.4/KVT49L/IM-A890K.008:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

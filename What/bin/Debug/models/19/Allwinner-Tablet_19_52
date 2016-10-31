@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=polaris_p1-eng 4.4.4 KVT49L 20140624 test-keys
 ro.build.fingerprint=Allwinner-Tablet/polaris_p1/polaris-p1:4.4.4/KVT49L/20140624:eng/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

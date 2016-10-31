@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=CP8712-user 4.4.4 KTU84P 4.4.054.P2.150803.8712 release-keys
 ro.build.fingerprint=Coolpad/CP8712/CP8712:4.4.4/KTU84P/4.4.054.P2.150803.8712:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

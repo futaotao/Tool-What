@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=sofinatd-user 4.4.4 KOT49H VIBEUI_V2.0_1512_7.17.1_ST_S658t. release-keys
 ro.build.fingerprint=Lenovo/sofinatd/S658t:4.4.4/KOT49H/VIBEUI_V2.0_1512_7.17.1_ST_S658t.:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

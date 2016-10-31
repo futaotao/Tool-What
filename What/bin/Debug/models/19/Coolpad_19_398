@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=SK1-01-user 4.4.4 KTU84P 4.4.029.P1.150716.SK1-01 release-keys
 ro.build.fingerprint=Coolpad/SK1-01/SK1-01:4.4.4/KTU84P/4.4.029.P1.150716.SK1-01:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Tab2A7-10F-user 4.4.4 KOT49H T2-A7-10F_S000040_150106_PRC release-keys
 ro.build.fingerprint=Lenovo/Tab2A7-10F/Tab2A7-10F:4.4.4/KOT49H/T2-A7-10F_S000040_150106_PRC:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

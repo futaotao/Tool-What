@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=lava72_sp28w_thai-user 4.4.4 KOT49H 1430817152 release-keys
 ro.build.fingerprint=iris510/lava72_sp28w_thai/lava72_sp28w_thai:4.4.4/KOT49H/1430817152:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

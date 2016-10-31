@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=p983g_a4hy-user 4.4.4 KOT49H 1410749519 test-keys
 ro.build.fingerprint=Teclast/p983g_a4hy/p983g_a4hy:4.4.4/KOT49H/1410749519:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

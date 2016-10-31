@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=mt716_c96_blx-user 4.4.4 KOT49H 1437182500 test-keys
 ro.build.fingerprint=aliyun/mt716_c96_blx/mt716_c96_blx:4.4.4/KOT49H/1437182500:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=msm8610-user 4.4.4 KTU84P TBE570712_9722_V0805 release-keys
 ro.build.fingerprint=qcom/msm8610/msm8610:4.4.4/KTU84P/TBE570712_9722_V0805:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

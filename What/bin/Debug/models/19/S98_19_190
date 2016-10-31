@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=S9812c_tb_kk-user 4.4.4 S98 1442971145 test-keys
 ro.build.fingerprint=S98/S9812c_tb_kk/S9812c_tb_kk:4.4.4/S98/1442971145:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

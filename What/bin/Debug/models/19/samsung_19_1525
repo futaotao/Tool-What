@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=klimtltezh-user 4.4.4 KOT49H T705ZHU1AOA1 release-keys
 ro.build.fingerprint=samsung/klimtltezh/klimtlte:4.4.4/KOT49H/T705ZHU1AOA1:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

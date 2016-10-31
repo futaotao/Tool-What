@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=hct82_lwt_om_kk-user 4.4.4 KOT49H 1407808618 test-keys
 ro.build.fingerprint=htc/hct82_lwt_om_kk/hct82_lwt_om_kk:4.4.4/KOT49H/1407808618:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

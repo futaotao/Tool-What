@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TCLP360W-user 4.4.4 KOT49H 20140911.190616 release-keys
 ro.build.fingerprint=TCL/TCLP360W/TCLP360W:4.4.4/KOT49H/20140911.190616:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

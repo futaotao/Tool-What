@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TCL_P331M-user 4.4.4 KOT49H 1417851473 release-keys
 ro.build.fingerprint=TCL/TCL_P331M/TCL_P331M:4.4.4/KOT49H/1417851473:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

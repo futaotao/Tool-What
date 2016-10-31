@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=ZTE-G720C-user 4.4.4 KTU84P eng.root.20150112.171208 release-keys
 ro.build.fingerprint=ZTE/ZTE-G720C/ZTE-G720C:4.4.4/KTU84P/eng.root.20150112.171208:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

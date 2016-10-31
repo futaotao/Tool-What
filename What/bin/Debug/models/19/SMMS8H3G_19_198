@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=SMMS8H3G12c_tb_kk-user 4.4.4 SMMS8H3G 1445495269 test-keys
 ro.build.fingerprint=SMMS8H3G/SMMS8H3G12c_tb_kk/SMMS8H3G12c_tb_kk:4.4.4/SMMS8H3G/1445495269:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

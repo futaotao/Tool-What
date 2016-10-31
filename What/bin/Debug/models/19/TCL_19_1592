@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TCL_P301M-user 4.4.4 KOT49H 1423535176 release-keys
 ro.build.fingerprint=TCL/TCL_P301M/TCL_P301M:4.4.4/KOT49H/1423535176:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

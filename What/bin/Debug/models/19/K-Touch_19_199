@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=techain82_slt_2s_kk-user 4.4.4 KOT49H 1422527681 test-keys
 ro.build.fingerprint=K-Touch/techain82_slt_2s_kk/techain82_slt_2s_kk:4.4.4/KOT49H/1422527681:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

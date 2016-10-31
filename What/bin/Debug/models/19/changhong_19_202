@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=w706-user 4.4.4 KOT49H 1432718203 test-keys
 ro.build.fingerprint=changhong/w706/w706:4.4.4/KOT49H/1432718203:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TL600-user 4.4.4 BOWAYTL600 TL600A_H01_V0.1_10_20150330 test-keys
 ro.build.fingerprint=BOWAY/TL600/TL600:4.4.4/BOWAYTL600/TL600A_H01_V0.1_10_20150330:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

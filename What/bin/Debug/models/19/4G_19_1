@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k20e_ae_ali_lht_v22-user 4.4.4 KOT49H 1426075067 test-keys
 ro.build.fingerprint=4G/k20e_ae_ali_lht_v22/k20e_ae_ali_lht_v22:4.4.4/KOT49H/1426075067:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=razorg-user 4.4.4 KRT10F 870255 test-keys
 ro.build.fingerprint=google/razorg/deb:4.4.4/KRT10F/870255:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

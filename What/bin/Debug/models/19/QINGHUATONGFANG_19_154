@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=kt07b_kdgk_e780-user 4.4.4 KOT49H 1438660268 test-keys
 ro.build.fingerprint=QINGHUATONGFANG/kt07b_kdgk_e780/kt07b_kdgk_e780:4.4.4/KOT49H/1438660268:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

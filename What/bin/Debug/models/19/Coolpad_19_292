@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=8690_T00-user 4.4.4 KOT49H 4.4.069.P0.150615.8690_T00 release-keys
 ro.build.fingerprint=Coolpad/8690_T00/8690_T00:4.4.4/KOT49H/4.4.069.P0.150615.8690_T00:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

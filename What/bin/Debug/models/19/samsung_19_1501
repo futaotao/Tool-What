@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=hltezh-user 4.4.4 KOT49H N9005ZHUENB5 release-keys
 ro.build.fingerprint=samsung/hltezh/hlte:4.4.4/KOT49H/N9005ZHUENB5:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=bbk6752_lwt_kk-user 4.4.4 KTU84P 1436510083 test-keys
 ro.build.fingerprint=vivo/bbk6752_lwt_kk/bbk6752_lwt_kk:4.4.4/KTU84P/1436510083:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

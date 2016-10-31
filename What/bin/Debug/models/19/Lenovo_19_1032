@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A5800-D-user 4.4.4 KTU84P A5800-D_S103_150326 release-keys
 ro.build.fingerprint=Lenovo/A5800-D/A5800-D:4.4.4/KTU84P/A5800-D_S103_150326:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

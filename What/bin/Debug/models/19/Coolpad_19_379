@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=CP7061-user 4.4.4 KOT49H 20140824.152716 release-keys
 ro.build.fingerprint=Coolpad/CP7061/CP7061:4.4.4/KOT49H/20140824.152716:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=pxa1L88H2-user 4.4.4 KTU84M A3900_S134_150814 release-keys
 ro.build.fingerprint=Lenovo/pxa1L88H2/pxa1L88H2:4.4.4/KTU84M/A3900_S134_150814:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

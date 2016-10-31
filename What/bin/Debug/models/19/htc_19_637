@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=htccn_chs_cu-user 4.4.4 KTU84L 374228.2 release-keys
 ro.build.fingerprint=htc/htccn_chs_cu/m7cdug:4.4.4/KTU84L/374228.2:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

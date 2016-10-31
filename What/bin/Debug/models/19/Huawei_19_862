@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=PE-TL20-user 4.4.4 HuaweiPE-TL20 CHNC00B133 release-keys
 ro.build.fingerprint=Huawei/PE-TL20/hwPE:4.4.4/HuaweiPE-TL20/CHNC00B133:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

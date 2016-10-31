@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k3e_at_ali30_wxm_k311-user 4.4.4 KOT49H 1435740232 release-keys
 ro.build.fingerprint=YunMeng/k3e_at_ali30_wxm_k311/k3e_at_ali30_wxm_k311:4.4.4/KOT49H/1435740232:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=LenovoA588t-user 4.4.4 KOT49H A588t_S042_141112 release-keys
 ro.build.fingerprint=Lenovo/LenovoA588t/LenovoA588t:4.4.4/KOT49H/A588t_S042_141112:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

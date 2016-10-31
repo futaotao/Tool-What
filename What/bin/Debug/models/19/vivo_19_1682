@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=msm8916_32-user 4.4.4 KTU84P 1437725145 test-keys
 ro.build.fingerprint=vivo/msm8916_32/msm8916_32:4.4.4/KTU84P/1437725145:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k3e_at_ali_xhd_k10_demi-user 4.4.4 KOT49H 1429592674 release-keys
 ro.build.fingerprint=DEMI/k3e_at_ali_xhd_k10_demi/k3e_at_ali_xhd_k10_demi:4.4.4/KOT49H/1429592674:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=G200-user 4.4.4 KOT49H 1438354954 test-keys
 ro.build.fingerprint=Wisboy/G200/G200:4.4.4/KOT49H/1438354954:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

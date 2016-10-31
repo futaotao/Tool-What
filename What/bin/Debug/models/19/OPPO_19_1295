@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=R7-user 4.4.4 KTU84P 1416486236 release-keys
 ro.build.fingerprint=OPPO/R7/R7:4.4.4/KTU84P/1416486236:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

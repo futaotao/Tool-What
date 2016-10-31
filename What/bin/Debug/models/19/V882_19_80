@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=b809_jiaye_d11-user 4.4.4 KOT49H 1437398708 test-keys
 ro.build.fingerprint=V882/b809_jiaye_d11/b809_jiaye_d11:4.4.4/KOT49H/1437398708:user/test-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

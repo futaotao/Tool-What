@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A2860-user 4.4.4 LenovoA2860 A2860_S160_150416.0714 release-keys
 ro.build.fingerprint=Lenovo/A2860/A2860:4.4.4/LenovoA2860/A2860_S160_150416.0714:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

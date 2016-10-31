@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=polaris_723q-eng 4.4.4 KVT49L 20141208 test-keys
 ro.build.fingerprint=Allwinner-Tablet/polaris_723q/polaris-723q:4.4.4/KVT49L/20141208:eng/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

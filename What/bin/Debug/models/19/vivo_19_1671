@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=full_bbk6735m_35gc_k-user 4.4.4 KTU84P 1438171710 release-keys
 ro.build.fingerprint=vivo/full_bbk6735m_35gc_k/bbk6735m_35gc_k:4.4.4/KTU84P/1438171710:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

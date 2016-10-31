@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=miki89_6833-user 4.4.4 KOT49H 1421323286 test-keys
 ro.build.fingerprint=MIKI/miki89_6833/miki89_6833:4.4.4/KOT49H/1421323286:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Y523-L076-user 4.4.4 HUAWEIY523-L076 CHSC01B055 release-keys
 ro.build.fingerprint=HUAWEI/Y523-L076/HWY523:4.4.4/HUAWEIY523-L076/CHSC01B055:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

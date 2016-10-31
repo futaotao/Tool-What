@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=b800_emmc_hulaiwang_m91-user 4.4.4 KOT49H 1436451025 test-keys
 ro.build.fingerprint=RLT/b800_emmc_hulaiwang_m91/b800_emmc_hulaiwang_m91:4.4.4/KOT49H/1436451025:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

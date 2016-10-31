@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A31t-user 4.4.4 KTU84P 1391526487 release-keys
 ro.build.fingerprint=OPPO/A31t/A31t:4.4.4/KTU84P/1391526487:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

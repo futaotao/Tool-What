@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k3e_at_ali_xhd_k10_ynor-user 4.4.4 KOT49H 1435028561 release-keys
 ro.build.fingerprint=Ynor/k3e_at_ali_xhd_k10_ynor/k3e_at_ali_xhd_k10_ynor:4.4.4/KOT49H/1435028561:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

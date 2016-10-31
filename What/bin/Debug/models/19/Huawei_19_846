@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=P7-L09-user 4.4.4 HuaweiP7-L09 C92B617 release-keys
 ro.build.fingerprint=Huawei/P7-L09/hwp7:4.4.4/HuaweiP7-L09/C92B617:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

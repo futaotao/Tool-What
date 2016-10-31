@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=CoolpadY60-W-user 4.4.4 KTU84P 1413336423 release-keys
 ro.build.fingerprint=Coolpad/CoolpadY60-W/CoolpadY60-W:4.4.4/KTU84P/1413336423:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

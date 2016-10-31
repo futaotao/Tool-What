@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A380t-user 4.4.4 KOT49H A380t_S114_1406241246 release-keys
 ro.build.fingerprint=Lenovo/A380t/A380t:4.4.4/KOT49H/A380t_S114_1406241246:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

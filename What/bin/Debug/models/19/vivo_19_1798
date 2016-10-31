@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=msm8974-user 4.4.4 KVT49L eng.compiler.20151103.170851 test-keys
 ro.build.fingerprint=vivo/msm8974/msm8974:4.4.4/KVT49L/eng.compiler.20151103.170851:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

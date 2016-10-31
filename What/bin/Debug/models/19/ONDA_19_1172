@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=astar_inet-eng 4.4.4 KVT49L 20141230 test-keys
 ro.build.fingerprint=ONDA/astar_inet/astar-inet:4.4.4/KVT49L/20141230:eng/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

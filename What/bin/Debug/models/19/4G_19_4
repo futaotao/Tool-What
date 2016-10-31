@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k3_324_ali30_lht_z03_aly-user 4.4.4 KOT49H 1440034412 test-keys
 ro.build.fingerprint=4G/k3_324_ali30_lht_z03_aly/k3_324_ali30_lht_z03_aly:4.4.4/KOT49H/1440034412:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

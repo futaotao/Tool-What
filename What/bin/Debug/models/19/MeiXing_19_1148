@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k3e_at_ali30_wxm_k3a-user 4.4.4 KOT49H 1438069009 test-keys
 ro.build.fingerprint=MeiXing/k3e_at_ali30_wxm_k3a/k3e_at_ali30_wxm_k3a:4.4.4/KOT49H/1438069009:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

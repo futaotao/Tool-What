@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=l1ats_slkj-user 4.4.4 KOT49H 1410921379 test-keys
 ro.build.fingerprint=alps/l1ats_slkj/l1ats_slkj:4.4.4/KOT49H/1410921379:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

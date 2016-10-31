@@ -7,6 +7,8 @@ using System.Threading;
 using System.Diagnostics;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace What
@@ -353,29 +355,37 @@ namespace What
         //获取ip
         public static Dictionary<string, string> getIpInfo()
         {
-            string url = "http://www.ip.cn/";
+            //string url = "http://www.ip.cn/";
+            string taobaoUrl = "http://ip.taobao.com/service/getIpInfo.php?ip=myip";
             Dictionary<string, string> dic = null;
             try
             {
                 dic = new Dictionary<string, string>();
-                WebRequest wr = WebRequest.Create(url);
+                WebRequest wr = WebRequest.Create(taobaoUrl);
                 Stream s = wr.GetResponse().GetResponseStream();
                 StreamReader sr = new StreamReader(s, Encoding.UTF8);
                 string all = sr.ReadToEnd(); //读取网站的数据
                 sr.Close();
                 s.Close();
-                int isp = all.IndexOf("<code>") + 6;
-                int iep = all.IndexOf("</code>");
-                string _ip = all.Substring(isp, iep - isp);
-                dic.Add("ip", _ip.Trim());
-                int lsp = all.IndexOf("来自：") + 3;
-                int lep = all.IndexOf("</p><p>GeoIP:");
-                string _location = all.Substring(lsp, lep - lsp);
+                //int isp = all.IndexOf("<code>") + 6;
+                //int iep = all.IndexOf("</code>");
+                //string _ip = all.Substring(isp, iep - isp);
+                //dic.Add("ip", _ip.Trim());
+                //int lsp = all.IndexOf("来自：") + 3;
+                //int lep = all.IndexOf("</p><p>GeoIP:");
+                //string _location = all.Substring(lsp, lep - lsp);
+                //dic.Add("location", _location);
+
+                var obj = JObject.Parse(all);
+                int code = (int)obj["code"];
+                dic.Add("ok", code+"");
+                string _location = (string)obj["data"]["region"] + (string)obj["data"]["city"];
+                string _ip = (string)obj["data"]["ip"];
                 dic.Add("location", _location);
+                dic.Add("ip", _ip.Trim());
             }
             catch(Exception e)
-            {
-               
+            {         
 
             }
             return dic;

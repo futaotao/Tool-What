@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=N5207-user 4.4.4 KTU84P 1390465867 release-keys
 ro.build.fingerprint=OPPO/N5207/N3:4.4.4/KTU84P/1390465867:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=astar_chiphd-eng 4.4.4 KVT49L 20150806 test-keys
 ro.build.fingerprint=MID/astar_chiphd/astar-chiphd:4.4.4/KVT49L/20150806:eng/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

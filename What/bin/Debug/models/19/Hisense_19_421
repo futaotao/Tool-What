@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=M20-M-user 4.4.4 KTU84P L_M20-M_S02 release-keys
 ro.build.fingerprint=Hisense/M20-M/HS9830SP:4.4.4/KTU84P/L_M20-M_S02:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

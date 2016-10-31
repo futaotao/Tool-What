@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=full_gs702c-user 4.4.4 KOT49H eng.liuzi.20141118.135653 release-keys
 ro.build.fingerprint=Android/full_gs702c/gs702c:4.4.4/KOT49H/eng.liuzi.20141118.135653:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

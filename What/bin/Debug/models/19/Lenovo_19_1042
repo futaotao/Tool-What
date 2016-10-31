@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Aiken-user 4.4.4 KOT49H A399_S026_150108_CU release-keys
 ro.build.fingerprint=Lenovo/Aiken/Aiken:4.4.4/KOT49H/A399_S026_150108_CU:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

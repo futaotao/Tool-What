@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=b809_emmc_hualing_wvga-user 4.4.4 KOT49H 1418441779 test-keys
 ro.build.fingerprint=V13/b809_emmc_hualing_wvga/b809_emmc_hualing_wvga:4.4.4/KOT49H/1418441779:user/test-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

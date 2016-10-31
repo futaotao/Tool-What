@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=miki82_tb_kk-user 4.4.4 KOT49H 1422956824 test-keys
 ro.build.fingerprint=alps/miki82_tb_kk/miki82_tb_kk:4.4.4/KOT49H/1422956824:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

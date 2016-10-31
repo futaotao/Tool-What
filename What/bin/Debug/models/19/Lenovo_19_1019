@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A3800-d-user 4.4.4 LenovoA3800-d A3800-d_S160_141104.150115 release-keys
 ro.build.fingerprint=Lenovo/A3800-d/A3800-d:4.4.4/LenovoA3800-d/A3800-d_S160_141104.150115:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

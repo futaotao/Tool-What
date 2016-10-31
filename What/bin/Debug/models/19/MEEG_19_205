@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=yk858_v20_emmc_tdscdma-user 4.4.4 KOT49H 1411698943 test-keys
 ro.build.fingerprint=MEEG/yk858_v20_emmc_tdscdma/yk858_v20_emmc_tdscdma:4.4.4/KOT49H/1411698943:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TCL_P501M-user 4.4.4 KTU84P 1431913509 release-keys
 ro.build.fingerprint=TCL/TCL_P501M/Festa5_CM:4.4.4/KTU84P/1431913509:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

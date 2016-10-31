@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=L108-user 4.4.4 BIRDL108 L108_V2.00 test-keys
 ro.build.fingerprint=BIRD/L108/L108:4.4.4/BIRDL108/L108_V2.00:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

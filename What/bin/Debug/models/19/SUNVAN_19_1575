@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=m5t81_ylt-user 4.4.4 KOT49H 1409843435 test-keys
 ro.build.fingerprint=SUNVAN/m5t81_ylt/m5t81_ylt:4.4.4/KOT49H/1409843435:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

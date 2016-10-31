@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Y635-CL00-user 4.4.4 HuaweiY635-CL00 C92B272 release-keys
 ro.build.fingerprint=Huawei/Y635-CL00/hwY635:4.4.4/HuaweiY635-CL00/C92B272:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

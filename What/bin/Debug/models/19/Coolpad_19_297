@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Coolpad_8707-user 4.4.4 KOT49H 4.4.001.P1.150123.8707 release-keys
 ro.build.fingerprint=Coolpad/Coolpad_8707/Coolpad_8707:4.4.4/KOT49H/4.4.001.P1.150123.8707:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

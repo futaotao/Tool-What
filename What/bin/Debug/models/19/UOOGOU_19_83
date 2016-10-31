@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=bird82_lwt_2s_a_td-user 4.4.4 KOT49H 1421054365 test-keys
 ro.build.fingerprint=UOOGOU/bird82_lwt_2s_a_td/bird82_lwt_2s_a_td:4.4.4/KOT49H/1421054365:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

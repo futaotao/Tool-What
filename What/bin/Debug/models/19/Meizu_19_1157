@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=meizu_mx3-user 4.4.4 KTU84P m35x.Flyme_OS_3.7.3.20140909113158 release-keys
 ro.build.fingerprint=Meizu/meizu_mx3/mx3:4.4.4/KTU84P/m35x.Flyme_OS_3.7.3.20140909113158:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

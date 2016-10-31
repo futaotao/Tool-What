@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=virgo_lte_ct-user 4.4.4 KTU84P 5.12.4 release-keys
 ro.build.fingerprint=Xiaomi/virgo_lte_ct/virgo:4.4.4/KTU84P/5.12.4:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

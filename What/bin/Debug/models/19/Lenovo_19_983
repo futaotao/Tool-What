@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A3600-d-user 4.4.4 LenovoA3600-d A3600-d_S161_141210_CU.150116 release-keys
 ro.build.fingerprint=Lenovo/A3600-d/A3600-d:4.4.4/LenovoA3600-d/A3600-d_S161_141210_CU.150116:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

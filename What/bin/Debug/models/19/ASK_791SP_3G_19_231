@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=k16_jkc_04-user 4.4.4 KOT49H 1427531133 test-keys
 ro.build.fingerprint=ASK_791SP_3G/k16_jkc_04/k16_jkc_04:4.4.4/KOT49H/1427531133:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

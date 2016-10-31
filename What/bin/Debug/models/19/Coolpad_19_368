@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=CoolpadY75-user 4.4.4 KTU84P 4.4.052.P0.151111.Y75 release-keys
 ro.build.fingerprint=Coolpad/CoolpadY75/CoolpadY75:4.4.4/KTU84P/4.4.052.P0.151111.Y75:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

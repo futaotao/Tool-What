@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A2800-user 4.4.4 KTU84P A2800-d_S300_150419_MP release-keys
 ro.build.fingerprint=Lenovo/A2800/A2800-d:4.4.4/KTU84P/A2800-d_S300_150419_MP:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

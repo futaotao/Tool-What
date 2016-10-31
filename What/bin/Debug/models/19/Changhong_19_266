@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=L806A-user 4.4.4 KOT49H 1427955860 test-keys
 ro.build.fingerprint=Changhong/L806A/L806A:4.4.4/KOT49H/1427955860:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

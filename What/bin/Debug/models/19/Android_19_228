@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=nox-user 4.4.4 KOT49H 2.0.0.0923 test-keys
 ro.build.fingerprint=Android/nox/nox:4.4.4/KOT49H/2.0.0.0923:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

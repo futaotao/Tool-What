@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=kdragon71_cwet_kk-user 4.4.4 KOT49H 1432003494 test-keys
 ro.build.fingerprint=alps/kdragon71_cwet_kk/kdragon71_cwet_kk:4.4.4/KOT49H/1432003494:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

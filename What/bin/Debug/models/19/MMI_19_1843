@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=yk858_v20_emmc-user 4.4.4 KOT49H 1411377963 test-keys
 ro.build.fingerprint=MMI/yk858_v20_emmc/yk858_v20_emmc:4.4.4/KOT49H/1411377963:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

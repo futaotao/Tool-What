@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=lava72_sp17w-user 4.4.4 KOT49H 1413430355 test-keys
 ro.build.fingerprint=iris500/lava72_sp17w/lava72_sp17w:4.4.4/KOT49H/1413430355:user/test-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

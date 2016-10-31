@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=octopus_ibt-eng 4.4.4 KTU84Q 20150206 test-keys
 ro.build.fingerprint=ONDA/octopus_ibt/octopus-ibt:4.4.4/KTU84Q/20150206:eng/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

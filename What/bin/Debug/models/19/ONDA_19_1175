@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=V919-user 4.4.4 KTU84P eng.ibuilder.20150806.151456 test-keys
 ro.build.fingerprint=ONDA/V919/V919:4.4.4/KTU84P/eng.ibuilder.20150806.151456:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

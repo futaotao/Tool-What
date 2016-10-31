@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=PE-TL00M-user 4.4.4 HuaweiPE-TL00M C01B200 release-keys
 ro.build.fingerprint=Huawei/PE-TL00M/hwPE:4.4.4/HuaweiPE-TL00M/C01B200:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

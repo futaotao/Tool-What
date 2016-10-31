@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=cancro_lte_ct-user 4.4.4 KTU84P V6.4.3.0.KXGCNCB release-keys
 ro.build.fingerprint=Xiaomi/cancro_lte_ct/cancro:4.4.4/KTU84P/V6.4.3.0.KXGCNCB:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

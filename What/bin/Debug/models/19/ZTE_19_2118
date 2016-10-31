@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=P682T20-user 4.4.4 KOT49H 20140728.180000 release-keys
 ro.build.fingerprint=ZTE/P682T20/P682T20:4.4.4/KOT49H/20140728.180000:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

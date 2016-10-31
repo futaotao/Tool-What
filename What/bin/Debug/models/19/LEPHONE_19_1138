@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=pxa1L88X3_L980_LEPHONE_T2-user 4.4.4 KTU84M 20150130.124949 test-keys
 ro.build.fingerprint=LEPHONE/pxa1L88X3_L980_LEPHONE_T2/pxa1L88X3_L980_LEPHONE_T2:4.4.4/KTU84M/20150130.124949:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

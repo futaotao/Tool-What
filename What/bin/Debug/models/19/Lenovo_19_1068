@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Lenovo_A328t-user 4.4.4 KOT49H A328t_S212_140730 release-keys
 ro.build.fingerprint=Lenovo/Lenovo_A328t/A328t:4.4.4/KOT49H/A328t_S212_140730:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

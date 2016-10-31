@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=x2to-user 4.4.4 KOT49H VIBEUI_V2.0_1503_5.21.1_ST_X2-TO. release-keys
 ro.build.fingerprint=Lenovo/x2to/X2-TO:4.4.4/KOT49H/VIBEUI_V2.0_1503_5.21.1_ST_X2-TO.:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

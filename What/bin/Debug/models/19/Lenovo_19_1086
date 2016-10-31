@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=LenovoA3300-T-user 4.4.4 KOT49H A3300T_A442_01_46_140928_CN release-keys
 ro.build.fingerprint=Lenovo/LenovoA3300-T/A3300-T:4.4.4/KOT49H/A3300T_A442_01_46_140928_CN:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

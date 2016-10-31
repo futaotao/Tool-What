@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=astar_ococci-eng 4.4.4 KVT49L 20151010 test-keys
 ro.build.fingerprint=Allwinner/astar_ococci/astar-ococci:4.4.4/KVT49L/20151010:eng/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

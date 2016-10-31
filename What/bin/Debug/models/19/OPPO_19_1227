@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A11-user 4.4.4 KTU84P 1405684359 release-keys
 ro.build.fingerprint=OPPO/A11/A11:4.4.4/KTU84P/1405684359:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

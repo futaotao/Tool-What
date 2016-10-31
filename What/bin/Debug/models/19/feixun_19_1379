@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=msm8909-user 4.4.4 KTU84P 1312485544 test-keys
 ro.build.fingerprint=feixun/msm8909/msm8909:4.4.4/KTU84P/1312485544:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

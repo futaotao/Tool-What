@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=m01_coolpad_cts-user 4.4.4 KOT49H 1415082559 release-keys
 ro.build.fingerprint=Coolpad/m01_coolpad_cts/m01_coolpad_cts:4.4.4/KOT49H/1415082559:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

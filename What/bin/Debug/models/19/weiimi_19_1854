@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=m7at81_hykj3-user 4.4.4 KOT49H 1412835926 test-keys
 ro.build.fingerprint=weiimi/m7at81_hykj3/m7at81_hykj3:4.4.4/KOT49H/1412835926:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

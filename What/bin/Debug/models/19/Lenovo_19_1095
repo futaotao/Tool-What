@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=LenovoTAB2A10-70LC-user 4.4.4 KTU84P A10-70LC_S0017_150625_PRC release-keys
 ro.build.fingerprint=Lenovo/LenovoTAB2A10-70LC/A10-70LC:4.4.4/KTU84P/A10-70LC_S0017_150625_PRC:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

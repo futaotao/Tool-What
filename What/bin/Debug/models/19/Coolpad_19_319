@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Coolpad8029-user 4.4.4 KTU84P 4.4.002.P1.150403.8029 release-keys
 ro.build.fingerprint=Coolpad/Coolpad8029/Coolpad8029:4.4.4/KTU84P/4.4.002.P1.150403.8029:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

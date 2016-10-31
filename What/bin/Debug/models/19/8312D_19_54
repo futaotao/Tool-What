@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=8312D12d_tb_kk-user 4.4.4 8312D 1427943713 test-keys
 ro.build.fingerprint=8312D/8312D12d_tb_kk/8312D12d_tb_kk:4.4.4/8312D/1427943713:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

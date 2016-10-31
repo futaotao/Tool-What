@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=meizu_mx4-user 4.4.4 KOT49H m75.Flyme_OS_4.2.2.2.20150306030454 release-keys
 ro.build.fingerprint=Meizu/meizu_mx4/mx4:4.4.4/KOT49H/m75.Flyme_OS_4.2.2.2.20150306030454:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

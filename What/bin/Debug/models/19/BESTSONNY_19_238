@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=sonny_L81-user 4.4.4 BESTSONNYsonny_L81 Best_sonny_L81_V1.5 release-keys
 ro.build.fingerprint=BESTSONNY/sonny_L81/sonny_L81:4.4.4/BESTSONNYsonny_L81/Best_sonny_L81_V1.5:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

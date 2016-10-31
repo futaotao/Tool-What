@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=trlteduoszc-user 4.4.4 KTU84P N9100ZCU1AOB1 release-keys
 ro.build.fingerprint=samsung/trlteduoszc/trltechn:4.4.4/KTU84P/N9100ZCU1AOB1:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

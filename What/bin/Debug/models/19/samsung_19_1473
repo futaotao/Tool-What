@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=chagallltetdzc-user 4.4.4 KOT49H T805CZCU1ANG2 release-keys
 ro.build.fingerprint=samsung/chagallltetdzc/chagalllte:4.4.4/KOT49H/T805CZCU1ANG2:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

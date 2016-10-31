@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=cp8017_m02-user 4.4.4 KOT49H 1406614256 test-keys
 ro.build.fingerprint=Coolpad/cp8017_m02/cp8017_m02:4.4.4/KOT49H/1406614256:user/test-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

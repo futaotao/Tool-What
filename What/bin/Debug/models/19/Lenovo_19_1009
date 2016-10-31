@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=A368t-user 4.4.4 S102 A368t_USR_S18800_141217_Beta2SP2RC1_CMCC_CN release-keys
 ro.build.fingerprint=Lenovo/A368t/A368t:4.4.4/S102/A368t_USR_S18800_141217_Beta2SP2RC1_CMCC_CN:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

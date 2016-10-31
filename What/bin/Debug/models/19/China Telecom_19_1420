@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=msm8916_x5_p516l-user 4.4.4 KTU84P eng.root.20150107 test-keys
 ro.build.fingerprint=China Telecom/msm8916_x5_p516l/msm8916_x5_p516l:4.4.4/KTU84P/eng.root.20150107:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

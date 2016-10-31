@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=b806_ouqi_q7-user 4.4.4 KOT49H 1427272512 test-keys
 ro.build.fingerprint=E72-R5/b806_ouqi_q7/b806_ouqi_q7:4.4.4/KOT49H/1427272512:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

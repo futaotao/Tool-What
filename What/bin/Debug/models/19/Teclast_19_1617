@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Teclast-user 4.4.4 KVT49L eng.yankendi.20140927.173254 test-keys
 ro.build.fingerprint=Teclast/Teclast/x98air3g_c6j6:4.4.4/KVT49L/eng.yankendi.20140927.173254:user/test-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

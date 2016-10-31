@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=m7at_ash-user 4.4.4 KOT49H 1422068558 test-keys
 ro.build.fingerprint=Ami/m7at_ash/m7at_ash:4.4.4/KOT49H/1422068558:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

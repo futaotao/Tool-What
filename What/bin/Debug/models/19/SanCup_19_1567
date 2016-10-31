@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=r9t_jgw_4g-user 4.4.4 KOT49H 1425376429 test-keys
 ro.build.fingerprint=SanCup/r9t_jgw_4g/r9t_jgw_4g:4.4.4/KOT49H/1425376429:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

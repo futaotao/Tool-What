@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=XL39h-user 4.4.4 14.4.A.0.108 k___jQ release-keys
 ro.build.fingerprint=Sony/XL39h/XL39h:4.4.4/14.4.A.0.108/k___jQ:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

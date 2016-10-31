@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=kanas3gcmcc-user 4.4.4 KOT49H G3558ZMU1ANF5 release-keys
 ro.build.fingerprint=samsung/kanas3gcmcc/kanas3gcmcc:4.4.4/KOT49H/G3558ZMU1ANF5:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=b807_emmc_sanmei-user 4.4.4 KOT49H 1415371239 test-keys
 ro.build.fingerprint=GM4/b807_emmc_sanmei/b807_emmc_sanmei:4.4.4/KOT49H/1415371239:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=SK1-02-user 4.4.4 KTU84P 4.4.023.P0.150810.SK1-02 release-keys
 ro.build.fingerprint=ivvi/SK1-02/SK1-02:4.4.4/KTU84P/4.4.023.P0.150810.SK1-02:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

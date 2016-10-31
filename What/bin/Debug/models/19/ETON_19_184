@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=p2-user 4.4.4 KTU84P 1436154743 test-keys
 ro.build.fingerprint=ETON/p2/p2:4.4.4/KTU84P/1436154743:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

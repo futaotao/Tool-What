@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=H60-L02-user 4.4.4 HDH60-L02 C00B121SP06 release-keys
 ro.build.fingerprint=Huawei/H60-L02/hwH60:4.4.4/HDH60-L02/C00B121SP06:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

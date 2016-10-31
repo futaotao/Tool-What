@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=lt03wifizc-user 4.4.4 KOT49H P600ZCUCOG1 release-keys
 ro.build.fingerprint=samsung/lt03wifizc/lt03wifi:4.4.4/KOT49H/P600ZCUCOG1:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

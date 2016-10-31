@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=pxa1L88X3_L980_KOPO_L138-user 4.4.4 KTU84M 20150130.173638 test-keys
 ro.build.fingerprint=KOPO/pxa1L88X3_L980_KOPO_L138/pxa1L88X3_L980_KOPO_L138:4.4.4/KTU84M/20150130.173638:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

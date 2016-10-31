@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=jfltexx-user 4.4.4 KOT49H I9505XXUFNB8 release-keys
 ro.build.fingerprint=samsung/jfltexx/jflte:4.4.4/KOT49H/I9505XXUFNB8:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

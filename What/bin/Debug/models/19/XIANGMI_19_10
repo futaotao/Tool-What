@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=alibaba71_cwet_ref-user 4.4.4 KOT49H 1436338777 test-keys
 ro.build.fingerprint=XIANGMI/alibaba71_cwet_ref/alibaba71_cwet_ref:4.4.4/KOT49H/1436338777:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

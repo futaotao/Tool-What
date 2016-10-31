@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TCL_P500M-user 4.4.4 KTU84P 20141224.184030 release-keys
 ro.build.fingerprint=TCL/TCL_P500M/Festa_L:4.4.4/KTU84P/20141224.184030:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

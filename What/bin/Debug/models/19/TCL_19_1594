@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=TCL_P308L-user 4.4.4 KTU84P eng.root.20150504 release-keys
 ro.build.fingerprint=TCL/TCL_P308L/Festa5s_CT:4.4.4/KTU84P/eng.root.20150504:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=astar_y8723as-eng 4.4.4 KVT49L 20150904 test-keys
 ro.build.fingerprint=STL/astar_y8723as/astar-y8723as:4.4.4/KVT49L/20150904:eng/test-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

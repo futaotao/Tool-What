@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=g2_open_com-user 4.4.4 KOT49I.D80220d D80220d.1418780971 release-keys
 ro.build.fingerprint=lge/g2_open_com/g2:4.4.4/KOT49I.D80220d/D80220d.1418780971:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

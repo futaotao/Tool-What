@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=yk828_v30_emmc-user 4.4.4 KOT49H 1421756555 test-keys
 ro.build.fingerprint=WANMI/yk828_v30_emmc/yk828_v30_emmc:4.4.4/KOT49H/1421756555:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=pxa1L88X1-user 4.4.4 KTU84M eng.zhuangjuan.20141106.170507 test-keys
 ro.build.fingerprint=VOTO VT898B/pxa1L88X1/pxa1L88X1:4.4.4/KTU84M/eng.zhuangjuan.20141106.170507:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

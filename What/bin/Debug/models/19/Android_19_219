@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=actions_7031-user 4.4.4 KTU84P eng.root.20151026.172501 release-keys
 ro.build.fingerprint=Android/actions_7031/q88:4.4.4/KTU84P/eng.root.20151026.172501:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

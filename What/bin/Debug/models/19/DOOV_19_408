@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=huaqin6752_lwt_b1c_kk-user 4.4.4 DOOVT20L 1434881806 test-keys
 ro.build.fingerprint=DOOV/huaqin6752_lwt_b1c_kk/huaqin6752_lwt_b1c_kk:4.4.4/DOOVT20L/1434881806:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

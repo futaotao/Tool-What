@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=b807_emmc_jiaye_d7-user 4.4.4 KOT49H 1430186988 test-keys
 ro.build.fingerprint=T10/b807_emmc_jiaye_d7/b807_emmc_jiaye_d7:4.4.4/KOT49H/1430186988:user/test-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

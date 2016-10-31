@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=full_yk628_emmc_tdd_35gc-user 4.4.4 KTU84P 1444798500 test-keys
 ro.build.fingerprint=BAIMI/full_yk628_emmc_tdd_35gc/yk628_emmc_tdd_35gc:4.4.4/KTU84P/1444798500:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

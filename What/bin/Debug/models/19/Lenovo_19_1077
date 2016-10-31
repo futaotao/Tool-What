@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=Lenovo2A7-30TC-user 4.4.4 KOT49H A7-30TC_S000012_141107_PRC release-keys
 ro.build.fingerprint=Lenovo/Lenovo2A7-30TC/A7-30TC:4.4.4/KOT49H/A7-30TC_S000012_141107_PRC:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

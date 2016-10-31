@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=r9t_gxi_lm-user 4.4.4 KOT49H 1417607761 test-keys
 ro.build.fingerprint=meetuu/r9t_gxi_lm/r9t_gxi_lm:4.4.4/KOT49H/1417607761:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

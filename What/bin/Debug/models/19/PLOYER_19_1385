@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=astar_ibt_8723bs-eng 4.4.4 KVT49L 20150416 test-keys
 ro.build.fingerprint=PLOYER/astar_ibt_8723bs/astar-ibt-8723bs:4.4.4/KVT49L/20150416:eng/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

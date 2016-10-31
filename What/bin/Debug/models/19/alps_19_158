@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=m6ats_hgzn-user 4.4.4 KOT49H 1410444701 test-keys
 ro.build.fingerprint=alps/m6ats_hgzn/m6ats_hgzn:4.4.4/KOT49H/1410444701:user/test-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280

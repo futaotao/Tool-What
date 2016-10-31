@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=P98_4G_A8H6-user 4.4.4 KTU84P 1426229253 release-keys
 ro.build.fingerprint=Teclast/P98_4G_A8H6/p984g_a8h6:4.4.4/KTU84P/1426229253:user/release-keys
 sdk_version=19
-screen_x_y=1080x1920
+screen_x_y=720x1280

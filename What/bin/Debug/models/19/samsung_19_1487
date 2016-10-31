@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=GT-I9100G-user 4.4.4 JZO54K I9100GXXLSR release-keys
 ro.build.fingerprint=samsung/GT-I9100G/GT-I9100G:4.4.4/JZO54K/I9100GXXLSR:user/release-keys
 sdk_version=19
-screen_x_y=480x800
+screen_x_y=720x1280

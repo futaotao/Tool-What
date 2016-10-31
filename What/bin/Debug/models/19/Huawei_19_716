@@ -17,4 +17,4 @@ ro.product.board=
 ro.build.description=G6-C00-user 4.4.4 HuaweiG6-C00 C92B361 release-keys
 ro.build.fingerprint=Huawei/G6-C00/hwG6-C00:4.4.4/HuaweiG6-C00/C92B361:user/release-keys
 sdk_version=19
-screen_x_y=480x854
+screen_x_y=720x1280
